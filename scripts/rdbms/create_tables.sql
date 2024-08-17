@@ -1,33 +1,33 @@
 -- Create address table
 CREATE TABLE address (
-                         address_id BIGINT PRIMARY KEY,
-                         street VARCHAR(255) NOT NULL,
-                         city VARCHAR(100) NOT NULL,
-                         state VARCHAR(100),
-                         postal_code VARCHAR(20),
-                         longitude DOUBLE PRECISION,
-                         latitude DOUBLE PRECISION,
-                         created_by VARCHAR(50) NOT NULL,
-                         created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                         updated_by VARCHAR(50),
-                         updated_at TIMESTAMP
+     address_id BIGINT PRIMARY KEY,
+     street VARCHAR(255) NOT NULL,
+     city VARCHAR(100) NOT NULL,
+     state VARCHAR(100),
+     postal_code VARCHAR(20),
+     longitude DOUBLE PRECISION,
+     latitude DOUBLE PRECISION,
+     created_by VARCHAR(50) NOT NULL,
+     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+     updated_by VARCHAR(50),
+     updated_at TIMESTAMP
 );
 
 -- Create contact table
 CREATE TABLE contact (
-                         contact_id BIGINT PRIMARY KEY,
-                         address_id INT NOT NULL,
-                         phone_number VARCHAR(20),
-                         email VARCHAR(100),
-                         website VARCHAR(100),
-                         schedule JSONB,
-                         created_by VARCHAR(50) NOT NULL,
-                         created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                         updated_by VARCHAR(50),
-                         updated_at TIMESTAMP,
-                         CONSTRAINT fk_address
-                             FOREIGN KEY(address_id)
-                                 REFERENCES address(address_id)
+     contact_id BIGINT PRIMARY KEY,
+     address_id INT NOT NULL,
+     phone_number VARCHAR(20),
+     email VARCHAR(100),
+     website VARCHAR(100),
+     schedule JSONB,
+     created_by VARCHAR(50) NOT NULL,
+     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+     updated_by VARCHAR(50),
+     updated_at TIMESTAMP,
+     CONSTRAINT fk_address
+         FOREIGN KEY(address_id)
+             REFERENCES address(address_id)
 );
 
 
@@ -42,13 +42,13 @@ CREATE TABLE contact (
 -- );
 -- Create company table
 CREATE TABLE company (
-                              company_id BIGINT PRIMARY KEY,
-                              name VARCHAR(255) NOT NULL,
-                              description TEXT,
-                              created_by VARCHAR(50) NOT NULL,
-                              created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                              updated_by VARCHAR(50),
-                              updated_at TIMESTAMP
+      company_id BIGINT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      description TEXT,
+      created_by VARCHAR(50) NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      updated_by VARCHAR(50),
+      updated_at TIMESTAMP
 
 );
 
