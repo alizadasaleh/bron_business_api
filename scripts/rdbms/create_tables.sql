@@ -64,16 +64,20 @@ CREATE TABLE service_type
 
 -- Create provided_service table
 CREATE TABLE service (
-                                  service_id BIGINT PRIMARY KEY,
-                                  company_id INT NOT NULL,
-                                  service_name VARCHAR(255) NOT NULL,
-                                  description TEXT,
-                                  price NUMERIC(10, 2),
-                                  created_by VARCHAR(50) NOT NULL,
-                                  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                                  updated_by VARCHAR(50),
-                                  updated_at TIMESTAMP,
-                                  CONSTRAINT fk_company
-                                      FOREIGN KEY(company_id)
-                                          REFERENCES company(company_id)
+      service_id BIGINT PRIMARY KEY,
+      company_id INT NOT NULL,
+      service_name VARCHAR(255) NOT NULL,
+      service_type_id INT,
+      description TEXT,
+      price NUMERIC(10, 2),
+      created_by VARCHAR(50) NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      updated_by VARCHAR(50),
+      updated_at TIMESTAMP,
+      CONSTRAINT fk_company
+          FOREIGN KEY(company_id)
+              REFERENCES company(company_id),
+      CONSTRAINT fk_service_type
+              FOREIGN KEY(service_type_id)
+              REFERENCES service_type(service_type_id)
 );
