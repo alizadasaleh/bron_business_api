@@ -5,7 +5,8 @@ CREATE TABLE address (
                          city VARCHAR(100) NOT NULL,
                          state VARCHAR(100),
                          postal_code VARCHAR(20),
-                         country VARCHAR(100) NOT NULL,
+                         longitude DOUBLE PRECISION,
+                         latitude DOUBLE PRECISION,
                          created_by VARCHAR(50) NOT NULL,
                          created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                          updated_by VARCHAR(50),
@@ -19,6 +20,7 @@ CREATE TABLE contact (
                          phone_number VARCHAR(20),
                          email VARCHAR(100),
                          website VARCHAR(100),
+                         schedule JSONB,
                          created_by VARCHAR(50) NOT NULL,
                          created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                          updated_by VARCHAR(50),
@@ -29,11 +31,15 @@ CREATE TABLE contact (
 );
 
 
-CREATE TABLE company_type(
-    company_type_id INT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-
-);
+-- CREATE TABLE company_type(
+--     company_type_id INT PRIMARY KEY,
+--     name VARCHAR(255) NOT NULL,
+--     created_by VARCHAR(50) NOT NULL,
+--     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+--     updated_by VARCHAR(50),
+--     updated_at TIMESTAMP
+--
+-- );
 -- Create company table
 CREATE TABLE company (
                               company_id BIGINT PRIMARY KEY,
@@ -42,17 +48,18 @@ CREATE TABLE company (
                               created_by VARCHAR(50) NOT NULL,
                               created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                               updated_by VARCHAR(50),
-                              updated_at TIMESTAMP,
-                              company_type_id INT,
-                              CONSTRAINT fk_company_type
-                                  FOREIGN KEY(company_type_id)
-                                      REFERENCES COMPANY_TYPE(company_type_id)
+                              updated_at TIMESTAMP
+
 );
 
 CREATE TABLE service_type
 (
     service_type_id INT PRIMARY KEY,
-    name            VARCHAR(255) NOT NULL
+    name            VARCHAR(255) NOT NULL,
+    created_by VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_by VARCHAR(50),
+    updated_at TIMESTAMP
 );
 
 -- Create provided_service table
