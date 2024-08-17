@@ -1,7 +1,6 @@
 -- Create address table
 CREATE TABLE address (
-                         address_id SERIAL PRIMARY KEY,
-                         organization_id INT NOT NULL,
+                         address_id BIGINT PRIMARY KEY,
                          street VARCHAR(255) NOT NULL,
                          city VARCHAR(100) NOT NULL,
                          state VARCHAR(100),
@@ -10,34 +9,13 @@ CREATE TABLE address (
                          created_by VARCHAR(50) NOT NULL,
                          created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                          updated_by VARCHAR(50),
-                         updated_at TIMESTAMP,
-                         CONSTRAINT fk_organization
-                             FOREIGN KEY(organization_id)
-                                 REFERENCES organization(organization_id)
-);
-
--- Create business_owner table
-CREATE TABLE business_owner (
-                                owner_id SERIAL PRIMARY KEY,
-                                user_id INT NOT NULL,
-                                organization_id INT NOT NULL,
-                                role VARCHAR(100),
-                                created_by VARCHAR(50) NOT NULL,
-                                created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                                updated_by VARCHAR(50),
-                                updated_at TIMESTAMP,
-                                CONSTRAINT fk_user
-                                    FOREIGN KEY(user_id)
-                                        REFERENCES users(user_id),
-                                CONSTRAINT fk_organization
-                                    FOREIGN KEY(organization_id)
-                                        REFERENCES organization(organization_id)
+                         updated_at TIMESTAMP
 );
 
 -- Create contact table
 CREATE TABLE contact (
-                         contact_id SERIAL PRIMARY KEY,
-                         organization_id INT NOT NULL,
+                         contact_id BIGINT PRIMARY KEY,
+                         address_id INT NOT NULL,
                          phone_number VARCHAR(20),
                          email VARCHAR(100),
                          website VARCHAR(100),
@@ -45,42 +23,42 @@ CREATE TABLE contact (
                          created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                          updated_by VARCHAR(50),
                          updated_at TIMESTAMP,
-                         CONSTRAINT fk_organization
-                             FOREIGN KEY(organization_id)
-                                 REFERENCES organization(organization_id)
+                         CONSTRAINT fk_address
+                             FOREIGN KEY(address_id)
+                                 REFERENCES address(address_id)
 );
 
--- Create operating_hour table
-CREATE TABLE operating_hour (
-                                operating_hour_id SERIAL PRIMARY KEY,
-                                organization_id INT NOT NULL,
-                                day_of_week VARCHAR(10) NOT NULL,
-                                open_time TIME NOT NULL,
-                                close_time TIME NOT NULL,
-                                created_by VARCHAR(50) NOT NULL,
-                                created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-                                updated_by VARCHAR(50),
-                                updated_at TIMESTAMP,
-                                CONSTRAINT fk_organization
-                                    FOREIGN KEY(organization_id)
-                                        REFERENCES organization(organization_id)
-);
 
--- Create organization table
-CREATE TABLE organization (
-                              organization_id SERIAL PRIMARY KEY,
+CREATE TABLE company_type(
+    company_type_id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+
+);
+-- Create company table
+CREATE TABLE company (
+                              company_id BIGINT PRIMARY KEY,
                               name VARCHAR(255) NOT NULL,
                               description TEXT,
                               created_by VARCHAR(50) NOT NULL,
                               created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                               updated_by VARCHAR(50),
-                              updated_at TIMESTAMP
+                              updated_at TIMESTAMP,
+                              company_type_id INT,
+                              CONSTRAINT fk_company_type
+                                  FOREIGN KEY(company_type_id)
+                                      REFERENCES COMPANY_TYPE(company_type_id)
+);
+
+CREATE TABLE service_type
+(
+    service_type_id INT PRIMARY KEY,
+    name            VARCHAR(255) NOT NULL
 );
 
 -- Create provided_service table
-CREATE TABLE provided_service (
-                                  service_id SERIAL PRIMARY KEY,
-                                  organization_id INT NOT NULL,
+CREATE TABLE service (
+                                  service_id BIGINT PRIMARY KEY,
+                                  company_id INT NOT NULL,
                                   service_name VARCHAR(255) NOT NULL,
                                   description TEXT,
                                   price NUMERIC(10, 2),
@@ -88,7 +66,7 @@ CREATE TABLE provided_service (
                                   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
                                   updated_by VARCHAR(50),
                                   updated_at TIMESTAMP,
-                                  CONSTRAINT fk_organization
-                                      FOREIGN KEY(organization_id)
-                                          REFERENCES organization(organization_id)
+                                  CONSTRAINT fk_company
+                                      FOREIGN KEY(company_id)
+                                          REFERENCES company(company_id)
 );
