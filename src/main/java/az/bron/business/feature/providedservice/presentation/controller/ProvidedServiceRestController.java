@@ -1,11 +1,11 @@
 package az.bron.business.feature.providedservice.presentation.controller;
 
-import az.bron.business.feature.providedservice.application.facade.ProvidedserviceFacade;
-import az.bron.business.feature.providedservice.application.model.request.CreateProvidedserviceRequest;
-import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedserviceRequest;
-import az.bron.business.feature.providedservice.application.model.response.CreateProvidedserviceResponse;
-import az.bron.business.feature.providedservice.application.model.response.GetProvidedserviceResponse;
-import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedserviceResponse;
+import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
+import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
+import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
+import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
+import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,11 +17,11 @@ import java.util.Collection;
 @RestController
 @RequestMapping("api/v1/providedservices")
 @RequiredArgsConstructor
-public class ProvidedserviceRestController {
-    private final ProvidedserviceFacade providedserviceFacade;
+public class ProvidedServiceRestController {
+    private final ProvidedServiceFacade providedserviceFacade;
 
     @PostMapping
-    public ResponseEntity<CreateProvidedserviceResponse> create(@Valid @RequestBody CreateProvidedserviceRequest request) {
+    public ResponseEntity<CreateProvidedServiceResponse> create(@Valid @RequestBody CreateProvidedServiceRequest request) {
         var response = providedserviceFacade.create(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -29,21 +29,21 @@ public class ProvidedserviceRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateProvidedserviceResponse> update(@PathVariable Long id, @Valid @RequestBody UpdateProvidedserviceRequest request) {
+    public ResponseEntity<UpdateProvidedServiceResponse> update(@PathVariable Long id, @Valid @RequestBody UpdateProvidedServiceRequest request) {
         var response = providedserviceFacade.update(id, request);
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<Collection<GetProvidedserviceResponse>> getAll() {
+    public ResponseEntity<Collection<GetProvidedServiceResponse>> getAll() {
         var response = providedserviceFacade.getAll();
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetProvidedserviceResponse> get(@PathVariable Long id) {
+    public ResponseEntity<GetProvidedServiceResponse> get(@PathVariable Long id) {
         var response = providedserviceFacade.get(id);
 
         return ResponseEntity.ok(response);

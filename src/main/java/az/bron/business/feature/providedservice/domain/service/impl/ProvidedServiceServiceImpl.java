@@ -1,8 +1,8 @@
 package az.bron.business.feature.providedservice.domain.service.impl;
 
-import az.bron.business.feature.providedservice.domain.model.Providedservice;
-import az.bron.business.feature.providedservice.domain.repository.ProvidedserviceRepository;
-import az.bron.business.feature.providedservice.domain.service.ProvidedserviceService;
+import az.bron.business.feature.providedservice.domain.model.ProvidedService;
+import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
+import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +11,16 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ProvidedserviceServiceImpl implements ProvidedserviceService {
-    final ProvidedserviceRepository providedserviceRepository;
+public class ProvidedServiceServiceImpl implements ProvidedServiceService {
+    final ProvidedServiceRepository providedserviceRepository;
 
     @Override
-    public void add(Providedservice providedservice) {
+    public void add(ProvidedService providedservice) {
         providedserviceRepository.add(providedservice);
     }
 
     @Override
-    public void update(Providedservice providedservice) {
+    public void update(ProvidedService providedservice) {
         providedserviceRepository.update(providedservice);
     }
 
@@ -30,12 +30,12 @@ public class ProvidedserviceServiceImpl implements ProvidedserviceService {
     }
 
     @Override
-    public Optional<Providedservice> get(Long id) {
+    public Optional<ProvidedService> get(Long id) {
         return providedserviceRepository.get(id);
     }
 
     @Override
-    public Collection<Providedservice> getAll() {
+    public Collection<ProvidedService> getAll() {
         return providedserviceRepository.getAll();
     }
 }

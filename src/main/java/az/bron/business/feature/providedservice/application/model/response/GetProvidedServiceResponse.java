@@ -3,6 +3,6 @@ package az.bron.business.feature.providedservice.application.model.response;
 import lombok.Data;
 
 @Data
-public class CreateProvidedserviceResponse {
+public class GetProvidedServiceResponse {
     private Long id;
 }

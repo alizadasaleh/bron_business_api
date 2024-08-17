@@ -6,5 +6,5 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Providedservice extends BaseDomain<Long> {
+public class ProvidedService extends BaseDomain<Long> {
 }
