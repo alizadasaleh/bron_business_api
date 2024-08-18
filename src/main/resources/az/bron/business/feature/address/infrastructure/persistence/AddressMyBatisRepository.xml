@@ -29,28 +29,33 @@
         select
         <include refid="Base_Column_List" />
         from address
-        where  address_id = #{addressId,jdbcType=BIGINT}
+        where  address_id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from address
     </select>
 
     <delete id="delete" parameterType="java.lang.Long">
         delete from address
-        where  address_id = #{addressId,jdbcType=BIGINT}
+        where  address_id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="add" keyColumn="address_id" keyProperty="addressId" parameterType="az.bron.business.feature.address.domain.model.Address" useGeneratedKeys="true">
+    <insert id="add" keyColumn="address_id" keyProperty="id" parameterType="az.bron.business.feature.address.domain.model.Address" useGeneratedKeys="true">
         insert into address
-        ( address_id,street,city
+        ( street,city
         ,state,postal_code,longitude
         ,latitude,created_by,created
         ,modified_by,modified)
-        values (#{addressId,jdbcType=BIGINT},#{street,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR}
+        values (#{street,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR}
                ,#{state,jdbcType=VARCHAR},#{postalCode,jdbcType=VARCHAR},#{longitude,jdbcType=DOUBLE}
                ,#{latitude,jdbcType=DOUBLE},#{createdBy,jdbcType=VARCHAR},#{created,jdbcType=TIMESTAMP}
                ,#{modifiedBy,jdbcType=VARCHAR},#{modified,jdbcType=TIMESTAMP})
     </insert>
-<!--    <insert id="add" keyColumn="address_id" keyProperty="addressId" parameterType="az.bron.business.feature.*.domain.model.Address" useGeneratedKeys="true">-->
+<!--    <insert id="add" keyColumn="address_id" keyProperty="id" parameterType="az.bron.business.feature.*.domain.model.Address" useGeneratedKeys="true">-->
 <!--        insert into address-->
 <!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-<!--            <if test="addressId != null">address_id,</if>-->
+<!--            <if test="id != null">address_id,</if>-->
 <!--            <if test="street != null">street,</if>-->
 <!--            <if test="city != null">city,</if>-->
 <!--            <if test="state != null">state,</if>-->
@@ -63,7 +68,7 @@
 <!--            <if test="modified != null">modified,</if>-->
 <!--        </trim>-->
 <!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-<!--            <if test="addressId != null">#{addressId,jdbcType=BIGINT},</if>-->
+<!--            <if test="id != null">#{id,jdbcType=BIGINT},</if>-->
 <!--            <if test="street != null">#{street,jdbcType=VARCHAR},</if>-->
 <!--            <if test="city != null">#{city,jdbcType=VARCHAR},</if>-->
 <!--            <if test="state != null">#{state,jdbcType=VARCHAR},</if>-->
@@ -110,7 +115,7 @@
 <!--                modified = #{modified,jdbcType=TIMESTAMP},-->
 <!--            </if>-->
 <!--        </set>-->
-<!--        where   address_id = #{addressId,jdbcType=BIGINT}-->
+<!--        where   address_id = #{id,jdbcType=BIGINT}-->
 <!--    </update>-->
     <update id="update" parameterType="az.bron.business.feature.address.domain.model.Address">
         update address
@@ -125,6 +130,6 @@
             created =  #{created,jdbcType=TIMESTAMP},
             modified_by =  #{modifiedBy,jdbcType=VARCHAR},
             modified =  #{modified,jdbcType=TIMESTAMP}
-        where   address_id = #{addressId,jdbcType=BIGINT}
+        where   address_id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
