@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="az.bron.business.feature.servicetype.infrastructure.persistence.ServiceTypeMyBatisRepository">
+
+    <resultMap id="BaseResultMap" type="az.bron.business.feature.servicetype.domain.model.ServiceType">
+        <id property="id" column="service_type_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="modifiedBy" column="modified_by" jdbcType="VARCHAR"/>
+        <result property="modified" column="modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        service_type_id,name,created_by,
+        created,modified_by,modified
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from service_type
+        where  service_type_id = #{serviceTypeId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from service_type
+        where  service_type_id = #{serviceTypeId,jdbcType=INTEGER}
+    </delete>
+    <insert id="add" keyColumn="service_type_id" keyProperty="serviceTypeId" parameterType="az.bron.business.feature.servicetype.domain.model.ServiceType" useGeneratedKeys="true">
+        insert into service_type
+        ( service_type_id,name,created_by
+        ,created,modified_by,modified
+        )
+        values (#{serviceTypeId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{createdBy,jdbcType=VARCHAR}
+               ,#{created,jdbcType=TIMESTAMP},#{modifiedBy,jdbcType=VARCHAR},#{modified,jdbcType=TIMESTAMP}
+               )
+    </insert>
+<!--    <insert id="add" keyColumn="service_type_id" keyProperty="serviceTypeId" parameterType="az.bron.business.feature.*.domain.model.ServiceType" useGeneratedKeys="true">-->
+<!--        insert into service_type-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="serviceTypeId != null">service_type_id,</if>-->
+<!--            <if test="name != null">name,</if>-->
+<!--            <if test="createdBy != null">created_by,</if>-->
+<!--            <if test="created != null">created,</if>-->
+<!--            <if test="modifiedBy != null">modified_by,</if>-->
+<!--            <if test="modified != null">modified,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="serviceTypeId != null">#{serviceTypeId,jdbcType=INTEGER},</if>-->
+<!--            <if test="name != null">#{name,jdbcType=VARCHAR},</if>-->
+<!--            <if test="createdBy != null">#{createdBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="created != null">#{created,jdbcType=TIMESTAMP},</if>-->
+<!--            <if test="modifiedBy != null">#{modifiedBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="modified != null">#{modified,jdbcType=TIMESTAMP},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+<!--    <update id="updateByPrimaryKeySelective" parameterType="az.bron.business.feature.*.domain.model.ServiceType">-->
+<!--        update service_type-->
+<!--        <set>-->
+<!--            <if test="name != null">-->
+<!--                name = #{name,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="createdBy != null">-->
+<!--                created_by = #{createdBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="created != null">-->
+<!--                created = #{created,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="modifiedBy != null">-->
+<!--                modified_by = #{modifiedBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="modified != null">-->
+<!--                modified = #{modified,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where   service_type_id = #{serviceTypeId,jdbcType=INTEGER}-->
+<!--    </update>-->
+    <update id="update" parameterType="az.bron.business.feature.servicetype.domain.model.ServiceType">
+        update service_type
+        set
+            name =  #{name,jdbcType=VARCHAR},
+            created_by =  #{createdBy,jdbcType=VARCHAR},
+            created =  #{created,jdbcType=TIMESTAMP},
+            modified_by =  #{modifiedBy,jdbcType=VARCHAR},
+            modified =  #{modified,jdbcType=TIMESTAMP}
+        where   service_type_id = #{serviceTypeId,jdbcType=INTEGER}
+    </update>
+</mapper>

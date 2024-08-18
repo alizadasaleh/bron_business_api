@@ -8,9 +8,9 @@ CREATE TABLE address (
      longitude DOUBLE PRECISION,
      latitude DOUBLE PRECISION,
      created_by VARCHAR(50) NOT NULL,
-     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-     updated_by VARCHAR(50),
-     updated_at TIMESTAMP
+     created TIMESTAMP NOT NULL DEFAULT NOW(),
+     modified_by VARCHAR(50),
+     modified TIMESTAMP
 );
 
 -- Create contact table
@@ -22,9 +22,9 @@ CREATE TABLE contact (
      website VARCHAR(100),
      schedule JSONB,
      created_by VARCHAR(50) NOT NULL,
-     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-     updated_by VARCHAR(50),
-     updated_at TIMESTAMP,
+     created TIMESTAMP NOT NULL DEFAULT NOW(),
+     modified_by VARCHAR(50),
+     modified TIMESTAMP,
      CONSTRAINT fk_address
          FOREIGN KEY(address_id)
              REFERENCES address(address_id)
@@ -35,9 +35,9 @@ CREATE TABLE contact (
 --     company_type_id INT PRIMARY KEY,
 --     name VARCHAR(255) NOT NULL,
 --     created_by VARCHAR(50) NOT NULL,
---     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
---     updated_by VARCHAR(50),
---     updated_at TIMESTAMP
+--     created TIMESTAMP NOT NULL DEFAULT NOW(),
+--     modified_by VARCHAR(50),
+--     modified TIMESTAMP
 --
 -- );
 -- Create company table
@@ -46,9 +46,9 @@ CREATE TABLE company (
       name VARCHAR(255) NOT NULL,
       description TEXT,
       created_by VARCHAR(50) NOT NULL,
-      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-      updated_by VARCHAR(50),
-      updated_at TIMESTAMP
+      created TIMESTAMP NOT NULL DEFAULT NOW(),
+      modified_by VARCHAR(50),
+      modified TIMESTAMP
 
 );
 
@@ -57,9 +57,9 @@ CREATE TABLE service_type
     service_type_id INT PRIMARY KEY,
     name            VARCHAR(255) NOT NULL,
     created_by VARCHAR(50) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_by VARCHAR(50),
-    updated_at TIMESTAMP
+    created TIMESTAMP NOT NULL DEFAULT NOW(),
+    modified_by VARCHAR(50),
+    modified TIMESTAMP
 );
 
 -- Create provided_service table
@@ -71,9 +71,9 @@ CREATE TABLE service (
       description TEXT,
       price NUMERIC(10, 2),
       created_by VARCHAR(50) NOT NULL,
-      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-      updated_by VARCHAR(50),
-      updated_at TIMESTAMP,
+      created TIMESTAMP NOT NULL DEFAULT NOW(),
+      modified_by VARCHAR(50),
+      modified TIMESTAMP,
       CONSTRAINT fk_company
           FOREIGN KEY(company_id)
               REFERENCES company(company_id),

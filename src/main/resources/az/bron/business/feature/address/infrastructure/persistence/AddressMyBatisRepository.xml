@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="az.bron.business.feature.address.infrastructure.persistence.AddressMyBatisRepository">
+
+    <resultMap id="BaseResultMap" type="az.bron.business.feature.address.domain.model.Address">
+        <id property="id" column="address_id" jdbcType="BIGINT"/>
+        <result property="street" column="street" jdbcType="VARCHAR"/>
+        <result property="city" column="city" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="postalCode" column="postal_code" jdbcType="VARCHAR"/>
+        <result property="longitude" column="longitude" jdbcType="DOUBLE"/>
+        <result property="latitude" column="latitude" jdbcType="DOUBLE"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="modifiedBy" column="modified_by" jdbcType="VARCHAR"/>
+        <result property="modified" column="modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        address_id,street,city,
+        state,postal_code,longitude,
+        latitude,created_by,created,
+        modified_by,modified
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from address
+        where  address_id = #{addressId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from address
+        where  address_id = #{addressId,jdbcType=BIGINT}
+    </delete>
+    <insert id="add" keyColumn="address_id" keyProperty="addressId" parameterType="az.bron.business.feature.address.domain.model.Address" useGeneratedKeys="true">
+        insert into address
+        ( address_id,street,city
+        ,state,postal_code,longitude
+        ,latitude,created_by,created
+        ,modified_by,modified)
+        values (#{addressId,jdbcType=BIGINT},#{street,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR}
+               ,#{state,jdbcType=VARCHAR},#{postalCode,jdbcType=VARCHAR},#{longitude,jdbcType=DOUBLE}
+               ,#{latitude,jdbcType=DOUBLE},#{createdBy,jdbcType=VARCHAR},#{created,jdbcType=TIMESTAMP}
+               ,#{modifiedBy,jdbcType=VARCHAR},#{modified,jdbcType=TIMESTAMP})
+    </insert>
+<!--    <insert id="add" keyColumn="address_id" keyProperty="addressId" parameterType="az.bron.business.feature.*.domain.model.Address" useGeneratedKeys="true">-->
+<!--        insert into address-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="addressId != null">address_id,</if>-->
+<!--            <if test="street != null">street,</if>-->
+<!--            <if test="city != null">city,</if>-->
+<!--            <if test="state != null">state,</if>-->
+<!--            <if test="postalCode != null">postal_code,</if>-->
+<!--            <if test="longitude != null">longitude,</if>-->
+<!--            <if test="latitude != null">latitude,</if>-->
+<!--            <if test="createdBy != null">created_by,</if>-->
+<!--            <if test="created != null">created,</if>-->
+<!--            <if test="modifiedBy != null">modified_by,</if>-->
+<!--            <if test="modified != null">modified,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="addressId != null">#{addressId,jdbcType=BIGINT},</if>-->
+<!--            <if test="street != null">#{street,jdbcType=VARCHAR},</if>-->
+<!--            <if test="city != null">#{city,jdbcType=VARCHAR},</if>-->
+<!--            <if test="state != null">#{state,jdbcType=VARCHAR},</if>-->
+<!--            <if test="postalCode != null">#{postalCode,jdbcType=VARCHAR},</if>-->
+<!--            <if test="longitude != null">#{longitude,jdbcType=DOUBLE},</if>-->
+<!--            <if test="latitude != null">#{latitude,jdbcType=DOUBLE},</if>-->
+<!--            <if test="createdBy != null">#{createdBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="created != null">#{created,jdbcType=TIMESTAMP},</if>-->
+<!--            <if test="modifiedBy != null">#{modifiedBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="modified != null">#{modified,jdbcType=TIMESTAMP},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+<!--    <update id="updateByPrimaryKeySelective" parameterType="az.bron.business.feature.*.domain.model.Address">-->
+<!--        update address-->
+<!--        <set>-->
+<!--            <if test="street != null">-->
+<!--                street = #{street,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="city != null">-->
+<!--                city = #{city,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="state != null">-->
+<!--                state = #{state,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="postalCode != null">-->
+<!--                postal_code = #{postalCode,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="longitude != null">-->
+<!--                longitude = #{longitude,jdbcType=DOUBLE},-->
+<!--            </if>-->
+<!--            <if test="latitude != null">-->
+<!--                latitude = #{latitude,jdbcType=DOUBLE},-->
+<!--            </if>-->
+<!--            <if test="createdBy != null">-->
+<!--                created_by = #{createdBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="created != null">-->
+<!--                created = #{created,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="modifiedBy != null">-->
+<!--                modified_by = #{modifiedBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="modified != null">-->
+<!--                modified = #{modified,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where   address_id = #{addressId,jdbcType=BIGINT}-->
+<!--    </update>-->
+    <update id="update" parameterType="az.bron.business.feature.address.domain.model.Address">
+        update address
+        set
+            street =  #{street,jdbcType=VARCHAR},
+            city =  #{city,jdbcType=VARCHAR},
+            state =  #{state,jdbcType=VARCHAR},
+            postal_code =  #{postalCode,jdbcType=VARCHAR},
+            longitude =  #{longitude,jdbcType=DOUBLE},
+            latitude =  #{latitude,jdbcType=DOUBLE},
+            created_by =  #{createdBy,jdbcType=VARCHAR},
+            created =  #{created,jdbcType=TIMESTAMP},
+            modified_by =  #{modifiedBy,jdbcType=VARCHAR},
+            modified =  #{modified,jdbcType=TIMESTAMP}
+        where   address_id = #{addressId,jdbcType=BIGINT}
+    </update>
+</mapper>

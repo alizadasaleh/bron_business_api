@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="az.bron.business.feature.company.infrastructure.persistence.CompanyMyBatisRepository">
+
+    <resultMap id="BaseResultMap" type="az.bron.business.feature.company.domain.model.Company">
+        <id property="id" column="company_id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="modifiedBy" column="modified_by" jdbcType="VARCHAR"/>
+        <result property="modified" column="modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        company_id,name,description,
+        created_by,created,modified_by,
+        modified
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from company
+        where  company_id = #{companyId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from company
+        where  company_id = #{companyId,jdbcType=BIGINT}
+    </delete>
+    <insert id="add" keyColumn="company_id" keyProperty="companyId" parameterType="az.bron.business.feature.company.domain.model.Company" useGeneratedKeys="true">
+        insert into company
+        ( company_id,name,description
+        ,created_by,created,modified_by
+        ,modified)
+        values (#{companyId,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR}
+               ,#{createdBy,jdbcType=VARCHAR},#{created,jdbcType=TIMESTAMP},#{modifiedBy,jdbcType=VARCHAR}
+               ,#{modified,jdbcType=TIMESTAMP})
+    </insert>
+<!--    <insert id="add" keyColumn="company_id" keyProperty="companyId" parameterType="az.bron.business.feature.*.domain.model.Company" useGeneratedKeys="true">-->
+<!--        insert into company-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="companyId != null">company_id,</if>-->
+<!--            <if test="name != null">name,</if>-->
+<!--            <if test="description != null">description,</if>-->
+<!--            <if test="createdBy != null">created_by,</if>-->
+<!--            <if test="created != null">created,</if>-->
+<!--            <if test="modifiedBy != null">modified_by,</if>-->
+<!--            <if test="modified != null">modified,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="companyId != null">#{companyId,jdbcType=BIGINT},</if>-->
+<!--            <if test="name != null">#{name,jdbcType=VARCHAR},</if>-->
+<!--            <if test="description != null">#{description,jdbcType=VARCHAR},</if>-->
+<!--            <if test="createdBy != null">#{createdBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="created != null">#{created,jdbcType=TIMESTAMP},</if>-->
+<!--            <if test="modifiedBy != null">#{modifiedBy,jdbcType=VARCHAR},</if>-->
+<!--            <if test="modified != null">#{modified,jdbcType=TIMESTAMP},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+<!--    <update id="updateByPrimaryKeySelective" parameterType="az.bron.business.feature.*.domain.model.Company">-->
+<!--        update company-->
+<!--        <set>-->
+<!--            <if test="name != null">-->
+<!--                name = #{name,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="description != null">-->
+<!--                description = #{description,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="createdBy != null">-->
+<!--                created_by = #{createdBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="created != null">-->
+<!--                created = #{created,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="modifiedBy != null">-->
+<!--                modified_by = #{modifiedBy,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="modified != null">-->
+<!--                modified = #{modified,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where   company_id = #{companyId,jdbcType=BIGINT}-->
+<!--    </update>-->
+    <update id="update" parameterType="az.bron.business.feature.company.domain.model.Company">
+        update company
+        set
+            name =  #{name,jdbcType=VARCHAR},
+            description =  #{description,jdbcType=VARCHAR},
+            created_by =  #{createdBy,jdbcType=VARCHAR},
+            created =  #{created,jdbcType=TIMESTAMP},
+            modified_by =  #{modifiedBy,jdbcType=VARCHAR},
+            modified =  #{modified,jdbcType=TIMESTAMP}
+        where   company_id = #{companyId,jdbcType=BIGINT}
+    </update>
+</mapper>
