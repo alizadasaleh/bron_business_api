@@ -15,16 +15,20 @@ public interface ContactMapper {
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "modified", ignore = true)
     @Mapping(target = "modifiedBy", ignore = true)
+    @Mapping(target = "address.id", source = "addressId")
     Contact toModel(CreateContactRequest request);
 
     @Mapping(target = "created", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "modified", ignore = true)
     @Mapping(target = "modifiedBy", ignore = true)
+    @Mapping(target = "address.id", source = "addressId")
     Contact toModel(UpdateContactRequest request);
 
+    @Mapping(source = "address.id", target = "addressId")
     CreateContactResponse toCreateResponse(Contact contact);
 
+    @Mapping(source = "address.id", target = "addressId")
     UpdateContactResponse toUpdateResponse(Contact contact);
 
     GetContactResponse toVehicleResponse(Contact contact);

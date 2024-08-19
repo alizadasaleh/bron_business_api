@@ -6,7 +6,6 @@
 
     <resultMap id="BaseResultMap" type="az.bron.business.feature.contact.domain.model.Contact">
         <id property="id" column="contact_id" jdbcType="BIGINT"/>
-<!--        <result property="addressId" column="address_id" jdbcType="INTEGER"/>-->
         <result property="phoneNumber" column="phone_number" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="website" column="website" jdbcType="VARCHAR"/>
@@ -15,107 +14,80 @@
         <result property="created" column="created" jdbcType="TIMESTAMP"/>
         <result property="modifiedBy" column="modified_by" jdbcType="VARCHAR"/>
         <result property="modified" column="modified" jdbcType="TIMESTAMP"/>
+        <association property="address" javaType="az.bron.business.feature.address.domain.model.Address"
+                     resultMap="addressMap"/>
     </resultMap>
 
+    <resultMap id="addressMap" type="az.bron.business.feature.address.domain.model.Address"
+               extends="az.bron.business.feature.address.infrastructure.persistence.AddressMyBatisRepository.BaseResultMap"/>
+
+
     <sql id="Base_Column_List">
-        contact_id,address_id,phone_number,
-        email,website,
-        created_by,created,modified_by,
-        modified
+        cnt.contact_id AS contact_id,
+        cnt.address_id AS addressId,
+        cnt.phone_number AS phoneNumber,
+        cnt.email AS email,
+        cnt.website AS website,
+        cnt.created_by AS createdBy,
+        cnt.created AS created,
+        cnt.modified_by AS modifiedBy,
+        cnt.modified AS modified,
+        adr.address_id AS address_id,
+        adr.street AS street,
+        adr.city AS city,
+        adr.state AS state,
+        adr.postal_code AS postalCode,
+        adr.longitude AS longitude,
+        adr.latitude AS latitude,
+        adr.created_by AS createdBy,
+        adr.created AS created,
+        adr.modified_by AS modifiedBy,
+        adr.modified AS modified
     </sql>
 
     <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from public.contact        where  contact_id = #{contactId,jdbcType=BIGINT}
+        from public.contact cnt
+        left join public.address adr
+        on cnt.address_id = adr.address_id
+        where  cnt.contact_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from public.contact cnt
+        left join public.address adr
+        on cnt.address_id = adr.address_id
     </select>
 
     <delete id="delete" parameterType="java.lang.Long">
-        delete from public.contact        where  contact_id = #{contactId,jdbcType=BIGINT}
+        delete from public.contact        where  contact_id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="add" keyColumn="contact_id" keyProperty="contactId" parameterType="az.bron.business.feature.contact.domain.model.Contact" useGeneratedKeys="true">
+    <insert id="add" keyColumn="contact_id" keyProperty="id" parameterType="az.bron.business.feature.contact.domain.model.Contact" useGeneratedKeys="true">
         insert into public.contact
-        ( contact_id,address_id,phone_number
+        ( address_id,phone_number
         ,email,website,schedule
         ,created_by,created,modified_by
         ,modified)
-        values (#{contactId,jdbcType=BIGINT},#{addressId,jdbcType=INTEGER},#{phoneNumber,jdbcType=VARCHAR}
+        values (#{address.id,jdbcType=INTEGER},#{phoneNumber,jdbcType=VARCHAR}
                ,#{email,jdbcType=VARCHAR},#{website,jdbcType=VARCHAR},#{schedule,typeHandler=az.bron.business.feature.contact.infrastructure.persistence.ScheduleTypeHandler}::jsonb
                ,#{createdBy,jdbcType=VARCHAR},#{created,jdbcType=TIMESTAMP},#{modifiedBy,jdbcType=VARCHAR}
                ,#{modified,jdbcType=TIMESTAMP})
     </insert>
-<!--    <insert id="add" keyColumn="contact_id" keyProperty="contactId" parameterType="az.bron.business.feature.*.domain.model.Contact" useGeneratedKeys="true">-->
-<!--        insert into contact-->
-<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-<!--            <if test="contactId != null">contact_id,</if>-->
-<!--            <if test="addressId != null">address_id,</if>-->
-<!--            <if test="phoneNumber != null">phone_number,</if>-->
-<!--            <if test="email != null">email,</if>-->
-<!--            <if test="website != null">website,</if>-->
-<!--            <if test="schedule != null">schedule,</if>-->
-<!--            <if test="createdBy != null">created_by,</if>-->
-<!--            <if test="created != null">created,</if>-->
-<!--            <if test="modifiedBy != null">modified_by,</if>-->
-<!--            <if test="modified != null">modified,</if>-->
-<!--        </trim>-->
-<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-<!--            <if test="contactId != null">#{contactId,jdbcType=BIGINT},</if>-->
-<!--            <if test="addressId != null">#{addressId,jdbcType=INTEGER},</if>-->
-<!--            <if test="phoneNumber != null">#{phoneNumber,jdbcType=VARCHAR},</if>-->
-<!--            <if test="email != null">#{email,jdbcType=VARCHAR},</if>-->
-<!--            <if test="website != null">#{website,jdbcType=VARCHAR},</if>-->
-<!--            <if test="schedule != null">#{schedule,jdbcType=OTHER},</if>-->
-<!--            <if test="createdBy != null">#{createdBy,jdbcType=VARCHAR},</if>-->
-<!--            <if test="created != null">#{created,jdbcType=TIMESTAMP},</if>-->
-<!--            <if test="modifiedBy != null">#{modifiedBy,jdbcType=VARCHAR},</if>-->
-<!--            <if test="modified != null">#{modified,jdbcType=TIMESTAMP},</if>-->
-<!--        </trim>-->
-<!--    </insert>-->
-<!--    <update id="updateByPrimaryKeySelective" parameterType="az.bron.business.feature.*.domain.model.Contact">-->
-<!--        update contact-->
-<!--        <set>-->
-<!--            <if test="addressId != null">-->
-<!--                address_id = #{addressId,jdbcType=INTEGER},-->
-<!--            </if>-->
-<!--            <if test="phoneNumber != null">-->
-<!--                phone_number = #{phoneNumber,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="email != null">-->
-<!--                email = #{email,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="website != null">-->
-<!--                website = #{website,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="schedule != null">-->
-<!--                schedule = #{schedule,jdbcType=OTHER},-->
-<!--            </if>-->
-<!--            <if test="createdBy != null">-->
-<!--                created_by = #{createdBy,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="created != null">-->
-<!--                created = #{created,jdbcType=TIMESTAMP},-->
-<!--            </if>-->
-<!--            <if test="modifiedBy != null">-->
-<!--                modified_by = #{modifiedBy,jdbcType=VARCHAR},-->
-<!--            </if>-->
-<!--            <if test="modified != null">-->
-<!--                modified = #{modified,jdbcType=TIMESTAMP},-->
-<!--            </if>-->
-<!--        </set>-->
-<!--        where   contact_id = #{contactId,jdbcType=BIGINT}-->
-<!--    </update>-->
     <update id="update" parameterType="az.bron.business.feature.contact.domain.model.Contact">
         update contact
         set
-            address_id =  #{addressId,jdbcType=INTEGER},
+            address_id =  #{address.id,jdbcType=INTEGER},
             phone_number =  #{phoneNumber,jdbcType=VARCHAR},
             email =  #{email,jdbcType=VARCHAR},
             website =  #{website,jdbcType=VARCHAR},
-            schedule =  #{schedule,jdbcType=OTHER},
+            schedule =  #{schedule,typeHandler=az.bron.business.feature.contact.infrastructure.persistence.ScheduleTypeHandler}::jsonb,
             created_by =  #{createdBy,jdbcType=VARCHAR},
             created =  #{created,jdbcType=TIMESTAMP},
             modified_by =  #{modifiedBy,jdbcType=VARCHAR},
             modified =  #{modified,jdbcType=TIMESTAMP}
-        where   contact_id = #{contactId,jdbcType=BIGINT}
+        where   contact_id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

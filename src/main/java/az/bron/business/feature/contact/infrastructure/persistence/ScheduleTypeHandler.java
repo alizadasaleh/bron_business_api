@@ -2,6 +2,7 @@ package az.bron.business.feature.contact.infrastructure.persistence;
 
 import az.bron.business.feature.contact.domain.model.Schedule;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 
@@ -10,9 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 public class ScheduleTypeHandler extends BaseTypeHandler<Schedule> {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Schedule schedule, JdbcType jdbcType) throws SQLException {
