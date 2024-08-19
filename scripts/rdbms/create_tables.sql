@@ -16,7 +16,7 @@ CREATE TABLE address (
 -- Create contact table
 CREATE TABLE contact (
      contact_id BIGSERIAL PRIMARY KEY,
-     address_id INT NOT NULL,
+     address_id BIGINT NOT NULL,
      phone_number VARCHAR(20),
      email VARCHAR(100),
      website VARCHAR(100),
@@ -43,12 +43,16 @@ CREATE TABLE contact (
 -- Create company table
 CREATE TABLE company (
       company_id BIGSERIAL PRIMARY KEY,
+      contact_id BIGINT NOT NULL,
       name VARCHAR(255) NOT NULL,
       description TEXT,
       created_by VARCHAR(50),
       created TIMESTAMP with time zone DEFAULT CURRENT_TIMESTAMP,
       modified_by VARCHAR(50),
-      modified TIMESTAMP
+      modified TIMESTAMP,
+      CONSTRAINT fk_contact
+          FOREIGN KEY(contact_id)
+              REFERENCES contact(contact_id)
 
 );
 

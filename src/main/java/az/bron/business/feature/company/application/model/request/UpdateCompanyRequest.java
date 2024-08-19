@@ -4,4 +4,7 @@ import lombok.Data;
 
 @Data
 public class UpdateCompanyRequest {
+    private String name;
+    private String description;
+    private Long contactId;
 }
