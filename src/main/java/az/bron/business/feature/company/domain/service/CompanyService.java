@@ -1,9 +1,18 @@
 package az.bron.business.feature.company.domain.service;
 
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.domain.service.CrudService;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
-public interface CompanyService extends CrudService<Company, Long> {
+public interface CompanyService {
+    Company create(Company company);
+
+    Company update(Company company);
+
+    Optional<Company> get(Long id);
+
+    List<Company> getAll();
+
+    void delete(Long id);
 }

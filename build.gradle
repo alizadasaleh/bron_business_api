@@ -20,21 +20,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation files('libs/domain-1.0.1-plain.jar')
-    implementation files('libs/exception-1.0.0-plain.jar')
-    implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
 }
 
 test {

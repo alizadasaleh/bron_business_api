@@ -6,22 +6,36 @@ import az.bron.business.feature.contact.application.model.request.UpdateContactR
 import az.bron.business.feature.contact.application.model.response.CreateContactResponse;
 import az.bron.business.feature.contact.application.model.response.GetContactResponse;
 import az.bron.business.feature.contact.application.model.response.UpdateContactResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/contacts")
 @RequiredArgsConstructor
+@RequestMapping("api/v1/contacts")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContactRestController {
     private final ContactFacade contactFacade;
 
+    @GetMapping
+    public ResponseEntity<List<GetContactResponse>> getContact() {
+        var response = contactFacade.getAll();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetContactResponse> get(@PathVariable("id") Long id) {
+        var response = contactFacade.get(id);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
-    public ResponseEntity<CreateContactResponse> create(@Valid @RequestBody CreateContactRequest request) {
+    public ResponseEntity<CreateContactResponse> create(@RequestBody CreateContactRequest request) {
         var response = contactFacade.create(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -29,31 +43,14 @@ public class ContactRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateContactResponse> update(@PathVariable Long id, @Valid @RequestBody UpdateContactRequest request) {
+    public ResponseEntity<UpdateContactResponse> update(@PathVariable("id") Long id, @RequestBody UpdateContactRequest request) {
         var response = contactFacade.update(id, request);
 
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<GetContactResponse>> getAll() {
-        var response = contactFacade.getAll();
-
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<GetContactResponse> get(@PathVariable Long id) {
-        var response = contactFacade.get(id);
-
-        return ResponseEntity.ok(response);
-    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        contactFacade.delete(id);
-
-        return ResponseEntity.noContent()
-                .build();
+    public void delete(@PathVariable("id") Long id) {
+       contactFacade.delete(id);
     }
 }

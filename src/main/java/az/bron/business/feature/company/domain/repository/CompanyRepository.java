@@ -1,7 +1,9 @@
 package az.bron.business.feature.company.domain.repository;
 
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.domain.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CompanyRepository extends CrudRepository<Company, Long> {
+@Repository
+public interface CompanyRepository extends JpaRepository<Company, Long> {
 }

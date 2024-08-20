@@ -6,37 +6,36 @@ import az.bron.business.feature.contact.domain.service.ContactService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ContactServiceImpl implements ContactService {
-    final ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 
     @Override
-    public void add(Contact contact) {
-        contactRepository.add(contact);
+    public Contact create(Contact contact) {
+        return contactRepository.save(contact);
     }
 
     @Override
-    public void update(Contact contact) {
-        contactRepository.update(contact);
-    }
-
-    @Override
-    public void delete(Long id) {
-        contactRepository.delete(id);
+    public Contact update(Contact contact) {
+        return contactRepository.save(contact);
     }
 
     @Override
     public Optional<Contact> get(Long id) {
-        return contactRepository.get(id);
+        return contactRepository.findById(id);
     }
 
     @Override
-    public Collection<Contact> getAll() {
-        return contactRepository.getAll();
+    public List<Contact> getAll() {
+        return contactRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+       contactRepository.deleteById(id);
     }
 }
-

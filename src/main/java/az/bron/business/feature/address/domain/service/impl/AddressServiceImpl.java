@@ -6,37 +6,36 @@ import az.bron.business.feature.address.domain.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
-    final AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
 
     @Override
-    public void add(Address address) {
-        addressRepository.add(address);
+    public Address create(Address address) {
+        return addressRepository.save(address);
     }
 
     @Override
-    public void update(Address address) {
-        addressRepository.update(address);
-    }
-
-    @Override
-    public void delete(Long id) {
-        addressRepository.delete(id);
+    public Address update(Address address) {
+        return addressRepository.save(address);
     }
 
     @Override
     public Optional<Address> get(Long id) {
-        return addressRepository.get(id);
+        return addressRepository.findById(id);
     }
 
     @Override
-    public Collection<Address> getAll() {
-        return addressRepository.getAll();
+    public List<Address> getAll() {
+        return addressRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+       addressRepository.deleteById(id);
     }
 }
-

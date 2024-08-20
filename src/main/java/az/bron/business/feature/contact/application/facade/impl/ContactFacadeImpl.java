@@ -1,6 +1,5 @@
 package az.bron.business.feature.contact.application.facade.impl;
 
-import az.bron.business.feature.contact.application.exception.ContactNotFoundException;
 import az.bron.business.feature.contact.application.facade.ContactFacade;
 import az.bron.business.feature.contact.application.mapper.ContactMapper;
 import az.bron.business.feature.contact.application.model.request.CreateContactRequest;
@@ -8,13 +7,11 @@ import az.bron.business.feature.contact.application.model.request.UpdateContactR
 import az.bron.business.feature.contact.application.model.response.CreateContactResponse;
 import az.bron.business.feature.contact.application.model.response.GetContactResponse;
 import az.bron.business.feature.contact.application.model.response.UpdateContactResponse;
-import az.bron.business.feature.contact.domain.model.Contact;
 import az.bron.business.feature.contact.domain.service.ContactService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Log4j2
@@ -22,58 +19,63 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContactFacadeImpl implements ContactFacade {
     private final ContactService contactService;
-
     private final ContactMapper contactMapper;
 
     @Override
     public CreateContactResponse create(CreateContactRequest request) {
-        Contact contact = contactMapper.toModel(request);
-        contactService.add(contact);
+        var contactModel = contactMapper.toModel(request);
+        var contact = contactService.create(contactModel);
 
         return contactMapper.toCreateResponse(contact);
     }
 
     @Override
     public UpdateContactResponse update(Long id, UpdateContactRequest request) {
-        Contact contact = contactMapper.toModel(request);
+        var contactModel = contactMapper.toModel(request);
 
         var existingContact = contactService.get(id);
 
         if (existingContact.isEmpty()) {
-            throw new ContactNotFoundException();
+            throw new RuntimeException("Contact with id " + id + " does not exist");
         }
 
-        var contactId = existingContact.get().getId();
+       contactModel.setId(id);
 
-        contact.setId(contactId);
-
-        contactService.update(contact);
+        var contact = contactService.create(contactModel);
 
         return contactMapper.toUpdateResponse(contact);
     }
 
     @Override
-    public List<GetContactResponse> getAll() {
-        Collection<Contact> contacts = contactService.getAll();
+    public GetContactResponse get(Long id) {
+        var existingContact = contactService.get(id);
 
-        return contacts.stream()
-                .map(contactMapper::toVehicleResponse)
+        if (existingContact.isEmpty()) {
+            throw new RuntimeException("Contact with id " + id + " does not exist");
+        }
+
+        var contact = existingContact.get();
+
+        return contactMapper.toGetResponse(contact);
+    }
+
+    @Override
+    public List<GetContactResponse> getAll() {
+        var result = contactService.getAll();
+
+        return result.stream()
+                .map(contactMapper::toGetResponse)
                 .toList();
     }
 
     @Override
-    public GetContactResponse get(Long id) {
-        var contact = contactService.get(id);
+    public void delete(Long id) {
+        var existingContact = contactService.get(id);
 
-        if (contact.isEmpty()) {
-            throw new ContactNotFoundException();
+        if (existingContact.isEmpty()) {
+            throw new RuntimeException("Contact with id " + id + " does not exist");
         }
 
-        return contactMapper.toVehicleResponse(contact.get());
-    }
-
-    @Override
-    public void delete(Long id) {
-        contactService.delete(id);
+       contactService.delete(id);
     }
 }

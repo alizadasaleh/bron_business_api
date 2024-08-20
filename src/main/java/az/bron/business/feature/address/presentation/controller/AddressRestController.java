@@ -6,22 +6,36 @@ import az.bron.business.feature.address.application.model.request.UpdateAddressR
 import az.bron.business.feature.address.application.model.response.CreateAddressResponse;
 import az.bron.business.feature.address.application.model.response.GetAddressResponse;
 import az.bron.business.feature.address.application.model.response.UpdateAddressResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/addresses")
 @RequiredArgsConstructor
+@RequestMapping("api/v1/addresses")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AddressRestController {
     private final AddressFacade addressFacade;
 
+    @GetMapping
+    public ResponseEntity<List<GetAddressResponse>> getAddress() {
+        var response = addressFacade.getAll();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetAddressResponse> get(@PathVariable("id") Long id) {
+        var response = addressFacade.get(id);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
-    public ResponseEntity<CreateAddressResponse> create(@Valid @RequestBody CreateAddressRequest request) {
+    public ResponseEntity<CreateAddressResponse> create(@RequestBody CreateAddressRequest request) {
         var response = addressFacade.create(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -29,31 +43,14 @@ public class AddressRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateAddressResponse> update(@PathVariable Long id, @Valid @RequestBody UpdateAddressRequest request) {
+    public ResponseEntity<UpdateAddressResponse> update(@PathVariable("id") Long id, @RequestBody UpdateAddressRequest request) {
         var response = addressFacade.update(id, request);
 
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<GetAddressResponse>> getAll() {
-        var response = addressFacade.getAll();
-
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<GetAddressResponse> get(@PathVariable Long id) {
-        var response = addressFacade.get(id);
-
-        return ResponseEntity.ok(response);
-    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        addressFacade.delete(id);
-
-        return ResponseEntity.noContent()
-                .build();
+    public void delete(@PathVariable("id") Long id) {
+       addressFacade.delete(id);
     }
 }
