@@ -1,5 +1,6 @@
 package az.bron.business.feature.contact.domain.model;
 
+import az.bron.business.common.Auditable;
 import az.bron.business.feature.address.domain.model.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "contacts")
-public class Contact {
+public class Contact extends Auditable<String> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +32,7 @@ public class Contact {
     @JdbcTypeCode(SqlTypes.JSON)
     private Schedule schedule;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 }
