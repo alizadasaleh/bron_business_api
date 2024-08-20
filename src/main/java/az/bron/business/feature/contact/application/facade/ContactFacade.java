@@ -9,13 +9,13 @@ import az.bron.business.feature.contact.application.model.response.UpdateContact
 import java.util.List;
 
 public interface ContactFacade {
-    CreateContactResponse create(CreateContactRequest dto);
+    CreateContactResponse create(CreateContactRequest request);
 
-    UpdateContactResponse update(Long id, UpdateContactRequest dto);
-
-    List<GetContactResponse> getAll();
+    UpdateContactResponse update(Long id, UpdateContactRequest request);
 
     GetContactResponse get(Long id);
+
+    List<GetContactResponse> getAll();
 
     void delete(Long id);
 }

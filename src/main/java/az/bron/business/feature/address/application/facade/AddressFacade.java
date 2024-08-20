@@ -9,13 +9,13 @@ import az.bron.business.feature.address.application.model.response.UpdateAddress
 import java.util.List;
 
 public interface AddressFacade {
-    CreateAddressResponse create(CreateAddressRequest dto);
+    CreateAddressResponse create(CreateAddressRequest request);
 
-    UpdateAddressResponse update(Long id, UpdateAddressRequest dto);
-
-    List<GetAddressResponse> getAll();
+    UpdateAddressResponse update(Long id, UpdateAddressRequest request);
 
     GetAddressResponse get(Long id);
+
+    List<GetAddressResponse> getAll();
 
     void delete(Long id);
 }

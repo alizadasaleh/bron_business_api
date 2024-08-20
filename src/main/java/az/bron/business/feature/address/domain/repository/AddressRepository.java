@@ -1,7 +1,9 @@
 package az.bron.business.feature.address.domain.repository;
 
 import az.bron.business.feature.address.domain.model.Address;
-import az.bron.domain.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AddressRepository extends CrudRepository<Address, Long> {
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }

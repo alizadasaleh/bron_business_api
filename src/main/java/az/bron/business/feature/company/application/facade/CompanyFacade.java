@@ -9,13 +9,13 @@ import az.bron.business.feature.company.application.model.response.UpdateCompany
 import java.util.List;
 
 public interface CompanyFacade {
-    CreateCompanyResponse create(CreateCompanyRequest dto);
+    CreateCompanyResponse create(CreateCompanyRequest request);
 
-    UpdateCompanyResponse update(Long id, UpdateCompanyRequest dto);
-
-    List<GetCompanyResponse> getAll();
+    UpdateCompanyResponse update(Long id, UpdateCompanyRequest request);
 
     GetCompanyResponse get(Long id);
+
+    List<GetCompanyResponse> getAll();
 
     void delete(Long id);
 }

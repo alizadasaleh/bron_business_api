@@ -6,37 +6,36 @@ import az.bron.business.feature.company.domain.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
-    final CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     @Override
-    public void add(Company company) {
-        companyRepository.add(company);
+    public Company create(Company company) {
+        return companyRepository.save(company);
     }
 
     @Override
-    public void update(Company company) {
-        companyRepository.update(company);
-    }
-
-    @Override
-    public void delete(Long id) {
-        companyRepository.delete(id);
+    public Company update(Company company) {
+        return companyRepository.save(company);
     }
 
     @Override
     public Optional<Company> get(Long id) {
-        return companyRepository.get(id);
+        return companyRepository.findById(id);
     }
 
     @Override
-    public Collection<Company> getAll() {
-        return companyRepository.getAll();
+    public List<Company> getAll() {
+        return companyRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+       companyRepository.deleteById(id);
     }
 }
-

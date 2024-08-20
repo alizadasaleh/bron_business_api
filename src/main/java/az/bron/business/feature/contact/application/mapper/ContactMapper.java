@@ -11,25 +11,17 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
-    @Mapping(target = "created", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "modified", ignore = true)
-    @Mapping(target = "modifiedBy", ignore = true)
-    @Mapping(target = "address.id", source = "addressId")
+    @Mapping(source = "addressId", target = "address.id")
     Contact toModel(CreateContactRequest request);
 
-    @Mapping(target = "created", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "modified", ignore = true)
-    @Mapping(target = "modifiedBy", ignore = true)
-    @Mapping(target = "address.id", source = "addressId")
+    @Mapping(source = "addressId", target = "address.id")
     Contact toModel(UpdateContactRequest request);
 
-    @Mapping(source = "address.id", target = "addressId")
+    @Mapping(target = "addressId", source = "address.id")
     CreateContactResponse toCreateResponse(Contact contact);
 
-    @Mapping(source = "address.id", target = "addressId")
+    @Mapping(target = "addressId", source = "address.id")
     UpdateContactResponse toUpdateResponse(Contact contact);
 
-    GetContactResponse toVehicleResponse(Contact contact);
+    GetContactResponse toGetResponse(Contact contact);
 }
