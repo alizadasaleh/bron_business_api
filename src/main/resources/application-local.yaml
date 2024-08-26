@@ -1,12 +1,23 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bron_business
-    username: postgres
-    password: root
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORDS}
     driver-class-name: org.postgresql.Driver
 
   application:
     name: bron-business
+
+
+  # JWT Configuratio
+
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH2_RESOURCE_SERVER_ISSUER_URI}
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
   mvc:
     problemdetails:
@@ -24,8 +35,18 @@ spring:
       serialization:
         write-dates-as-timestamps: false
 
+logging:
+  file:
+    name: bronapplogfile.log
+  level:
+    az.bron.business: WARN
 
 
 server:
-  port: 8088
+  port: ${SERVER_PORT}
 debug: on
+jwt:
+  auth:
+    converter:
+      principal-attribute: principal_username
+      resource-id: bron_client
