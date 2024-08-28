@@ -4,6 +4,7 @@ import az.bron.business.common.Auditable;
 import az.bron.business.feature.contact.domain.model.Contact;
 import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 

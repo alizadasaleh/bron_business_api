@@ -5,4 +5,8 @@ import lombok.Data;
 @Data
 public class CreateMasterResponse {
     private Long id;
+    private String name;
+    private String description;
+
+    private Long companyId;
 }

@@ -7,15 +7,20 @@ import az.bron.business.feature.providedservice.application.model.response.GetPr
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ProvidedServiceMapper {
+    @Mapping(source = "companyId", target = "company.id")
     ProvidedService toModel(CreateProvidedServiceRequest request);
 
+    @Mapping(source = "companyId", target = "company.id")
     ProvidedService toModel(UpdateProvidedServiceRequest request);
 
+    @Mapping(target = "companyId", source = "company.id")
     CreateProvidedServiceResponse toCreateResponse(ProvidedService providedservice);
 
+    @Mapping(target = "companyId", source = "company.id")
     UpdateProvidedServiceResponse toUpdateResponse(ProvidedService providedservice);
 
     GetProvidedServiceResponse toGetResponse(ProvidedService providedservice);

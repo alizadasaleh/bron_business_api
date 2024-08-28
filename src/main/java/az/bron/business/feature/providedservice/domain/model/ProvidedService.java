@@ -6,6 +6,8 @@ import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.master.domain.service.MasterService;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
 import az.bron.business.feature.providedservice.domain.repository.DurationConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +34,7 @@ public class ProvidedService extends Auditable<Long> {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
     @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
