@@ -43,7 +43,7 @@ dependencies {
 }
 
 bootJar {
-    destinationDirectory = file("$projectDir")
+    destinationDirectory = file("$projectDir/jars")
 }
 
 test {
