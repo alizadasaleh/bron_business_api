@@ -6,6 +6,7 @@ import az.bron.business.feature.company.application.model.request.UpdateCompanyR
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/companies")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class CompanyRestController {
     private final CompanyFacade companyFacade;
 

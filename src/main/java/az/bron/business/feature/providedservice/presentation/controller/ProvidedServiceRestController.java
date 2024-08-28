@@ -6,6 +6,7 @@ import az.bron.business.feature.providedservice.application.model.request.Update
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/providedServices")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class ProvidedServiceRestController {
     private final ProvidedServiceFacade providedserviceFacade;
 
