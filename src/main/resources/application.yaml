@@ -38,7 +38,11 @@ logging:
     name: bronapplogfile.log
   level:
     az.bron.business: WARN
-
+jwt:
+  auth:
+    converter:
+      principal-attribute: principal_username
+      resource-id: bron_client
 
 server:
   port: 8088
