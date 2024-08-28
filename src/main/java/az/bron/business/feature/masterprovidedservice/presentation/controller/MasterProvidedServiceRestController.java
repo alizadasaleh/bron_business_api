@@ -6,6 +6,7 @@ import az.bron.business.feature.masterprovidedservice.application.model.request.
 import az.bron.business.feature.masterprovidedservice.application.model.response.CreateMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.GetMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.UpdateMasterProvidedServiceResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/masterprovidedservices")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class MasterProvidedServiceRestController {
     private final MasterProvidedServiceFacade masterprovidedserviceFacade;
 

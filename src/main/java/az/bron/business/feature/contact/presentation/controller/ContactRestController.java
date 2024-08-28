@@ -1,6 +1,7 @@
 package az.bron.business.feature.contact.presentation.controller;
 
 import az.bron.business.feature.contact.application.facade.ContactFacade;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import az.bron.business.feature.contact.application.model.request.CreateContactRequest;
 import az.bron.business.feature.contact.application.model.request.UpdateContactRequest;
 import az.bron.business.feature.contact.application.model.response.CreateContactResponse;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/contacts")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class ContactRestController {
     private final ContactFacade contactFacade;
 
