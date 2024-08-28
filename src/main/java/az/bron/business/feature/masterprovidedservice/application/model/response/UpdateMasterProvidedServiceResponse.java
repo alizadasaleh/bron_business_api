@@ -6,4 +6,10 @@ import lombok.Data;
 public class UpdateMasterProvidedServiceResponse {
     private Long id;
 
+    private Long masterId;
+
+    private Long serviceId;
+
+    private Double price;
+
 }
