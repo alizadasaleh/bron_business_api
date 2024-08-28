@@ -3,13 +3,13 @@ package az.bron.business.feature.master.domain.model;
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
-import az.bron.business.feature.providedservice.domain.model.ProvidedService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
