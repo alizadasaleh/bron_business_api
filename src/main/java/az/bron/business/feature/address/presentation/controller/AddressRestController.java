@@ -6,6 +6,7 @@ import az.bron.business.feature.address.application.model.request.UpdateAddressR
 import az.bron.business.feature.address.application.model.response.CreateAddressResponse;
 import az.bron.business.feature.address.application.model.response.GetAddressResponse;
 import az.bron.business.feature.address.application.model.response.UpdateAddressResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/addresses")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class AddressRestController {
     private final AddressFacade addressFacade;
 

@@ -6,6 +6,7 @@ import az.bron.business.feature.master.application.model.request.UpdateMasterReq
 import az.bron.business.feature.master.application.model.response.CreateMasterResponse;
 import az.bron.business.feature.master.application.model.response.GetMasterResponse;
 import az.bron.business.feature.master.application.model.response.UpdateMasterResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/masters")
+@SecurityRequirement(name = "bearerAuth")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MasterRestController {
     private final MasterFacade masterFacade;
