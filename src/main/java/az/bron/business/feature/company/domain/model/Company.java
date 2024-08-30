@@ -5,6 +5,7 @@ import az.bron.business.feature.contact.domain.model.Contact;
 import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,8 +30,10 @@ public class Company extends Auditable<String> {
     private Contact contact;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Master> masters;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ProvidedService> providedServices;
 }

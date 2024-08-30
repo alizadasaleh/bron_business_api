@@ -25,8 +25,5 @@ public interface CompanyMapper {
     @Mapping(target = "contactId", source = "contact.id")
     UpdateCompanyResponse toUpdateResponse(Company company);
 
-
-    @Mapping(target = "providedServices.masters", ignore = true)
-    @Mapping(target = "masters.masterServices", ignore = true)
     GetCompanyResponse toGetResponse(Company company);
 }
