@@ -2,7 +2,6 @@ package az.bron.business.feature.providedservice.application.model.request;
 
 import lombok.Data;
 
-import java.time.Duration;
 
 @Data
 public class CreateProvidedServiceRequest {

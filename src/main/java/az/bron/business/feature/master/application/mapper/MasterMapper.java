@@ -25,5 +25,7 @@ public interface MasterMapper {
     @Mapping(target = "companyId", source = "company.id")
     UpdateMasterResponse toUpdateResponse(Master master);
 
+    @Mapping(source = "masterServices", target = "services")
     GetMasterResponse toGetResponse(Master master);
+
 }
