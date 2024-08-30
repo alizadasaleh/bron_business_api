@@ -25,9 +25,12 @@ public class Master extends Auditable<Long> {
     private String description;
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
 
     @OneToMany(mappedBy = "master", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<MasterProvidedService> masterServices ;
+
 
 }

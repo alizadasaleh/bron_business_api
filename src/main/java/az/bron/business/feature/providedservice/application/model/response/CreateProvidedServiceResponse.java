@@ -1,6 +1,6 @@
 package az.bron.business.feature.providedservice.application.model.response;
 
-import java.time.Duration;
+import az.bron.business.feature.providedservice.application.model.request.Duration;
 import lombok.Data;
 
 @Data

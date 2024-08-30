@@ -6,6 +6,7 @@ import az.bron.business.feature.masterprovidedservice.application.model.response
 import az.bron.business.feature.masterprovidedservice.application.model.response.GetMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.UpdateMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
+import az.bron.business.feature.masterprovidedservice.application.model.response.GetCertainProvidedServiceResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -30,4 +31,11 @@ public interface MasterProvidedServiceMapper {
     @Mapping(target = "masterId", source = "master.id")
     @Mapping(target = "serviceId", source = "providedService.id")
     GetMasterProvidedServiceResponse toGetResponse(MasterProvidedService masterprovidedservice);
+
+    @Mapping(target = "id", source = "providedService.id")
+    @Mapping(target = "name", source = "providedService.name")
+    @Mapping(target = "description", source = "providedService.description")
+    @Mapping(target = "duration", source = "providedService.duration")
+    @Mapping(target = "companyId", source = "providedService.company.id")
+    GetCertainProvidedServiceResponse toGetCertainResponse(MasterProvidedService masterprovidedservice);
 }
