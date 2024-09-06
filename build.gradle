@@ -39,11 +39,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.3.2'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
 
+    implementation files('libs/domain-1.0.0-plain.jar')
+    implementation files('libs/exception-1.0.0-plain.jar')
+
 
 }
 
 bootJar {
-    destinationDirectory = file("$projectDir")
+    destinationDirectory = file("$projectDir/jars")
 }
 
 test {

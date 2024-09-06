@@ -1,0 +1,81 @@
+package az.bron.business.feature.providedservice.application.facade.impl;
+
+import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
+import az.bron.business.feature.providedservice.application.mapper.ProvidedServiceMapper;
+import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
+import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
+import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
+import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Log4j2
+@Service
+@RequiredArgsConstructor
+public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
+    private final ProvidedServiceService providedserviceService;
+    private final ProvidedServiceMapper providedserviceMapper;
+
+    @Override
+    public CreateProvidedServiceResponse create(CreateProvidedServiceRequest request) {
+        var providedserviceModel = providedserviceMapper.toModel(request);
+        var providedservice = providedserviceService.create(providedserviceModel);
+
+        return providedserviceMapper.toCreateResponse(providedservice);
+    }
+
+    @Override
+    public UpdateProvidedServiceResponse update(Long id, UpdateProvidedServiceRequest request) {
+        var providedserviceModel = providedserviceMapper.toModel(request);
+
+        var existingProvidedService = providedserviceService.get(id);
+
+        if (existingProvidedService.isEmpty()) {
+            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+        }
+
+       providedserviceModel.setId(id);
+
+        var providedservice = providedserviceService.create(providedserviceModel);
+
+        return providedserviceMapper.toUpdateResponse(providedservice);
+    }
+
+    @Override
+    public GetProvidedServiceResponse get(Long id) {
+        var existingProvidedService = providedserviceService.get(id);
+
+        if (existingProvidedService.isEmpty()) {
+            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+        }
+
+        var providedservice = existingProvidedService.get();
+
+        return providedserviceMapper.toGetResponse(providedservice);
+    }
+
+    @Override
+    public List<GetProvidedServiceResponse> getAll() {
+        var result = providedserviceService.getAll();
+
+        return result.stream()
+                .map(providedserviceMapper::toGetResponse)
+                .toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+        var existingProvidedService = providedserviceService.get(id);
+
+        if (existingProvidedService.isEmpty()) {
+            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+        }
+
+       providedserviceService.delete(id);
+    }
+}
