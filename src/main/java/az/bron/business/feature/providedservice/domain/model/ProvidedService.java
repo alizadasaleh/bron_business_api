@@ -6,6 +6,7 @@ import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.master.domain.service.MasterService;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
 import az.bron.business.feature.providedservice.application.model.request.Duration;
+import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -35,6 +36,11 @@ public class ProvidedService extends Auditable<Long> {
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private ServiceCategory category;
 
     @Transient
     private List<MasterProvidedService> masterServices;
