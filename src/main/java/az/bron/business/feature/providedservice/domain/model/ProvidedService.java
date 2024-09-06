@@ -36,7 +36,6 @@ public class ProvidedService extends Auditable<Long> {
     @JsonIgnore
     private Company company;
 
-    @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @Transient
     private List<MasterProvidedService> masterServices;
 }

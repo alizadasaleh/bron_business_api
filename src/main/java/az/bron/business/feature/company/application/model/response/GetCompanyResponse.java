@@ -16,6 +16,7 @@ public class GetCompanyResponse {
     private String name;
     private String description;
     private GetContactResponse contact;
+
     private List<GetMasterResponse> masters;
     private List<GetProvidedServiceResponse> providedServices;
 }

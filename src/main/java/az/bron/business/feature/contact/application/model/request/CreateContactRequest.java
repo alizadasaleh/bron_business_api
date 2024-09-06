@@ -1,5 +1,6 @@
 package az.bron.business.feature.contact.application.model.request;
 
+import az.bron.business.feature.address.application.model.request.CreateAddressRequest;
 import az.bron.business.feature.address.domain.model.Address;
 import az.bron.business.feature.contact.domain.model.Schedule;
 import lombok.Data;
@@ -12,5 +13,5 @@ public class CreateContactRequest {
     private String additionalPhoneNumber;
     private String additionalEmail;
     private Schedule schedule;
-    private Long addressId;
+    private CreateAddressRequest address;
 }
