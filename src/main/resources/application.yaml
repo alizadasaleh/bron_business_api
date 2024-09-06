@@ -33,12 +33,11 @@ spring:
           jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 
-logging:
-  file:
-    name: bronapplogfile.log
-  level:
-    az.bron.business: WARN
-
+jwt:
+  auth:
+    converter:
+      principal-attribute: principal_username
+      resource-id: bron_client
 
 server:
   port: 8088
