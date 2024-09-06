@@ -21,9 +21,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/v1/**").hasRole(ADMIN)
+                    .requestMatchers("/swagger-ui/**").permitAll()
+                    .requestMatchers("/v3/api-docs/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/**").hasAnyRole(USER,ADMIN)
+                    .requestMatchers(HttpMethod.POST, "/api/v1/**").hasRole(ADMIN)
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(

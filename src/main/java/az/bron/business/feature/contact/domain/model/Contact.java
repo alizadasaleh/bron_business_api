@@ -13,14 +13,8 @@ import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "contacts")
-public class Contact extends Auditable<String> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Embeddable
+public class Contact {
 
     private String phoneNumber;
     private String email;
@@ -32,8 +26,7 @@ public class Contact extends Auditable<String> {
     @JdbcTypeCode(SqlTypes.JSON)
     private Schedule schedule;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @Embedded
     private Address address;
 }
 
