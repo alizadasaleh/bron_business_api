@@ -14,5 +14,7 @@ public interface ProvidedServiceService {
 
     List<ProvidedService> getAll();
 
+    List<ProvidedService> getAllByCompanyId(Long companyId);
+
     void delete(Long id);
 }

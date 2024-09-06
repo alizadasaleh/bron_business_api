@@ -35,6 +35,11 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService {
     }
 
     @Override
+    public List<ProvidedService> getAllByCompanyId(Long companyId) {
+        return providedserviceRepository.findAllByCompanyId(companyId);
+    }
+
+    @Override
     public void delete(Long id) {
        providedserviceRepository.deleteById(id);
     }

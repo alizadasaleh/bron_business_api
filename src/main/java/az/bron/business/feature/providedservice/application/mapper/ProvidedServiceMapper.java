@@ -24,7 +24,6 @@ public interface ProvidedServiceMapper {
     @Mapping(target = "companyId", source = "company.id")
     UpdateProvidedServiceResponse toUpdateResponse(ProvidedService providedservice);
 
-    @Mapping(source = "masterServices", target = "masters")
     GetProvidedServiceResponse toGetResponse(ProvidedService providedservice);
 
 

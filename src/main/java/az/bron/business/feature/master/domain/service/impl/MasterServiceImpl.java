@@ -35,6 +35,11 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public List<Master> getAllByCompanyId(Long companyId) {
+        return masterRepository.findAllByCompanyId(companyId);
+    }
+
+    @Override
     public void delete(Long id) {
        masterRepository.deleteById(id);
     }
