@@ -14,5 +14,7 @@ public interface MasterService {
 
     List<Master> getAll();
 
+    List<Master> getAllByCompanyId(Long companyId);
+
     void delete(Long id);
 }

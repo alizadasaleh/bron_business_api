@@ -25,15 +25,13 @@ public class Company extends Auditable<String> {
     private String name;
     private String description;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+
+    @Embedded
     private Contact contact;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @Transient
     private List<Master> masters;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @Transient
     private List<ProvidedService> providedServices;
 }
