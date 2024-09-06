@@ -1,0 +1,26 @@
+package az.bron.business.feature.company.domain.model.contact;
+
+import az.bron.business.feature.company.domain.model.address.Address;
+import jakarta.persistence.*;
+import lombok.Data;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+@Data
+@Embeddable
+public class Contact {
+
+    private String phoneNumber;
+    private String email;
+    private String website;
+    private String additionalPhoneNumber;
+    private String additionalEmail;
+
+    @Column(columnDefinition = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private Schedule schedule;
+
+    @Embedded
+    private Address address;
+}
+
