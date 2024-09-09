@@ -23,14 +23,15 @@ public class CompanyRestController {
     private final CompanyFacade companyFacade;
 
     @GetMapping
-    public ResponseEntity<List<GetCompanyResponse>> getCompany() {
+    public ResponseEntity<List<GetCompanyResponse>> getCompany(@RequestParam boolean withDetails) {
         var response = companyFacade.getAll();
 
         return ResponseEntity.ok(response);
     }
 
+
     @GetMapping("/{id}")
-    public ResponseEntity<GetCompanyResponse> get(@PathVariable("id") Long id) {
+    public ResponseEntity<GetCompanyResponse> get(@PathVariable("id") Long id, @RequestParam boolean withDetails) {
         var response = companyFacade.get(id);
 
         return ResponseEntity.ok(response);
