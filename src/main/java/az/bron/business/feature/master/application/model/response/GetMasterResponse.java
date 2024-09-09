@@ -14,6 +14,4 @@ public class GetMasterResponse {
     private String name;
     private String description;
     private Long companyId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<GetCertainProvidedServiceResponse> services;
 }
