@@ -7,6 +7,7 @@ import az.bron.business.feature.company.application.model.response.GetCompanyRes
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
@@ -18,5 +19,6 @@ public interface CompanyMapper {
 
     UpdateCompanyResponse toUpdateResponse(Company company);
 
+    @Mapping(target = "providedServices.category", ignore = true)
     GetCompanyResponse toGetResponse(Company company);
 }

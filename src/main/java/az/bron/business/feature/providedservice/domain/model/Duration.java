@@ -1,4 +1,4 @@
-package az.bron.business.feature.providedservice.application.model.request;
+package az.bron.business.feature.providedservice.domain.model;
 
 import java.io.Serializable;
 import lombok.Builder;
