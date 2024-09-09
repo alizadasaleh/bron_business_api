@@ -2,21 +2,16 @@ package az.bron.business.feature.providedservice.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.business.feature.master.domain.model.Master;
-import az.bron.business.feature.master.domain.service.MasterService;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
-import az.bron.business.feature.providedservice.application.model.request.Duration;
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -32,16 +27,17 @@ public class ProvidedService extends Auditable<Long> {
 
     private Duration duration;
 
-    @ManyToOne
+    @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private ServiceCategory category;
 
-    @Transient
+    @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<MasterProvidedService> masterServices;
 }

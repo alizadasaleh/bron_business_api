@@ -21,11 +21,11 @@ public class MasterProvidedService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
     private Master master;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
     private ProvidedService providedService;
 
