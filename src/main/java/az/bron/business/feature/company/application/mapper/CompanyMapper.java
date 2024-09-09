@@ -19,6 +19,5 @@ public interface CompanyMapper {
 
     UpdateCompanyResponse toUpdateResponse(Company company);
 
-    @Mapping(target = "providedServices.category", ignore = true)
     GetCompanyResponse toGetResponse(Company company);
 }

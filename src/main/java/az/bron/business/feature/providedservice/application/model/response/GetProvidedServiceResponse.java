@@ -17,6 +17,5 @@ public class GetProvidedServiceResponse {
     private String description;
     private Duration duration;
     private Long companyId;
-    private List<GetMasterResponse> masters;
-    private GetServiceCategoryResponse category;
+
 }
