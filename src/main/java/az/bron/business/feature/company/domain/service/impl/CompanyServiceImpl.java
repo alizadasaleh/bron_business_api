@@ -38,4 +38,9 @@ public class CompanyServiceImpl implements CompanyService {
     public void delete(Long id) {
        companyRepository.deleteById(id);
     }
+
+    @Override
+    public List<Company> getAllWithDetails() {
+        return companyRepository.getAllWithDetails();
+    }
 }

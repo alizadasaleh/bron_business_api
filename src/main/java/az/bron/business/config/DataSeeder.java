@@ -11,7 +11,7 @@ import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.master.domain.repository.MasterRepository;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
 import az.bron.business.feature.masterprovidedservice.domain.repository.MasterProvidedServiceRepository;
-import az.bron.business.feature.providedservice.application.model.request.Duration;
+import az.bron.business.feature.providedservice.domain.model.Duration;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
@@ -19,7 +19,6 @@ import az.bron.business.feature.servicecategory.domain.repository.ServiceCategor
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -71,21 +70,26 @@ public class DataSeeder {
             serviceCategoryRepository.saveAll(List.of(cat1, cat2, cat3, cat4, cat5));
 
             // Define provided services
-            ProvidedService svc1 = new ProvidedService(null, "Tech Consulting", "Expert tech consulting services.", Duration.builder().hours(4).build(), null, cat1, null);
-            ProvidedService svc2 = new ProvidedService(null, "App Development", "Custom app development services.", Duration.builder().hours(2).build(), null, cat2, null);
-            ProvidedService svc3 = new ProvidedService(null, "Technical Support", "24/7 technical support.", Duration.builder().hours(1).build(), null, cat3, null);
-            ProvidedService svc4 = new ProvidedService(null, "UI/UX Design", "Design services for user interfaces and experiences.", Duration.builder().hours(3).build(), null, cat4, null);
-            ProvidedService svc5 = new ProvidedService(null, "Training Workshop", "Hands-on training workshops.", Duration.builder().hours(1).build(), null, cat5, null);
+            ProvidedService svc1 = new ProvidedService(null, "Tech Consulting", "Expert tech consulting services.", Duration.builder().hours(4).build(), company1, cat1, null);
+            ProvidedService svc2 = new ProvidedService(null, "App Development", "Custom app development services.", Duration.builder().hours(2).build(), company1, cat2, null);
+            ProvidedService svc3 = new ProvidedService(null, "Technical Support", "24/7 technical support.", Duration.builder().hours(1).build(), company1, cat3, null);
+            ProvidedService svc4 = new ProvidedService(null, "UI/UX Design", "Design services for user interfaces and experiences.", Duration.builder().hours(3).build(), company1, cat4, null);
+            ProvidedService svc5 = new ProvidedService(null, "Training Workshop", "Hands-on training workshops.", Duration.builder().hours(1).build(), company1, cat5, null);
 
+//            ProvidedService svc1 = new ProvidedService(null, "Tech Consulting", "Expert tech consulting services.", Duration.builder().hours(4).build(), company3, cat1, null);
+//            ProvidedService svc2 = new ProvidedService(null, "App Development", "Custom app development services.", Duration.builder().hours(2).build(), company3, cat2, null);
+//            ProvidedService svc3 = new ProvidedService(null, "Technical Support", "24/7 technical support.", Duration.builder().hours(1).build(), company3, cat3, null);
+//            ProvidedService svc4 = new ProvidedService(null, "UI/UX Design", "Design services for user interfaces and experiences.", Duration.builder().hours(3).build(), company3, cat4, null);
+//            ProvidedService svc5 = new ProvidedService(null, "Training Workshop", "Hands-on training workshops.", Duration.builder().hours(1).build(), company3, cat5, null);
             // Save provided services
             providedServiceRepository.saveAll(List.of(svc1, svc2, svc3, svc4, svc5));
 
             // Define masters
-            Master master1 = new Master(null, "Master Consultant", "Expert in tech solutions and consulting.", null, null);
-            Master master2 = new Master(null, "Master Developer", "Specialist in software development.", null, null);
-            Master master3 = new Master(null, "Master Designer", "Creative designer with a focus on UI/UX.", null, null);
-            Master master4 = new Master(null, "Master Trainer", "Experienced in training and workshops.", null, null);
-            Master master5 = new Master(null, "Master Support", "Proficient in providing technical support.", null, null);
+            Master master1 = new Master(null, "Master Consultant", "Expert in tech solutions and consulting.", company1, null);
+            Master master2 = new Master(null, "Master Developer", "Specialist in software development.", company1, null);
+            Master master3 = new Master(null, "Master Designer", "Creative designer with a focus on UI/UX.", company1, null);
+            Master master4 = new Master(null, "Master Trainer", "Experienced in training and workshops.", company1, null);
+            Master master5 = new Master(null, "Master Support", "Proficient in providing technical support.", company1, null);
 
             // Save masters
             masterRepository.saveAll(List.of(master1, master2, master3, master4, master5));
