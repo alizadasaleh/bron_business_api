@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
+    @Query("SELECT c FROM Company c " +
+            "LEFT JOIN FETCH c.masters m " +
+            "LEFT JOIN FETCH c.providedServices ps ")
+    List<Company> getAllWithDetails();
 }

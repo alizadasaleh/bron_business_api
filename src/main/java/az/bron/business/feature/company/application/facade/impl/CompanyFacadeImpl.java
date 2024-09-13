@@ -61,29 +61,17 @@ public class CompanyFacadeImpl implements CompanyFacade {
 
         Company company = existingCompany.get();
 
-        if(true){
-            company.setMasters(masterService.getAllByCompanyId(company.getId()));
-            company.setProvidedServices(providedServiceRepository.findAllByCompanyId(company.getId()));
-        }
 
         return companyMapper.toGetResponse(company);
     }
 
     @Override
     public List<GetCompanyResponse> getAll() {
-        var companies = companyService.getAll();
+        List<Company> result = companyService.getAllWithDetails();
 
-        var result = companies.stream()
-                .peek(company -> {
-                    if (true) {
-                        company.setMasters(masterService.getAllByCompanyId(company.getId()));
-                        company.setProvidedServices(providedServiceRepository.findAllByCompanyId(company.getId()));
-                    }
-                })
+        return result.stream()
                 .map(companyMapper::toGetResponse)
                 .toList();
-
-        return result;
     }
 
     @Override

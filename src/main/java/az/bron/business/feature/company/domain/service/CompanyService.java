@@ -15,4 +15,6 @@ public interface CompanyService {
     List<Company> getAll();
 
     void delete(Long id);
+
+    List<Company> getAllWithDetails();
 }
