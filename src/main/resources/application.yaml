@@ -41,4 +41,5 @@ jwt:
 
 server:
   port: 8088
+  forward-headers-strategy: framework
 debug: on

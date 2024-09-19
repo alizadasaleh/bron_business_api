@@ -35,6 +35,11 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public Optional<Company> getWithDetails(Long id) {
+        return companyRepository.getWithDetails(id);
+    }
+
+    @Override
     public void delete(Long id) {
        companyRepository.deleteById(id);
     }
