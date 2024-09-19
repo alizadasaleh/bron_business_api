@@ -4,10 +4,13 @@ import az.bron.business.feature.company.application.model.request.CreateCompanyR
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
+import az.bron.business.feature.company.application.model.response.GetCompanyWithDetailsResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
@@ -20,4 +23,9 @@ public interface CompanyMapper {
     UpdateCompanyResponse toUpdateResponse(Company company);
 
     GetCompanyResponse toGetResponse(Company company);
+
+    GetCompanyWithDetailsResponse toGetWithDetailsResponse(Company company);
+
+    List<GetCompanyWithDetailsResponse> toGetWithDetailsResponse(List<Company> company);
+
 }
