@@ -16,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -52,8 +53,15 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public GetCompanyResponse get(Long id) {
-        var existingCompany = companyService.get(id);
+    public GetCompanyResponse get(Long id, boolean withDetails) {
+        Optional<Company> existingCompany;
+
+        if(withDetails) {
+            existingCompany = companyService.getWithDetails(id);
+        }
+        else {
+            existingCompany = companyService.get(id);
+        }
 
         if (existingCompany.isEmpty()) {
             throw new RuntimeException("Company with id " + id + " does not exist");
@@ -62,16 +70,30 @@ public class CompanyFacadeImpl implements CompanyFacade {
         Company company = existingCompany.get();
 
 
-        return companyMapper.toGetResponse(company);
+        if(withDetails){
+            return companyMapper.toGetWithDetailsResponse(company);
+        }else {
+            return companyMapper.toGetResponse(company);
+        }
     }
 
     @Override
-    public List<GetCompanyResponse> getAll() {
-        List<Company> result = companyService.getAllWithDetails();
+    public List<GetCompanyResponse> getAll(boolean withDetails) {
+        List<Company> result;
+        if (withDetails) {
+            result = companyService.getAllWithDetails();
+            return result.stream()
+                    .map(t -> { GetCompanyResponse response = companyMapper.toGetWithDetailsResponse(t); return response; })
+                    .toList();
+        }
+        else {
+            result = companyService.getAll();
+            return result.stream()
+                    .map(companyMapper::toGetResponse)
+                    .toList();
+        }
 
-        return result.stream()
-                .map(companyMapper::toGetResponse)
-                .toList();
+
     }
 
     @Override
