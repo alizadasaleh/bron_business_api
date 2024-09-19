@@ -13,9 +13,9 @@ public interface CompanyFacade {
 
     UpdateCompanyResponse update(Long id, UpdateCompanyRequest request);
 
-    GetCompanyResponse get(Long id);
+    GetCompanyResponse get(Long id, boolean withDetails);
 
-    List<GetCompanyResponse> getAll();
+    List<GetCompanyResponse> getAll(boolean withDetails);
 
     void delete(Long id);
 }

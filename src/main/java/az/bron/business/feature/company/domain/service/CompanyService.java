@@ -14,7 +14,10 @@ public interface CompanyService {
 
     List<Company> getAll();
 
-    void delete(Long id);
+    Optional<Company> getWithDetails(Long id);
 
     List<Company> getAllWithDetails();
+
+    void delete(Long id);
+
 }
