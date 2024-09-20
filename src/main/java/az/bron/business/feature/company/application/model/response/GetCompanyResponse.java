@@ -12,5 +12,8 @@ public class GetCompanyResponse {
     private Long id;
     private String name;
     private String description;
+    private String logoImageUrl;
+    private String profileImageUrl;
+    private String backgroundImageUrl;
     private GetContactResponse contact;
 }
