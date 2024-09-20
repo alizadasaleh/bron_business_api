@@ -9,9 +9,12 @@ import az.bron.business.feature.company.application.model.response.UpdateCompany
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -51,6 +54,42 @@ public class CompanyRestController {
 
         return ResponseEntity.ok(response);
     }
+    @PostMapping(path = "/{id}/profileImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadProfileImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            companyFacade.uploadProfileImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
+    @PostMapping(path = "/{id}/logoImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadLogoImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            companyFacade.uploadLogoImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
+    @PostMapping(path = "/{id}/backgroundImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadBackgroundImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            companyFacade.uploadBackgroundImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
