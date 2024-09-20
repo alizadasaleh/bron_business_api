@@ -21,6 +21,8 @@ public class MasterProvidedService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String coverImageUrl;
+
     @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JoinColumn(name = "master_id")
     private Master master;

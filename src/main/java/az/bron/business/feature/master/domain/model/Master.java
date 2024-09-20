@@ -22,6 +22,8 @@ public class Master extends Auditable<Long> {
     private Long id;
     private String name;
     private String description;
+    private String profileImageUrl;
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     @JsonIgnore
