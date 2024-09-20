@@ -37,6 +37,8 @@ public class ProvidedService extends Auditable<Long> {
     @JsonIgnore
     private ServiceCategory category;
 
+    private String coverImageUrl;
+
     @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<MasterProvidedService> masterServices;

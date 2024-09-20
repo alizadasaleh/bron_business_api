@@ -26,6 +26,10 @@ public class Company extends Auditable<String> {
     private String name;
     private String description;
 
+    private String logoImageUrl;
+    private String profileImageUrl;
+    private String backgroundImageUrl;
+
 
     @Embedded
     private Contact contact;

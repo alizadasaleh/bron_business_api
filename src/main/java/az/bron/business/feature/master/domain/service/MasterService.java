@@ -17,4 +17,6 @@ public interface MasterService {
     List<Master> getAllByCompanyId(Long companyId);
 
     void delete(Long id);
+
+    void updateProfileImageUrl(String fileName, Long id);
 }
