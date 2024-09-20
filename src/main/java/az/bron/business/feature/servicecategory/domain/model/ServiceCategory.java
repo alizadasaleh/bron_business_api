@@ -17,6 +17,8 @@ public class ServiceCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String coverImageUrl;
+
     private String name;
     private String description;
 
