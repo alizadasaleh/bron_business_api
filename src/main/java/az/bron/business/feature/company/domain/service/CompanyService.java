@@ -20,4 +20,9 @@ public interface CompanyService {
 
     void delete(Long id);
 
+    void updateProfileImageUrl(String fileName, Long id);
+
+    void updateBackgroundImageUrl(String fileName, Long id);
+
+    void updateLogoImageUrl(String fileName, Long id);
 }
