@@ -58,7 +58,8 @@ public class MasterProvidedServiceRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateMasterProvidedServiceResponse> update(@PathVariable("id") Long id,
-                                                                      @RequestBody UpdateMasterProvidedServiceRequest request) {
+                                                                      @RequestBody UpdateMasterProvidedServiceRequest
+                                                                              request) {
         var response = masterprovidedserviceFacade.update(id, request);
 
         return ResponseEntity.ok(response);
