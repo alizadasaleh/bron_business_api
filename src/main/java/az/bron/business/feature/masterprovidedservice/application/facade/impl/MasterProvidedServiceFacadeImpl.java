@@ -21,38 +21,38 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFacade {
-    private final MasterProvidedServiceService masterprovidedserviceService;
-    private final MasterProvidedServiceMapper masterprovidedserviceMapper;
+    private final MasterProvidedServiceService masterProvidedServiceService;
+    private final MasterProvidedServiceMapper masterProvidedServiceMapper;
     private final S3Service s3Service;
 
     @Override
     public CreateMasterProvidedServiceResponse create(CreateMasterProvidedServiceRequest request) {
-        var masterprovidedserviceModel = masterprovidedserviceMapper.toModel(request);
-        var masterprovidedservice = masterprovidedserviceService.create(masterprovidedserviceModel);
+        var masterProvidedServiceModel = masterProvidedServiceMapper.toModel(request);
+        var masterprovidedservice = masterProvidedServiceService.create(masterProvidedServiceModel);
 
-        return masterprovidedserviceMapper.toCreateResponse(masterprovidedservice);
+        return masterProvidedServiceMapper.toCreateResponse(masterprovidedservice);
     }
 
     @Override
     public UpdateMasterProvidedServiceResponse update(Long id, UpdateMasterProvidedServiceRequest request) {
-        var masterprovidedserviceModel = masterprovidedserviceMapper.toModel(request);
+        var masterProvidedServiceModel = masterProvidedServiceMapper.toModel(request);
 
-        var existingMasterProvidedService = masterprovidedserviceService.get(id);
+        var existingMasterProvidedService = masterProvidedServiceService.get(id);
 
         if (existingMasterProvidedService.isEmpty()) {
             throw new RuntimeException("MasterProvidedService with id " + id + " does not exist");
         }
 
-        masterprovidedserviceModel.setId(id);
+        masterProvidedServiceModel.setId(id);
 
-        var masterprovidedservice = masterprovidedserviceService.create(masterprovidedserviceModel);
+        var masterprovidedservice = masterProvidedServiceService.create(masterProvidedServiceModel);
 
-        return masterprovidedserviceMapper.toUpdateResponse(masterprovidedservice);
+        return masterProvidedServiceMapper.toUpdateResponse(masterprovidedservice);
     }
 
     @Override
     public GetMasterProvidedServiceResponse get(Long id) {
-        var existingMasterProvidedService = masterprovidedserviceService.get(id);
+        var existingMasterProvidedService = masterProvidedServiceService.get(id);
 
         if (existingMasterProvidedService.isEmpty()) {
             throw new RuntimeException("MasterProvidedService with id " + id + " does not exist");
@@ -60,33 +60,33 @@ public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFac
 
         var masterprovidedservice = existingMasterProvidedService.get();
 
-        return masterprovidedserviceMapper.toGetResponse(masterprovidedservice);
+        return masterProvidedServiceMapper.toGetResponse(masterprovidedservice);
     }
 
     @Override
     public List<GetMasterProvidedServiceResponse> getAll() {
-        var result = masterprovidedserviceService.getAll();
+        var result = masterProvidedServiceService.getAll();
 
         return result.stream()
-                .map(masterprovidedserviceMapper::toGetResponse)
+                .map(masterProvidedServiceMapper::toGetResponse)
                 .toList();
     }
 
     @Override
     public void delete(Long id) {
-        var existingMasterProvidedService = masterprovidedserviceService.get(id);
+        var existingMasterProvidedService = masterProvidedServiceService.get(id);
 
         if (existingMasterProvidedService.isEmpty()) {
             throw new RuntimeException("MasterProvidedService with id " + id + " does not exist");
         }
 
-        masterprovidedserviceService.delete(id);
+        masterProvidedServiceService.delete(id);
     }
 
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "master-provided-service/image/cover/");
-        masterprovidedserviceService.updateCoverImageUrl(fileName, id);
+        String url = s3Service.uploadFile(fileName, file,  "master-provided-service/image/cover/");
+        masterProvidedServiceService.updateCoverImageUrl(url, id);
     }
 }

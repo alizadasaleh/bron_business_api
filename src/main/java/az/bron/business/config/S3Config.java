@@ -18,6 +18,7 @@ public class S3Config {
     @Value("${aws.secret.key}")
     private String awsSecretKey;
 
+
     @Bean
     public AmazonS3 s3client() {
 

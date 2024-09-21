@@ -1,5 +1,6 @@
 package az.bron.business.feature.company.domain.service.impl;
 
+import az.bron.business.feature.company.application.mapper.CompanyMapper;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
@@ -53,8 +54,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public void updateBackgroundImageUrl(String fileName, Long id) {
-        companyRepository.insertBackgroundImageUrl(fileName, id);
+    public void updateBackgroundImageUrl(String fileName, String directory, Long id) {
+        companyRepository.insertBackgroundImageUrl(directory + fileName, id);
 
     }
 
