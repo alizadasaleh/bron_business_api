@@ -5,8 +5,9 @@ import az.bron.business.feature.masterprovidedservice.application.model.request.
 import az.bron.business.feature.masterprovidedservice.application.model.response.CreateMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.GetMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.UpdateMasterProvidedServiceResponse;
-
+import java.io.IOException;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface MasterProvidedServiceFacade {
     CreateMasterProvidedServiceResponse create(CreateMasterProvidedServiceRequest request);
@@ -18,4 +19,6 @@ public interface MasterProvidedServiceFacade {
     List<GetMasterProvidedServiceResponse> getAll();
 
     void delete(Long id);
+
+    void uploadCoverImage(Long id, MultipartFile file) throws IOException;
 }

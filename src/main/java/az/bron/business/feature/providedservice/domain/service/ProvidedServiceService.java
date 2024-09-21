@@ -1,7 +1,6 @@
 package az.bron.business.feature.providedservice.domain.service;
 
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +16,6 @@ public interface ProvidedServiceService {
     List<ProvidedService> getAllByCompanyId(Long companyId);
 
     void delete(Long id);
+
+    void updateCoverImageUrl(String fileName, Long id);
 }
