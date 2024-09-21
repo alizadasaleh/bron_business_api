@@ -10,7 +10,6 @@ import az.bron.business.feature.company.application.model.response.GetCompanyRes
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.service.CompanyService;
-import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -112,14 +111,14 @@ public class CompanyFacadeImpl implements CompanyFacade {
     @Override
     public void uploadProfileImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        String url = s3Service.uploadFile(fileName, file,  "company/image/profile/");
+        String url = s3Service.uploadFile(fileName, file, "company/image/profile/");
         companyService.updateProfileImageUrl(url, id);
     }
 
     @Override
     public void uploadLogoImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        String url = s3Service.uploadFile(fileName, file,  "company/image/logo/");
+        String url = s3Service.uploadFile(fileName, file, "company/image/logo/");
         companyService.updateLogoImageUrl(url, id);
     }
 
@@ -127,7 +126,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
     public void uploadBackgroundImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
         String directory = "company/image/background/";
-        String url = s3Service.uploadFile(fileName, file, directory );
-        companyService.updateBackgroundImageUrl(url,directory, id);
+        String url = s3Service.uploadFile(fileName, file, directory);
+        companyService.updateBackgroundImageUrl(url, directory, id);
     }
 }

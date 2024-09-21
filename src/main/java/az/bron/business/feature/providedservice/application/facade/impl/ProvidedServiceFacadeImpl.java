@@ -86,7 +86,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        String url = s3Service.uploadFile(fileName, file,  "provided-service/image/cover/");
+        String url = s3Service.uploadFile(fileName, file, "provided-service/image/cover/");
         providedserviceService.updateCoverImageUrl(url, id);
     }
 }
