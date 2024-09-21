@@ -9,14 +9,11 @@ import az.bron.business.feature.master.application.model.response.CreateMasterRe
 import az.bron.business.feature.master.application.model.response.GetMasterResponse;
 import az.bron.business.feature.master.application.model.response.UpdateMasterResponse;
 import az.bron.business.feature.master.domain.service.MasterService;
-import az.bron.business.feature.master.presentation.controller.MasterRestController;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 @Log4j2
@@ -50,7 +47,7 @@ public class MasterFacadeImpl implements MasterFacade {
             throw new RuntimeException("Master with id " + id + " does not exist");
         }
 
-       masterModel.setId(id);
+        masterModel.setId(id);
 
         var master = masterService.create(masterModel);
 
@@ -87,13 +84,13 @@ public class MasterFacadeImpl implements MasterFacade {
             throw new RuntimeException("Master with id " + id + " does not exist");
         }
 
-       masterService.delete(id);
+        masterService.delete(id);
     }
 
     @Override
     public void uploadProfileImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket","master/image/profile/");
-        masterService.updateProfileImageUrl(fileName,id);
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "master/image/profile/");
+        masterService.updateProfileImageUrl(fileName, id);
     }
 }

@@ -5,10 +5,9 @@ import az.bron.business.feature.company.application.model.request.UpdateCompanyR
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface CompanyFacade {
     CreateCompanyResponse create(CreateCompanyRequest request);

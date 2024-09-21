@@ -3,10 +3,10 @@ package az.bron.business.feature.masterprovidedservice.application.mapper;
 import az.bron.business.feature.masterprovidedservice.application.model.request.CreateMasterProvidedServiceRequest;
 import az.bron.business.feature.masterprovidedservice.application.model.request.UpdateMasterProvidedServiceRequest;
 import az.bron.business.feature.masterprovidedservice.application.model.response.CreateMasterProvidedServiceResponse;
+import az.bron.business.feature.masterprovidedservice.application.model.response.GetCertainProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.GetMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.UpdateMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
-import az.bron.business.feature.masterprovidedservice.application.model.response.GetCertainProvidedServiceResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

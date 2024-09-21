@@ -1,9 +1,8 @@
 package az.bron.business.feature.company.domain.model.contact;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-
 import java.util.Map;
+import lombok.Data;
 
 @Data
 public class Schedule {
