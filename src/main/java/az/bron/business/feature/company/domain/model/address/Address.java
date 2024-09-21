@@ -1,6 +1,6 @@
 package az.bron.business.feature.company.domain.model.address;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 

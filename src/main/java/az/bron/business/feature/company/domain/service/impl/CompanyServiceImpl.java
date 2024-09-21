@@ -3,11 +3,11 @@ package az.bron.business.feature.company.domain.service.impl;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +41,28 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void delete(Long id) {
-       companyRepository.deleteById(id);
+        companyRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateProfileImageUrl(String fileName, Long id) {
+        companyRepository.insertProfileImageUrl(fileName, id);
+
+    }
+
+    @Override
+    @Transactional
+    public void updateBackgroundImageUrl(String fileName, String directory, Long id) {
+        companyRepository.insertBackgroundImageUrl(directory + fileName, id);
+
+    }
+
+    @Override
+    @Transactional
+    public void updateLogoImageUrl(String fileName, Long id) {
+        companyRepository.insertLogoImageUrl(fileName, id);
+
     }
 
     @Override

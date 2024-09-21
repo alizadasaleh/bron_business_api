@@ -3,11 +3,11 @@ package az.bron.business.feature.masterprovidedservice.domain.service.impl;
 import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
 import az.bron.business.feature.masterprovidedservice.domain.repository.MasterProvidedServiceRepository;
 import az.bron.business.feature.masterprovidedservice.domain.service.MasterProvidedServiceService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +36,13 @@ public class MasterProvidedServiceServiceImpl implements MasterProvidedServiceSe
 
     @Override
     public void delete(Long id) {
-       masterprovidedserviceRepository.deleteById(id);
+        masterprovidedserviceRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateCoverImageUrl(String fileName, Long id) {
+        masterprovidedserviceRepository.insertCoverImageUrl(fileName, id);
+
     }
 }

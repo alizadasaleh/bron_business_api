@@ -11,7 +11,7 @@ import az.bron.business.feature.providedservice.application.mapper.ProvidedServi
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring",uses = {MasterProvidedServiceMapper.class, ProvidedServiceMapper.class})
+@Mapper(componentModel = "spring", uses = {MasterProvidedServiceMapper.class, ProvidedServiceMapper.class})
 public interface MasterMapper {
     @Mapping(source = "companyId", target = "company.id")
     Master toModel(CreateMasterRequest request);

@@ -1,7 +1,6 @@
 package az.bron.business.feature.company.domain.service;
 
 import az.bron.business.feature.company.domain.model.Company;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +19,9 @@ public interface CompanyService {
 
     void delete(Long id);
 
+    void updateProfileImageUrl(String fileName, Long id);
+
+    void updateBackgroundImageUrl(String fileName, String directory, Long id);
+
+    void updateLogoImageUrl(String fileName, Long id);
 }

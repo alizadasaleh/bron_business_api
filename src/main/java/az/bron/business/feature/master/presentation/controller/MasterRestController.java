@@ -7,12 +7,23 @@ import az.bron.business.feature.master.application.model.response.CreateMasterRe
 import az.bron.business.feature.master.application.model.response.GetMasterResponse;
 import az.bron.business.feature.master.application.model.response.UpdateMasterResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,35 +35,49 @@ public class MasterRestController {
 
     @GetMapping
     public ResponseEntity<List<GetMasterResponse>> getMaster() {
-        var response = masterFacade.getAll();
+        List<GetMasterResponse> response = masterFacade.getAll();
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<GetMasterResponse> get(@PathVariable("id") Long id) {
-        var response = masterFacade.get(id);
+        GetMasterResponse response = masterFacade.get(id);
 
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping(path = "/{id}/profileImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadFile(@PathVariable("id") Long id,
+                                             @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            masterFacade.uploadProfileImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
     @PostMapping
     public ResponseEntity<CreateMasterResponse> create(@RequestBody CreateMasterRequest request) {
-        var response = masterFacade.create(request);
+        CreateMasterResponse response = masterFacade.create(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateMasterResponse> update(@PathVariable("id") Long id, @RequestBody UpdateMasterRequest request) {
-        var response = masterFacade.update(id, request);
+    public ResponseEntity<UpdateMasterResponse> update(@PathVariable("id") Long id,
+                                                       @RequestBody UpdateMasterRequest request) {
+        UpdateMasterResponse response = masterFacade.update(id, request);
 
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-       masterFacade.delete(id);
+        masterFacade.delete(id);
     }
 }
