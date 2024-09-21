@@ -15,4 +15,6 @@ public interface ServiceCategoryService {
     List<ServiceCategory> getAll();
 
     void delete(Integer id);
+
+    void updateCoverImageUrl(String fileName, Long id);
 }
