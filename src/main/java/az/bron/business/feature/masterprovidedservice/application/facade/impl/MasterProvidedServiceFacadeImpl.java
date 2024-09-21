@@ -1,5 +1,6 @@
 package az.bron.business.feature.masterprovidedservice.application.facade.impl;
 
+import az.bron.business.config.S3Service;
 import az.bron.business.feature.masterprovidedservice.application.facade.MasterProvidedServiceFacade;
 import az.bron.business.feature.masterprovidedservice.application.mapper.MasterProvidedServiceMapper;
 import az.bron.business.feature.masterprovidedservice.application.model.request.CreateMasterProvidedServiceRequest;
@@ -11,8 +12,11 @@ import az.bron.business.feature.masterprovidedservice.domain.service.MasterProvi
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Service
@@ -20,6 +24,7 @@ import java.util.List;
 public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFacade {
     private final MasterProvidedServiceService masterprovidedserviceService;
     private final MasterProvidedServiceMapper masterprovidedserviceMapper;
+    private S3Service s3Service;
 
     @Override
     public CreateMasterProvidedServiceResponse create(CreateMasterProvidedServiceRequest request) {
@@ -77,5 +82,12 @@ public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFac
         }
 
        masterprovidedserviceService.delete(id);
+    }
+
+    @Override
+    public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
+        String fileName = String.valueOf(UUID.randomUUID());
+        s3Service.uploadFile(fileName, file, "bron-business-bucket","master-provided-service/image/cover/");
+        masterprovidedserviceService.updateCoverImageUrl(fileName,id);
     }
 }
