@@ -3,11 +3,11 @@ package az.bron.business.feature.master.domain.service.impl;
 import az.bron.business.feature.master.domain.model.Master;
 import az.bron.business.feature.master.domain.repository.MasterRepository;
 import az.bron.business.feature.master.domain.service.MasterService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +41,12 @@ public class MasterServiceImpl implements MasterService {
 
     @Override
     public void delete(Long id) {
-       masterRepository.deleteById(id);
+        masterRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateProfileImageUrl(String fileName, Long id) {
+        masterRepository.insertProfileImageUrl(fileName, id);
     }
 }
