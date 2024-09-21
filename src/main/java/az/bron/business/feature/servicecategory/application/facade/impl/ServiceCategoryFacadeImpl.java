@@ -89,7 +89,7 @@ public class ServiceCategoryFacadeImpl implements ServiceCategoryFacade {
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/cover/");
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "service-category/image/cover/");
         servicecategoryService.updateCoverImageUrl(fileName, id);
     }
 }
