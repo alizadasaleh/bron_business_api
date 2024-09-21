@@ -1,7 +1,6 @@
 package az.bron.business.feature.servicecategory.application.facade.impl;
 
 import az.bron.business.config.S3Service;
-import az.bron.business.feature.masterprovidedservice.domain.service.MasterProvidedServiceService;
 import az.bron.business.feature.servicecategory.application.exception.ServiceCategoryNotFoundException;
 import az.bron.business.feature.servicecategory.application.facade.ServiceCategoryFacade;
 import az.bron.business.feature.servicecategory.application.mapper.ServiceCategoryMapper;
@@ -88,7 +87,7 @@ public class ServiceCategoryFacadeImpl implements ServiceCategoryFacade {
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        String url = s3Service.uploadFile(fileName, file,  "service-category/image/cover/");
+        String url = s3Service.uploadFile(fileName, file, "service-category/image/cover/");
         serviceCategoryService.updateCoverImageUrl(url, id);
     }
 }

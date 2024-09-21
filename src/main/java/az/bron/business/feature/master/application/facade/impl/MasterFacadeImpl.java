@@ -90,7 +90,7 @@ public class MasterFacadeImpl implements MasterFacade {
     @Override
     public void uploadProfileImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        String url = s3Service.uploadFile(fileName, file,  "master/image/profile/");
+        String url = s3Service.uploadFile(fileName, file, "master/image/profile/");
         masterService.updateProfileImageUrl(url, id);
     }
 }
