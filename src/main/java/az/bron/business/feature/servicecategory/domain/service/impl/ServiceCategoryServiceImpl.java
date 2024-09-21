@@ -5,6 +5,7 @@ import az.bron.business.feature.servicecategory.domain.repository.ServiceCategor
 import az.bron.business.feature.servicecategory.domain.service.ServiceCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,5 +38,11 @@ public class ServiceCategoryServiceImpl implements ServiceCategoryService {
     @Override
     public void delete(Integer id) {
        servicecategoryRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateCoverImageUrl(String fileName, Long id) {
+        servicecategoryRepository.insertCoverImageUrl(fileName,id);
     }
 }

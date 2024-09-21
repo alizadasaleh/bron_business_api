@@ -30,7 +30,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;
     private final ProvidedServiceRepository providedServiceRepository;
-    private S3Service s3Service;
+    private final S3Service s3Service;
 
     @Override
     public CreateCompanyResponse create(CreateCompanyRequest request) {
