@@ -6,12 +6,16 @@ import az.bron.business.feature.providedservice.application.model.request.Update
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -50,6 +54,20 @@ public class ProvidedServiceRestController {
 
         return ResponseEntity.ok(response);
     }
+
+
+    @PostMapping(path = "/{id}/coverImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadCoverImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            providedserviceFacade.uploadCoverImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {

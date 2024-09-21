@@ -53,12 +53,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public void updateBackgroundImageUrl(String fileName, Long id) {
         companyRepository.insertBackgroundImageUrl(fileName,id);
 
     }
 
     @Override
+    @Transactional
     public void updateLogoImageUrl(String fileName, Long id) {
         companyRepository.insertLogoImageUrl(fileName,id);
 

@@ -24,7 +24,6 @@ public class ProvidedService extends Auditable<Long> {
     private Long id;
     private String name;
     private String description;
-
     private Duration duration;
 
     @ManyToOne(optional = false,fetch = FetchType.LAZY)
