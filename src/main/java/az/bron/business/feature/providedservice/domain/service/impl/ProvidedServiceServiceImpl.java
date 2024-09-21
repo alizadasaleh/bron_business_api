@@ -3,6 +3,7 @@ package az.bron.business.feature.providedservice.domain.service.impl;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,5 +43,12 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService {
     @Override
     public void delete(Long id) {
        providedserviceRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateCoverImageUrl(String fileName, Long id) {
+        providedserviceRepository.insertCoverImageUrl(fileName,id);
+
     }
 }

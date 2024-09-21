@@ -17,4 +17,6 @@ public interface ProvidedServiceService {
     List<ProvidedService> getAllByCompanyId(Long companyId);
 
     void delete(Long id);
+
+    void updateCoverImageUrl(String fileName, Long id);
 }
