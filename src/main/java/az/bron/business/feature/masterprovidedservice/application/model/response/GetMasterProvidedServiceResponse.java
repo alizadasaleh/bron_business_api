@@ -8,7 +8,9 @@ import lombok.Data;
 @Data
 public class GetMasterProvidedServiceResponse {
     private Long id;
-    private Long masterId; // IDs to break recursion
-    private Long serviceId; // IDs to break recursion
+    private Long masterId;
+    private Long serviceId;
     private Double price;
+    private String coverImageUrl;
+
 }

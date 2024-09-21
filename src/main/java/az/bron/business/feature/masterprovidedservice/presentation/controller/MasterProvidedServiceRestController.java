@@ -9,9 +9,12 @@ import az.bron.business.feature.masterprovidedservice.application.model.response
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -49,6 +52,18 @@ public class MasterProvidedServiceRestController {
         var response = masterprovidedserviceFacade.update(id, request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(path = "/{id}/coverImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadCoverImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            masterprovidedserviceFacade.uploadCoverImage(id, file);
+            return ResponseEntity.ok("Profile image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
     }
 
     @DeleteMapping("/{id}")
