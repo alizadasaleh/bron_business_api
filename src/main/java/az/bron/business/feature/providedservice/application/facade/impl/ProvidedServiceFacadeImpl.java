@@ -24,7 +24,7 @@ import java.util.UUID;
 public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     private final ProvidedServiceService providedserviceService;
     private final ProvidedServiceMapper providedserviceMapper;
-    private S3Service s3Service;
+    private final S3Service s3Service;
 
     @Override
     public CreateProvidedServiceResponse create(CreateProvidedServiceRequest request) {

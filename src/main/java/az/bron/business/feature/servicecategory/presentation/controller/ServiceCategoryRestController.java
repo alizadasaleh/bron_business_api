@@ -8,9 +8,12 @@ import az.bron.business.feature.servicecategory.application.model.response.GetSe
 import az.bron.business.feature.servicecategory.application.model.response.UpdateServiceCategoryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -48,6 +51,19 @@ public class ServiceCategoryRestController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping(path = "/{id}/coverImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> uploadCoverImage(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+
+        try {
+            servicecategoryFacade.uploadCoverImage(id, file);
+            return ResponseEntity.ok("Cover image uploaded successfully");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
+        }
+
+    }
+
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) {
