@@ -15,4 +15,6 @@ public interface MasterProvidedServiceService {
     List<MasterProvidedService> getAll();
 
     void delete(Long id);
+
+    void updateCoverImageUrl(String fileName, Long id);
 }
