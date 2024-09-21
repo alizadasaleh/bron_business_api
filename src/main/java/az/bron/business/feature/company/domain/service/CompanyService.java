@@ -21,7 +21,7 @@ public interface CompanyService {
 
     void updateProfileImageUrl(String fileName, Long id);
 
-    void updateBackgroundImageUrl(String fileName, Long id);
+    void updateBackgroundImageUrl(String fileName, String directory, Long id);
 
     void updateLogoImageUrl(String fileName, Long id);
 }

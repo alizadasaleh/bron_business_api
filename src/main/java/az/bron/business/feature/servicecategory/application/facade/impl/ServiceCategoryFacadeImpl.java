@@ -23,39 +23,38 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class ServiceCategoryFacadeImpl implements ServiceCategoryFacade {
-    private final ServiceCategoryService servicecategoryService;
-    private final ServiceCategoryMapper servicecategoryMapper;
+    private final ServiceCategoryService serviceCategoryService;
+    private final ServiceCategoryMapper serviceCategoryMapper;
     private final S3Service s3Service;
-    private final MasterProvidedServiceService providedserviceService;
 
     @Override
     public CreateServiceCategoryResponse create(CreateServiceCategoryRequest request) {
-        var servicecategoryModel = servicecategoryMapper.toModel(request);
-        var servicecategory = servicecategoryService.create(servicecategoryModel);
+        var serviceCategoryModel = serviceCategoryMapper.toModel(request);
+        var servicecategory = serviceCategoryService.create(serviceCategoryModel);
 
-        return servicecategoryMapper.toCreateResponse(servicecategory);
+        return serviceCategoryMapper.toCreateResponse(servicecategory);
     }
 
     @Override
     public UpdateServiceCategoryResponse update(Integer id, UpdateServiceCategoryRequest request) {
-        var servicecategoryModel = servicecategoryMapper.toModel(request);
+        var serviceCategoryModel = serviceCategoryMapper.toModel(request);
 
-        var existingServiceCategory = servicecategoryService.get(id);
+        var existingServiceCategory = serviceCategoryService.get(id);
 
         if (existingServiceCategory.isEmpty()) {
             throw new ServiceCategoryNotFoundException();
         }
 
-        servicecategoryModel.setId(id);
+        serviceCategoryModel.setId(id);
 
-        var servicecategory = servicecategoryService.create(servicecategoryModel);
+        var servicecategory = serviceCategoryService.create(serviceCategoryModel);
 
-        return servicecategoryMapper.toUpdateResponse(servicecategory);
+        return serviceCategoryMapper.toUpdateResponse(servicecategory);
     }
 
     @Override
     public GetServiceCategoryResponse get(Integer id) {
-        var existingServiceCategory = servicecategoryService.get(id);
+        var existingServiceCategory = serviceCategoryService.get(id);
 
         if (existingServiceCategory.isEmpty()) {
             throw new ServiceCategoryNotFoundException();
@@ -63,33 +62,33 @@ public class ServiceCategoryFacadeImpl implements ServiceCategoryFacade {
 
         var servicecategory = existingServiceCategory.get();
 
-        return servicecategoryMapper.toGetResponse(servicecategory);
+        return serviceCategoryMapper.toGetResponse(servicecategory);
     }
 
     @Override
     public List<GetServiceCategoryResponse> getAll() {
-        var result = servicecategoryService.getAll();
+        var result = serviceCategoryService.getAll();
 
         return result.stream()
-                .map(servicecategoryMapper::toGetResponse)
+                .map(serviceCategoryMapper::toGetResponse)
                 .toList();
     }
 
     @Override
     public void delete(Integer id) {
-        var existingServiceCategory = servicecategoryService.get(id);
+        var existingServiceCategory = serviceCategoryService.get(id);
 
         if (existingServiceCategory.isEmpty()) {
             throw new ServiceCategoryNotFoundException();
         }
 
-        servicecategoryService.delete(id);
+        serviceCategoryService.delete(id);
     }
 
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "service-category/image/cover/");
-        servicecategoryService.updateCoverImageUrl(fileName, id);
+        String url = s3Service.uploadFile(fileName, file,  "service-category/image/cover/");
+        serviceCategoryService.updateCoverImageUrl(url, id);
     }
 }
