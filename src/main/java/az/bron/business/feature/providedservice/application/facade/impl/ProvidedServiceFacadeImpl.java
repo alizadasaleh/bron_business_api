@@ -27,15 +27,15 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
 
     @Override
     public CreateProvidedServiceResponse create(CreateProvidedServiceRequest request) {
-        var providedserviceModel = providedserviceMapper.toModel(request);
-        var providedservice = providedserviceService.create(providedserviceModel);
+        var providedServiceModel = providedserviceMapper.toModel(request);
+        var providedservice = providedserviceService.create(providedServiceModel);
 
         return providedserviceMapper.toCreateResponse(providedservice);
     }
 
     @Override
     public UpdateProvidedServiceResponse update(Long id, UpdateProvidedServiceRequest request) {
-        var providedserviceModel = providedserviceMapper.toModel(request);
+        var providedServiceModel = providedserviceMapper.toModel(request);
 
         var existingProvidedService = providedserviceService.get(id);
 
@@ -43,9 +43,9 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
             throw new RuntimeException("ProvidedService with id " + id + " does not exist");
         }
 
-        providedserviceModel.setId(id);
+        providedServiceModel.setId(id);
 
-        var providedservice = providedserviceService.create(providedserviceModel);
+        var providedservice = providedserviceService.create(providedServiceModel);
 
         return providedserviceMapper.toUpdateResponse(providedservice);
     }
@@ -86,7 +86,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "provided-service/image/cover/");
-        providedserviceService.updateCoverImageUrl(fileName, id);
+        String url = s3Service.uploadFile(fileName, file,  "provided-service/image/cover/");
+        providedserviceService.updateCoverImageUrl(url, id);
     }
 }

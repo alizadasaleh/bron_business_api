@@ -26,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class CompanyFacadeImpl implements CompanyFacade {
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;
-    private final ProvidedServiceRepository providedServiceRepository;
     private final S3Service s3Service;
 
     @Override
@@ -113,21 +112,22 @@ public class CompanyFacadeImpl implements CompanyFacade {
     @Override
     public void uploadProfileImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/profile/");
-        companyService.updateProfileImageUrl(fileName, id);
+        String url = s3Service.uploadFile(fileName, file,  "company/image/profile/");
+        companyService.updateProfileImageUrl(url, id);
     }
 
     @Override
     public void uploadLogoImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/logo/");
-        companyService.updateLogoImageUrl(fileName, id);
+        String url = s3Service.uploadFile(fileName, file,  "company/image/logo/");
+        companyService.updateLogoImageUrl(url, id);
     }
 
     @Override
     public void uploadBackgroundImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/background/");
-        companyService.updateBackgroundImageUrl(fileName, id);
+        String directory = "company/image/background/";
+        String url = s3Service.uploadFile(fileName, file, directory );
+        companyService.updateBackgroundImageUrl(url,directory, id);
     }
 }
