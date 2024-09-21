@@ -7,10 +7,8 @@ import az.bron.business.feature.company.application.model.response.GetCompanyRes
 import az.bron.business.feature.company.application.model.response.GetCompanyWithDetailsResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
 import java.util.List;
+import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {

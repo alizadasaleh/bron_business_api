@@ -1,7 +1,6 @@
 package az.bron.business.feature.master.domain.service;
 
 import az.bron.business.feature.master.domain.model.Master;
-
 import java.util.List;
 import java.util.Optional;
 

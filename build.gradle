@@ -7,6 +7,13 @@ plugins {
 group = 'az.bron'
 version = '1.0-SNAPSHOT'
 
+plugins {
+    id 'checkstyle'
+}
+checkstyle {
+    toolVersion = "10.12.4"
+}
+
 repositories {
     mavenCentral()
 }
@@ -40,8 +47,6 @@ dependencies {
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.770'
     implementation files('libs/domain-1.0.0-plain.jar')
     implementation files('libs/exception-1.0.0-plain.jar')
-
-
 
 }
 

@@ -1,7 +1,7 @@
 package az.bron.business.feature.company.application.model.response.address;
 
-import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

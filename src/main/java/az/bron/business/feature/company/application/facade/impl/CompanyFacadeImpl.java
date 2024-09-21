@@ -10,18 +10,15 @@ import az.bron.business.feature.company.application.model.response.GetCompanyRes
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.service.CompanyService;
-import az.bron.business.feature.company.presentation.controller.CompanyRestController;
-import az.bron.business.feature.master.domain.service.MasterService;
 import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Log4j2
 @Service
@@ -50,7 +47,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
             throw new RuntimeException("Company with id " + id + " does not exist");
         }
 
-       companyModel.setId(id);
+        companyModel.setId(id);
 
         var company = companyService.create(companyModel);
 
@@ -61,10 +58,9 @@ public class CompanyFacadeImpl implements CompanyFacade {
     public GetCompanyResponse get(Long id, boolean withDetails) {
         Optional<Company> existingCompany;
 
-        if(withDetails) {
+        if (withDetails) {
             existingCompany = companyService.getWithDetails(id);
-        }
-        else {
+        } else {
             existingCompany = companyService.get(id);
         }
 
@@ -75,9 +71,9 @@ public class CompanyFacadeImpl implements CompanyFacade {
         Company company = existingCompany.get();
 
 
-        if(withDetails){
+        if (withDetails) {
             return companyMapper.toGetWithDetailsResponse(company);
-        }else {
+        } else {
             return companyMapper.toGetResponse(company);
         }
     }
@@ -88,10 +84,12 @@ public class CompanyFacadeImpl implements CompanyFacade {
         if (withDetails) {
             result = companyService.getAllWithDetails();
             return result.stream()
-                    .map(t -> { GetCompanyResponse response = companyMapper.toGetWithDetailsResponse(t); return response; })
+                    .map(t -> {
+                        GetCompanyResponse response = companyMapper.toGetWithDetailsResponse(t);
+                        return response;
+                    })
                     .toList();
-        }
-        else {
+        } else {
             result = companyService.getAll();
             return result.stream()
                     .map(companyMapper::toGetResponse)
@@ -109,27 +107,27 @@ public class CompanyFacadeImpl implements CompanyFacade {
             throw new RuntimeException("Company with id " + id + " does not exist");
         }
 
-       companyService.delete(id);
+        companyService.delete(id);
     }
 
     @Override
     public void uploadProfileImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket","company/image/profile/");
-        companyService.updateProfileImageUrl(fileName,id);
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/profile/");
+        companyService.updateProfileImageUrl(fileName, id);
     }
 
     @Override
     public void uploadLogoImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket","company/image/logo/");
-        companyService.updateLogoImageUrl(fileName,id);
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/logo/");
+        companyService.updateLogoImageUrl(fileName, id);
     }
 
     @Override
     public void uploadBackgroundImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket","company/image/background/");
-        companyService.updateBackgroundImageUrl(fileName,id);
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "company/image/background/");
+        companyService.updateBackgroundImageUrl(fileName, id);
     }
 }
