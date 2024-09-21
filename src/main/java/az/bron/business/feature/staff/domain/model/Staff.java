@@ -1,9 +1,8 @@
-package az.bron.business.feature.providedservice.domain.model;
+package az.bron.business.feature.staff.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
-import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,28 +22,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "services")
-public class ProvidedService extends Auditable<Long> {
+@Table(name = "staffs")
+public class Staff extends Auditable<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-    private Duration duration;
+    private String profileImageUrl;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    @JsonIgnore
-    private ServiceCategory category;
-
-    private String coverImageUrl;
-
-    @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
     private List<StaffProvidedService> staffServices;
+
+
 }

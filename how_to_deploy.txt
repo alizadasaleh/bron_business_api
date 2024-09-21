@@ -1,0 +1,7 @@
+cd ../bron
+
+sudo kill -9 `sudo lsof -t -i:8088`
+
+export $(cat .env | xargs)
+
+nohup java -jar business-1.0.15-SNAPSHOT.jar > log1.0.15.txt 2>&1 &
