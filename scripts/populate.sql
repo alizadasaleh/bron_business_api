@@ -44,15 +44,15 @@ INSERT INTO services (name, description, duration, company_id) VALUES
                                                                    ('Service 5', 'Description for Service 5', '{"hours":2,"minutes":30}', 5);
 
 COMMIT ;
-INSERT INTO masters (name, description, company_id) VALUES
-                                                        ('Master 1', 'Description for Master 1', 1),
-                                                        ('Master 2', 'Description for Master 2', 2),
-                                                        ('Master 3', 'Description for Master 3', 3),
-                                                        ('Master 4', 'Description for Master 4', 4),
-                                                        ('Master 5', 'Description for Master 5', 5);
+INSERT INTO staffs (name, description, company_id) VALUES
+                                                        ('Staff 1', 'Description for Staff 1', 1),
+                                                        ('Staff 2', 'Description for Staff 2', 2),
+                                                        ('Staff 3', 'Description for Staff 3', 3),
+                                                        ('Staff 4', 'Description for Staff 4', 4),
+                                                        ('Staff 5', 'Description for Staff 5', 5);
 
 COMMIT ;
-INSERT INTO master_services (master_id, service_id, price) VALUES
+INSERT INTO staff_services (staff_id, service_id, price) VALUES
                                                                (1, 1, 100.00),
                                                                (1, 2, 150.00),
                                                                (2, 3, 200.00),
