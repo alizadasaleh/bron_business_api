@@ -1,9 +1,8 @@
 package az.bron.business.feature.company.domain.model.contact;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-
 import java.time.LocalTime;
+import lombok.Data;
 
 @Data
 public class WorkingHours {

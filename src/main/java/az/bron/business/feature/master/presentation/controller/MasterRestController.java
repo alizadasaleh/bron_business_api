@@ -8,13 +8,21 @@ import az.bron.business.feature.master.application.model.response.GetMasterRespo
 import az.bron.business.feature.master.application.model.response.UpdateMasterResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -38,8 +46,10 @@ public class MasterRestController {
 
         return ResponseEntity.ok(response);
     }
+
     @PostMapping(path = "/{id}/profileImage/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<String> uploadFile(@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> uploadFile(@PathVariable("id") Long id,
+                                             @RequestParam("file") MultipartFile file) throws IOException {
 
         try {
             masterFacade.uploadProfileImage(id, file);
@@ -59,7 +69,8 @@ public class MasterRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateMasterResponse> update(@PathVariable("id") Long id, @RequestBody UpdateMasterRequest request) {
+    public ResponseEntity<UpdateMasterResponse> update(@PathVariable("id") Long id,
+                                                       @RequestBody UpdateMasterRequest request) {
         UpdateMasterResponse response = masterFacade.update(id, request);
 
         return ResponseEntity.ok(response);
@@ -67,6 +78,6 @@ public class MasterRestController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-       masterFacade.delete(id);
+        masterFacade.delete(id);
     }
 }

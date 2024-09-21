@@ -9,14 +9,13 @@ import az.bron.business.feature.masterprovidedservice.application.model.response
 import az.bron.business.feature.masterprovidedservice.application.model.response.GetMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.application.model.response.UpdateMasterProvidedServiceResponse;
 import az.bron.business.feature.masterprovidedservice.domain.service.MasterProvidedServiceService;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 @Log4j2
 @Service
@@ -44,7 +43,7 @@ public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFac
             throw new RuntimeException("MasterProvidedService with id " + id + " does not exist");
         }
 
-       masterprovidedserviceModel.setId(id);
+        masterprovidedserviceModel.setId(id);
 
         var masterprovidedservice = masterprovidedserviceService.create(masterprovidedserviceModel);
 
@@ -81,13 +80,13 @@ public class MasterProvidedServiceFacadeImpl implements MasterProvidedServiceFac
             throw new RuntimeException("MasterProvidedService with id " + id + " does not exist");
         }
 
-       masterprovidedserviceService.delete(id);
+        masterprovidedserviceService.delete(id);
     }
 
     @Override
     public void uploadCoverImage(Long id, MultipartFile file) throws IOException {
         String fileName = String.valueOf(UUID.randomUUID());
-        s3Service.uploadFile(fileName, file, "bron-business-bucket","master-provided-service/image/cover/");
-        masterprovidedserviceService.updateCoverImageUrl(fileName,id);
+        s3Service.uploadFile(fileName, file, "bron-business-bucket", "master-provided-service/image/cover/");
+        masterprovidedserviceService.updateCoverImageUrl(fileName, id);
     }
 }
