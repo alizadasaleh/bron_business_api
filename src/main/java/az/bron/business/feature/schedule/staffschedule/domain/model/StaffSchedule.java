@@ -1,8 +1,7 @@
-package az.bron.business.feature.schedule.companyschedule.domain.model;
+package az.bron.business.feature.schedule.staffschedule.domain.model;
 
-import az.bron.business.common.Auditable;
-import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.schedule.common.models.Schedule;
+import az.bron.business.feature.staff.domain.model.Staff;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,8 +15,8 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "companySchedules")
-public class CompanySchedule extends Auditable<String> {
+@Table(name = "StaffSchedules")
+public class StaffSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,7 @@ public class CompanySchedule extends Auditable<String> {
     private Schedule schedule;
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "staff_id")
     @JsonIgnore
-    private Company company;
+    private Staff staff;
 }
