@@ -6,6 +6,8 @@ import az.bron.business.feature.schedule.staffschedule.application.model.request
 import az.bron.business.feature.schedule.staffschedule.application.model.response.CreateStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.GetStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.UpdateStaffScheduleResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,9 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/StaffSchedules")
+@RequestMapping("api/v1/staffSchedules")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-
+@SecurityRequirement(name = "bearerAuth")
 public class StaffScheduleRestController {
     private final StaffScheduleFacade staffscheduleFacade;
 
