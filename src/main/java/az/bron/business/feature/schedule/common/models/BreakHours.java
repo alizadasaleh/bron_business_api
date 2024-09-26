@@ -1,15 +1,13 @@
-package az.bron.business.feature.schedule.companyschedule.domain.model;
+package az.bron.business.feature.schedule.common.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalTime;
-import java.util.List;
 import lombok.Data;
 
 @Data
-public class WorkingHours {
+public class BreakHours {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime startTime;
+    private LocalTime breakStartTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-    private LocalTime endTime;
-    private List<BreakHours> breaks;
+    private LocalTime breakEndTime;
 }
