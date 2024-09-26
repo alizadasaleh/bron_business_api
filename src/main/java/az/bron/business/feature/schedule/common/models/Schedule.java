@@ -1,4 +1,4 @@
-package az.bron.business.feature.schedule.companyschedule.domain.model;
+package az.bron.business.feature.schedule.common.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;

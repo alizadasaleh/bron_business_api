@@ -1,4 +1,4 @@
-package az.bron.business.feature.schedule.companyschedule.domain.model;
+package az.bron.business.feature.schedule.common.models;
 
 public enum Workday {
     MONDAY,
