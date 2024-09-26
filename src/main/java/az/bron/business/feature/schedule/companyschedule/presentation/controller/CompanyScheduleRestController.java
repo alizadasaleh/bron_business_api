@@ -6,6 +6,7 @@ import az.bron.business.feature.schedule.companyschedule.application.model.reque
 import az.bron.business.feature.schedule.companyschedule.application.model.response.CreateCompanyScheduleResponse;
 import az.bron.business.feature.schedule.companyschedule.application.model.response.GetCompanyScheduleResponse;
 import az.bron.business.feature.schedule.companyschedule.application.model.response.UpdateCompanyScheduleResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/companySchedules")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class CompanyScheduleRestController {
     private final CompanyScheduleFacade companyscheduleFacade;
 
