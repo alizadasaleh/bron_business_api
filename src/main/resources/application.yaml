@@ -25,19 +25,6 @@ spring:
         write-dates-as-timestamps: false
 
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${OAUTH2_RESOURCE_SERVER_ISSUER_URI}
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-
-
-jwt:
-  auth:
-    converter:
-      principal-attribute: principal_username
-      resource-id: bron_client
 
 server:
   port: 8088
