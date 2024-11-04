@@ -34,17 +34,3 @@ logging:
 server:
   port: ${SERVER_PORT}
 debug: on
-
-aws:
-  access:
-    key: ${AWS_ACCESS_KEY}
-  secret:
-    key: ${AWS_SECRET_KEY}
-  bucket:
-    name: ${AWS_S3_BUCKET_NAME}
-    url: ${AWS_S3_BUCKET_URL}
-
-security:
-  jwt:
-    secret-key: c2577b2adcc1f980bb7e4edc2ef6e474bd3f152569b27eb3ea74a4af9a79099e
-    expiration-time: 3600000
