@@ -19,12 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/auth")
 public class AuthenticationController {
-    private final JwtService jwtService;
 
     private final AuthenticationFacade authenticationFacade;
 
-    public AuthenticationController(JwtService jwtService, AuthenticationFacade authenticationFacade) {
-        this.jwtService = jwtService;
+    public AuthenticationController(AuthenticationFacade authenticationFacade) {
         this.authenticationFacade = authenticationFacade;
     }
 
