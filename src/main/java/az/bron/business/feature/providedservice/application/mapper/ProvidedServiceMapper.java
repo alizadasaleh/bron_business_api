@@ -1,6 +1,6 @@
 package az.bron.business.feature.providedservice.application.mapper;
 
-import az.bron.business.feature.master.application.mapper.MasterMapper;
+import az.bron.business.feature.staff.application.mapper.StaffMapper;
 import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
@@ -10,7 +10,7 @@ import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = MasterMapper.class)
+@Mapper(componentModel = "spring", uses = StaffMapper.class)
 public interface ProvidedServiceMapper {
     @Mapping(source = "companyId", target = "company.id")
     ProvidedService toModel(CreateProvidedServiceRequest request);

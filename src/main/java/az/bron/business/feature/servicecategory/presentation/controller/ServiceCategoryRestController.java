@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/ServiceCategories")
+@RequestMapping("api/v1/serviceCategories")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ServiceCategoryRestController {
     private final ServiceCategoryFacade servicecategoryFacade;
