@@ -8,17 +8,6 @@ spring:
   application:
     name: bron-business
 
-
-  # JWT Configuratio
-
-
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${OAUTH2_RESOURCE_SERVER_ISSUER_URI}
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
-
   mvc:
     problemdetails:
       enabled: true
@@ -45,11 +34,6 @@ logging:
 server:
   port: ${SERVER_PORT}
 debug: on
-jwt:
-  auth:
-    converter:
-      principal-attribute: principal_username
-      resource-id: bron_client
 
 aws:
   access:
@@ -59,3 +43,8 @@ aws:
   bucket:
     name: ${AWS_S3_BUCKET_NAME}
     url: ${AWS_S3_BUCKET_URL}
+
+security:
+  jwt:
+    secret-key: c2577b2adcc1f980bb7e4edc2ef6e474bd3f152569b27eb3ea74a4af9a79099e
+    expiration-time: 3600000

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
     @Query("SELECT c FROM Company c " +
-            "LEFT JOIN FETCH c.masters m " +
+            "LEFT JOIN FETCH c.staffs m " +
             "LEFT JOIN FETCH c.providedServices ps ")
     List<Company> getAllWithDetails();
 
     @Query("SELECT c FROM Company c " +
-            "LEFT JOIN FETCH c.masters m " +
+            "LEFT JOIN FETCH c.staffs m " +
             "LEFT JOIN FETCH c.providedServices ps " +
             "where c.id = :companyId")
     Optional<Company> getWithDetails(Long companyId);

@@ -7,10 +7,10 @@
 //import az.bron.business.feature.company.domain.model.contact.Workday;
 //import az.bron.business.feature.company.domain.model.contact.WorkingHours;
 //import az.bron.business.feature.company.domain.repository.CompanyRepository;
-//import az.bron.business.feature.master.domain.model.Master;
-//import az.bron.business.feature.master.domain.repository.MasterRepository;
-//import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
-//import az.bron.business.feature.masterprovidedservice.domain.repository.MasterProvidedServiceRepository;
+//import az.bron.business.feature.staff.domain.model.Staff;
+//import az.bron.business.feature.staff.domain.repository.StaffRepository;
+//import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
+//import az.bron.business.feature.staffprovidedservice.domain.repository.StaffProvidedServiceRepository;
 //import az.bron.business.feature.providedservice.domain.model.Duration;
 //import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 //import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
@@ -30,8 +30,8 @@
 //
 //    @Bean
 //    public CommandLineRunner loadData(CompanyRepository companyRepository, ServiceCategoryRepository
-//    serviceCategoryRepository, MasterRepository masterRepository, MasterProvidedServiceRepository
-//    masterProvidedServiceRepository, ProvidedServiceRepository providedServiceRepository) {
+//    serviceCategoryRepository, StaffRepository staffRepository, StaffProvidedServiceRepository
+//    staffProvidedServiceRepository, ProvidedServiceRepository providedServiceRepository) {
 //        return args -> {
 //            // Define common working hours
 //            WorkingHours workingHours = new WorkingHours();
@@ -106,30 +106,30 @@
 //            // Save provided services
 //            providedServiceRepository.saveAll(List.of(svc1, svc2, svc3, svc4, svc5));
 //
-//            // Define masters
-//            Master master1 = new Master(null, "Master Consultant", "Expert in tech solutions and consulting.",
+//            // Define staffs
+//            Staff staff1 = new Staff(null, "Staff Consultant", "Expert in tech solutions and consulting.",
 //            company1, null);
-//            Master master2 = new Master(null, "Master Developer", "Specialist in software development.", company1,
+//            Staff staff2 = new Staff(null, "Staff Developer", "Specialist in software development.", company1,
 //            null);
-//            Master master3 = new Master(null, "Master Designer", "Creative designer with a focus on UI/UX.",
+//            Staff staff3 = new Staff(null, "Staff Designer", "Creative designer with a focus on UI/UX.",
 //            company1, null);
-//            Master master4 = new Master(null, "Master Trainer", "Experienced in training and workshops.", company1,
+//            Staff staff4 = new Staff(null, "Staff Trainer", "Experienced in training and workshops.", company1,
 //            null);
-//            Master master5 = new Master(null, "Master Support", "Proficient in providing technical support.",
+//            Staff staff5 = new Staff(null, "Staff Support", "Proficient in providing technical support.",
 //            company1, null);
 //
-//            // Save masters
-//            masterRepository.saveAll(List.of(master1, master2, master3, master4, master5));
+//            // Save staffs
+//            staffRepository.saveAll(List.of(staff1, staff2, staff3, staff4, staff5));
 //
-//            // Define master provided services with different combinations
-//            MasterProvidedService mps1 = new MasterProvidedService(null, master1, svc1, 200.00);
-//            MasterProvidedService mps2 = new MasterProvidedService(null, master2, svc2, 5000.00);
-//            MasterProvidedService mps3 = new MasterProvidedService(null, master3, svc4, 1500.00);
-//            MasterProvidedService mps4 = new MasterProvidedService(null, master4, svc5, 1200.00);
-//            MasterProvidedService mps5 = new MasterProvidedService(null, master5, svc3, 100.00);
+//            // Define staff provided services with different combinations
+//            StaffProvidedService mps1 = new StaffProvidedService(null, staff1, svc1, 200.00);
+//            StaffProvidedService mps2 = new StaffProvidedService(null, staff2, svc2, 5000.00);
+//            StaffProvidedService mps3 = new StaffProvidedService(null, staff3, svc4, 1500.00);
+//            StaffProvidedService mps4 = new StaffProvidedService(null, staff4, svc5, 1200.00);
+//            StaffProvidedService mps5 = new StaffProvidedService(null, staff5, svc3, 100.00);
 //
-//            // Save master provided services
-//            masterProvidedServiceRepository.saveAll(List.of(mps1, mps2, mps3, mps4, mps5));
+//            // Save staff provided services
+//            staffProvidedServiceRepository.saveAll(List.of(mps1, mps2, mps3, mps4, mps5));
 //
 //        };
 //    }

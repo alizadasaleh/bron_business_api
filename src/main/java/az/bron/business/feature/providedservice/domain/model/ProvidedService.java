@@ -2,7 +2,7 @@ package az.bron.business.feature.providedservice.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.business.feature.masterprovidedservice.domain.model.MasterProvidedService;
+import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
@@ -46,5 +46,5 @@ public class ProvidedService extends Auditable<Long> {
 
     @OneToMany(mappedBy = "providedService", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<MasterProvidedService> masterServices;
+    private List<StaffProvidedService> staffServices;
 }
