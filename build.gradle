@@ -41,11 +41,16 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.3.2'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.770'
     implementation files('libs/domain-1.0.0-plain.jar')
     implementation files('libs/exception-1.0.0-plain.jar')
+
+    //security
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+
 
 }
 

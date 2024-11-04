@@ -2,7 +2,7 @@ package az.bron.business.feature.company.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.contact.Contact;
-import az.bron.business.feature.master.domain.model.Master;
+import az.bron.business.feature.staff.domain.model.Staff;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embedded;
@@ -43,7 +43,7 @@ public class Company extends Auditable<String> {
     private Contact contact;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private Set<Master> masters;
+    private Set<Staff> staffs;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     @JsonIgnore
