@@ -1,6 +1,7 @@
 package az.bron.business.feature.providedservice.application.facade.impl;
 
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.providedservice.application.exception.ProvidedServiceNotFoundException;
 import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
 import az.bron.business.feature.providedservice.application.mapper.ProvidedServiceMapper;
 import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
@@ -40,7 +41,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
         var existingProvidedService = providedserviceService.get(id);
 
         if (existingProvidedService.isEmpty()) {
-            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+            throw new ProvidedServiceNotFoundException("ProvidedService with id " + id + " does not exist");
         }
 
         providedServiceModel.setId(id);
@@ -55,7 +56,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
         var existingProvidedService = providedserviceService.get(id);
 
         if (existingProvidedService.isEmpty()) {
-            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+            throw new ProvidedServiceNotFoundException("ProvidedService with id " + id + " does not exist");
         }
 
         var providedservice = existingProvidedService.get();
@@ -77,7 +78,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
         var existingProvidedService = providedserviceService.get(id);
 
         if (existingProvidedService.isEmpty()) {
-            throw new RuntimeException("ProvidedService with id " + id + " does not exist");
+            throw new ProvidedServiceNotFoundException("ProvidedService with id " + id + " does not exist");
         }
 
         providedserviceService.delete(id);

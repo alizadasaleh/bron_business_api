@@ -9,4 +9,9 @@ public class StaffNotFoundException extends NotFoundException {
                 "",
                 ErrorDetails.error(314_00, "StaffNotFound")));
     }
+    public StaffNotFoundException(String message) {
+        super(ErrorDetails.of("", "Staff not found",
+                message,
+                ErrorDetails.error(314_00, "StaffNotFound")));
+    }
 }

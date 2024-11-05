@@ -1,6 +1,7 @@
 package az.bron.business.feature.company.application.facade.impl;
 
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.company.application.exception.CompanyNotFoundException;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.mapper.CompanyMapper;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
@@ -42,7 +43,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
         var existingCompany = companyService.get(id);
 
         if (existingCompany.isEmpty()) {
-            throw new RuntimeException("Company with id " + id + " does not exist");
+            throw new CompanyNotFoundException("Company with id " + id + " does not exist");
         }
 
         companyModel.setId(id);
@@ -63,7 +64,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
         }
 
         if (existingCompany.isEmpty()) {
-            throw new RuntimeException("Company with id " + id + " does not exist");
+            throw new CompanyNotFoundException("Company with id " + id + " does not exist");
         }
 
         Company company = existingCompany.get();
@@ -102,7 +103,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
         var existingCompany = companyService.get(id);
 
         if (existingCompany.isEmpty()) {
-            throw new RuntimeException("Company with id " + id + " does not exist");
+            throw new CompanyNotFoundException("Company with id " + id + " does not exist");
         }
 
         companyService.delete(id);
