@@ -1,6 +1,7 @@
 package az.bron.business.feature.staff.application.facade.impl;
 
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.staff.application.exception.StaffNotFoundException;
 import az.bron.business.feature.staff.application.facade.StaffFacade;
 import az.bron.business.feature.staff.application.mapper.StaffMapper;
 import az.bron.business.feature.staff.application.model.request.CreateStaffRequest;
@@ -44,7 +45,7 @@ public class StaffFacadeImpl implements StaffFacade {
         var existingStaff = staffService.get(id);
 
         if (existingStaff.isEmpty()) {
-            throw new RuntimeException("Staff with id " + id + " does not exist");
+            throw new StaffNotFoundException("Staff with id " + id + " does not exist");
         }
 
         staffModel.setId(id);
@@ -59,7 +60,7 @@ public class StaffFacadeImpl implements StaffFacade {
         var existingStaff = staffService.get(id);
 
         if (existingStaff.isEmpty()) {
-            throw new RuntimeException("Staff with id " + id + " does not exist");
+            throw new StaffNotFoundException("Staff with id " + id + " does not exist");
         }
 
         var staff = existingStaff.get();
@@ -81,7 +82,7 @@ public class StaffFacadeImpl implements StaffFacade {
         var existingStaff = staffService.get(id);
 
         if (existingStaff.isEmpty()) {
-            throw new RuntimeException("Staff with id " + id + " does not exist");
+            throw new StaffNotFoundException("Staff with id " + id + " does not exist");
         }
 
         staffService.delete(id);

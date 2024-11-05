@@ -9,4 +9,10 @@ public class ProvidedServiceNotFoundException extends NotFoundException {
                 "",
                 ErrorDetails.error(314_00, "ProvidedServiceNotFound")));
     }
+
+    public ProvidedServiceNotFoundException(String message) {
+        super(ErrorDetails.of("", "ProvidedService not found",
+                message,
+                ErrorDetails.error(314_00, "ProvidedServiceNotFound")));
+    }
 }
