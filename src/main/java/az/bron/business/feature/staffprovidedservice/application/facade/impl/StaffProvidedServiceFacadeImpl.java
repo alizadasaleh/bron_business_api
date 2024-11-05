@@ -1,6 +1,7 @@
 package az.bron.business.feature.staffprovidedservice.application.facade.impl;
 
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.staffprovidedservice.application.exception.StaffProvidedServiceNotFoundException;
 import az.bron.business.feature.staffprovidedservice.application.facade.StaffProvidedServiceFacade;
 import az.bron.business.feature.staffprovidedservice.application.mapper.StaffProvidedServiceMapper;
 import az.bron.business.feature.staffprovidedservice.application.model.request.CreateStaffProvidedServiceRequest;
@@ -40,7 +41,7 @@ public class StaffProvidedServiceFacadeImpl implements StaffProvidedServiceFacad
         var existingStaffProvidedService = staffProvidedServiceService.get(id);
 
         if (existingStaffProvidedService.isEmpty()) {
-            throw new RuntimeException("StaffProvidedService with id " + id + " does not exist");
+            throw new StaffProvidedServiceNotFoundException("StaffProvidedService with id " + id + " does not exist");
         }
 
         staffProvidedServiceModel.setId(id);
@@ -55,7 +56,7 @@ public class StaffProvidedServiceFacadeImpl implements StaffProvidedServiceFacad
         var existingStaffProvidedService = staffProvidedServiceService.get(id);
 
         if (existingStaffProvidedService.isEmpty()) {
-            throw new RuntimeException("StaffProvidedService with id " + id + " does not exist");
+            throw new StaffProvidedServiceNotFoundException("StaffProvidedService with id " + id + " does not exist");
         }
 
         var staffprovidedservice = existingStaffProvidedService.get();
@@ -77,7 +78,7 @@ public class StaffProvidedServiceFacadeImpl implements StaffProvidedServiceFacad
         var existingStaffProvidedService = staffProvidedServiceService.get(id);
 
         if (existingStaffProvidedService.isEmpty()) {
-            throw new RuntimeException("StaffProvidedService with id " + id + " does not exist");
+            throw new StaffProvidedServiceNotFoundException("StaffProvidedService with id " + id + " does not exist");
         }
 
         staffProvidedServiceService.delete(id);

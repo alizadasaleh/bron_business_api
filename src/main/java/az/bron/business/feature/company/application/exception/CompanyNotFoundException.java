@@ -4,6 +4,11 @@ import az.gov.dlp.exception.NotFoundException;
 import az.gov.dlp.exception.model.ErrorDetails;
 
 public class CompanyNotFoundException extends NotFoundException {
+    public CompanyNotFoundException(String message) {
+        super(ErrorDetails.of("", "Company not found",
+                message,
+                ErrorDetails.error(314_00, "CompanyNotFound")));
+    }
     public CompanyNotFoundException() {
         super(ErrorDetails.of("", "Company not found",
                 "",
