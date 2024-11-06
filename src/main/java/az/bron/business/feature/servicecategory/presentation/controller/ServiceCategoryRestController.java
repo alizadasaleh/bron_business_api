@@ -6,6 +6,7 @@ import az.bron.business.feature.servicecategory.application.model.request.Update
 import az.bron.business.feature.servicecategory.application.model.response.CreateServiceCategoryResponse;
 import az.bron.business.feature.servicecategory.application.model.response.GetServiceCategoryResponse;
 import az.bron.business.feature.servicecategory.application.model.response.UpdateServiceCategoryResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/serviceCategories")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class ServiceCategoryRestController {
     private final ServiceCategoryFacade servicecategoryFacade;
 
