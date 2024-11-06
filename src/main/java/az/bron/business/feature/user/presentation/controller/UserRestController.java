@@ -6,6 +6,7 @@ import az.bron.business.feature.user.application.model.request.UpdateUserRequest
 import az.bron.business.feature.user.application.model.response.CreateUserResponse;
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.UpdateUserResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/admins")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class UserRestController {
     private final UserFacade userFacade;
 
