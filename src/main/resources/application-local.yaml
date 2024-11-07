@@ -23,11 +23,12 @@ spring:
     jackson:
       serialization:
         write-dates-as-timestamps: false
+
   mail:
     host: smtp.gmail.com
     port: 587
-    username: example@gmail.com
-    password: gmail_app_password
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
     properties.mail.smtp:
       auth: true
       starttls.enable: true
@@ -38,7 +39,6 @@ logging:
     name: bronapplogfile.log
   level:
     az.bron.business: WARN
-
 
 server:
   port: ${SERVER_PORT}
@@ -58,3 +58,6 @@ security:
     secret-key: c2577b2adcc1f980bb7e4edc2ef6e474bd3f152569b27eb3ea74a4af9a79099e
     expiration-time: 36000
 
+APP_URL: ${APP_URL}
+
+#smtp mail properties

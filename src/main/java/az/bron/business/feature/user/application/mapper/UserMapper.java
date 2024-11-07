@@ -1,6 +1,7 @@
 package az.bron.business.feature.user.application.mapper;
 
 import az.bron.business.feature.user.application.model.request.CreateUserRequest;
+import az.bron.business.feature.user.application.model.request.LoginUserRequest;
 import az.bron.business.feature.user.application.model.request.RegisterUserRequest;
 import az.bron.business.feature.user.application.model.request.UpdateUserRequest;
 import az.bron.business.feature.user.application.model.response.CreateUserResponse;
@@ -25,4 +26,6 @@ public interface UserMapper {
     GetUserResponse toGetResponse(User user);
 
     RegisterUserResponse toRegisterUserResponse(User registeredUser);
+
+    User toModel(LoginUserRequest loginUserRequest);
 }
