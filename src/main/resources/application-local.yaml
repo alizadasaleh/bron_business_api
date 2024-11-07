@@ -23,6 +23,15 @@ spring:
     jackson:
       serialization:
         write-dates-as-timestamps: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: example@gmail.com
+    password: gmail_app_password
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
 
 logging:
   file:
@@ -47,4 +56,5 @@ aws:
 security:
   jwt:
     secret-key: c2577b2adcc1f980bb7e4edc2ef6e474bd3f152569b27eb3ea74a4af9a79099e
-    expiration-time: 3600000
+    expiration-time: 36000
+
