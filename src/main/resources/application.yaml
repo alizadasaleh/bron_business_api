@@ -24,7 +24,15 @@ spring:
       serialization:
         write-dates-as-timestamps: false
 
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
 
 server:
   port: 8088
@@ -39,3 +47,5 @@ aws:
   bucket:
     name: ${AWS_S3_BUCKET_NAME}
     url: ${AWS_S3_BUCKET_URL}
+
+APP_URL: ${APP_URL}
