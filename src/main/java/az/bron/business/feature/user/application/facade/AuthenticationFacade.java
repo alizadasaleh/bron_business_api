@@ -12,10 +12,14 @@ import az.bron.business.feature.user.application.model.request.RegisterUserReque
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.LoginResponse;
 import az.bron.business.feature.user.application.model.response.RegisterUserResponse;
+import az.bron.business.feature.user.domain.model.ConfirmationToken;
 import az.bron.business.feature.user.domain.model.User;
+import az.bron.business.feature.user.domain.repository.ConfirmationTokenRepository;
+import az.bron.business.feature.user.domain.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,6 +31,10 @@ public class AuthenticationFacade {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
     private final RoleService roleService;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final UserRepository userRepository;
+
+
 
     public LoginResponse login(LoginUserRequest loginUserRequest) {
         User user = new User();
@@ -49,6 +57,12 @@ public class AuthenticationFacade {
         user.setPassword(registerUserRequest.getPassword());
         user.setFullName(registerUserRequest.getFullName());
         User authenticatedUser = authenticationService.signup(user);
+
+        ConfirmationToken confirmationToken = new ConfirmationToken();
+        confirmationToken.setUser(authenticatedUser);
+
+
+        confirmationTokenRepository.save(confirmationToken);
 
         Optional<Role> optionalRole = roleService.findByName(RoleEnum.USER);
 
@@ -75,5 +89,18 @@ public class AuthenticationFacade {
 
 
         return getUserResponse;
+    }
+
+    String confirmEmail(String confirmationToken){
+        ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+
+        if(token != null)
+        {
+            User user = userRepository.findByEmailIgnoreCase(token.getUser().getEmail());
+            user.setEnabled(true);
+            userRepository.save(user);
+            return "Email verified successfully!";
+        }
+        return "Error: Couldn't verify email";
     }
 }

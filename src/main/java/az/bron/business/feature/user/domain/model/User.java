@@ -37,8 +37,22 @@ public class User implements UserDetails {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean emailVerified;
+
     @Column(nullable = false)
     private String password;
+
+    @Column(unique = true)
+    private String phoneNumber;
+
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean phoneNumberVerified;
+
+    private boolean isEnabled;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
