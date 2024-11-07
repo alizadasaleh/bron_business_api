@@ -4,8 +4,9 @@ package az.bron.business.feature.user.application.facade;
 import az.bron.business.config.JwtService;
 import az.bron.business.feature.role.domain.model.Role;
 import az.bron.business.feature.role.domain.model.RoleEnum;
-import az.bron.business.feature.role.domain.repository.RoleRepository;
 import az.bron.business.feature.role.domain.service.RoleService;
+import az.bron.business.feature.user.application.exception.UserAlreadyExists;
+import az.bron.business.feature.user.application.mapper.UserMapper;
 import az.bron.business.feature.user.application.model.request.AuthenticationService;
 import az.bron.business.feature.user.application.model.request.LoginUserRequest;
 import az.bron.business.feature.user.application.model.request.RegisterUserRequest;
@@ -19,7 +20,6 @@ import az.bron.business.feature.user.domain.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class AuthenticationFacade {
     private final RoleService roleService;
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final UserRepository userRepository;
-
+    private final UserMapper userMapper;
 
 
     public LoginResponse login(LoginUserRequest loginUserRequest) {
@@ -52,16 +52,15 @@ public class AuthenticationFacade {
     }
 
     public RegisterUserResponse signup(RegisterUserRequest registerUserRequest) {
-        User user = new User();
-        user.setEmail(registerUserRequest.getEmail());
-        user.setPassword(registerUserRequest.getPassword());
-        user.setFullName(registerUserRequest.getFullName());
-        User authenticatedUser = authenticationService.signup(user);
+        if(userRepository.findByEmail(registerUserRequest.getEmail()).isPresent()) {
+            throw new UserAlreadyExists(registerUserRequest.getEmail());
+        }
+        User user = userMapper.toModel(registerUserRequest);
+
+        User registeredUser = authenticationService.signup(user);
 
         ConfirmationToken confirmationToken = new ConfirmationToken();
-        confirmationToken.setUser(authenticatedUser);
-
-
+        confirmationToken.setUser(registeredUser);
         confirmationTokenRepository.save(confirmationToken);
 
         Optional<Role> optionalRole = roleService.findByName(RoleEnum.USER);
@@ -70,10 +69,7 @@ public class AuthenticationFacade {
             return null;
         }
 
-        RegisterUserResponse registerUserResponse = new RegisterUserResponse();
-        registerUserResponse.setEmail(authenticatedUser.getEmail());
-        registerUserResponse.setFullName(authenticatedUser.getFullName());
-        return registerUserResponse;
+        return userMapper.toRegisterUserResponse(registeredUser);
 
 
     }
