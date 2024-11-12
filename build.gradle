@@ -1,65 +1,59 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.4'
-
-}
-
-group = 'az.bron'
-version = '1.0-SNAPSHOT'
-
-
-repositories {
-    mavenCentral()
-}
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+    plugins {
+        id 'java'
+        id 'org.springframework.boot' version '3.2.5'
+        id 'io.spring.dependency-management' version '1.1.4'
     }
-}
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
-
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1'
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
-    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.770'
-    implementation files('libs/domain-1.0.0-plain.jar')
-    implementation files('libs/exception-1.0.0-plain.jar')
-
-    //security
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-
-    //mail
-    implementation 'org.springframework.boot:spring-boot-starter-mail:3.3.4'
-
-    //retry
-//    implementation 'org.springframework.retry:spring-retry:2.0.10'
+    group = 'az.bron'
+    version = '1.0-SNAPSHOT'
 
 
-}
+    repositories {
+        mavenCentral()
+    }
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-bootJar {
-    destinationDirectory = file("$projectDir/jars")
-}
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 
-test {
-    useJUnitPlatform()
-}
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'org.postgresql:postgresql'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.1'
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
+        implementation 'com.amazonaws:aws-java-sdk-s3:1.12.770'
+        implementation files('libs/domain-1.0.0-plain.jar')
+        implementation files('libs/exception-1.0.0-plain.jar')
+
+        //security
+        runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+        runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+        implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+
+        //mail
+        implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+        // Fixed oauth2 client version - use the same version as spring-boot
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+        implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
