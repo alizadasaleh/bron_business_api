@@ -1,6 +1,8 @@
 package az.bron.business.feature.providedservice.application.facade.impl;
 
+import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.providedservice.application.SortProvidedServiceBy;
 import az.bron.business.feature.providedservice.application.exception.ProvidedServiceNotFoundException;
 import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
 import az.bron.business.feature.providedservice.application.mapper.ProvidedServiceMapper;
@@ -9,12 +11,18 @@ import az.bron.business.feature.providedservice.application.model.request.Update
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,12 +73,19 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     }
 
     @Override
-    public List<GetProvidedServiceResponse> getAll() {
-        var result = providedserviceService.getAll();
+    public Page<GetProvidedServiceResponse> getAll(int page, int size, SortProvidedServiceBy sortBy,
+                                                   SortDirection sortDir) {
+        Sort sort = sortDir.toString().equalsIgnoreCase("asc") ? Sort.by(sortBy.toString()).ascending() :
+                Sort.by(sortBy.toString()).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
 
-        return result.stream()
+        Page<ProvidedService> result = providedserviceService.getAll(pageable);
+
+        List<GetProvidedServiceResponse> dtoList = result.stream()
                 .map(providedserviceMapper::toGetResponse)
                 .toList();
+
+        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
     }
 
     @Override

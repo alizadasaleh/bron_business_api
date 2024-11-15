@@ -1,5 +1,7 @@
 package az.bron.business.feature.providedservice.presentation.controller;
 
+import az.bron.business.common.application.model.request.SortDirection;
+import az.bron.business.feature.providedservice.application.SortProvidedServiceBy;
 import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
 import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +32,18 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/providedServices")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@SecurityRequirement(name = "bearerAuth")
+@SecurityRequirement(name = "bearerAu"
+        + "th")
 public class ProvidedServiceRestController {
     private final ProvidedServiceFacade providedserviceFacade;
 
     @GetMapping
-    public ResponseEntity<List<GetProvidedServiceResponse>> getProvidedService() {
-        var response = providedserviceFacade.getAll();
+    public ResponseEntity<Page<GetProvidedServiceResponse>> getProvidedService(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "Id") SortProvidedServiceBy sortBy,
+            @RequestParam(defaultValue = "ASC") SortDirection sortDir) {
+        var response = providedserviceFacade.getAll(page,size,sortBy,sortDir);
 
         return ResponseEntity.ok(response);
     }
