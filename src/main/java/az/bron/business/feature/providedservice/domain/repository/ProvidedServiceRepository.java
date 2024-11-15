@@ -18,4 +18,5 @@ public interface ProvidedServiceRepository extends JpaRepository<ProvidedService
     void insertCoverImageUrl(String fileName, Long id);
 
     Page<ProvidedService> findAll(Pageable pageable);
+
 }
