@@ -9,6 +9,7 @@ import az.bron.business.feature.providedservice.application.model.response.Updat
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring", uses = StaffMapper.class)
 public interface ProvidedServiceMapper {
@@ -25,6 +26,5 @@ public interface ProvidedServiceMapper {
     UpdateProvidedServiceResponse toUpdateResponse(ProvidedService providedservice);
 
     GetProvidedServiceResponse toGetResponse(ProvidedService providedservice);
-
 
 }
