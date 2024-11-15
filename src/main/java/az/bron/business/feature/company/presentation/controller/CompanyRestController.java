@@ -5,6 +5,7 @@ import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
+import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
@@ -108,6 +109,11 @@ public class CompanyRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
         }
 
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CompanySearchResponse>> search(@RequestParam String query) {
+        return ResponseEntity.ok(companyFacade.search(query));
     }
 
 
