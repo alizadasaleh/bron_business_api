@@ -17,6 +17,12 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
+      search:
+        enabled: true
+        backend:
+          directory:
+            type: local-directory
+            root: /data/lucene
       hibernate:
         format_sql: true
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
