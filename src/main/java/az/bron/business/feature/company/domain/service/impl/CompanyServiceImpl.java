@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,8 +32,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAll() {
-        return companyRepository.findAll();
+    public Page<Company> getAll(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAllWithDetails() {
-        return companyRepository.getAllWithDetails();
+    public Page<Company> getAllWithDetails(Pageable pageable) {
+        return companyRepository.getAllWithDetails(pageable);
     }
 }

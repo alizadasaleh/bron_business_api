@@ -3,6 +3,8 @@ package az.bron.business.feature.company.domain.service;
 import az.bron.business.feature.company.domain.model.Company;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface CompanyService {
     Company create(Company company);
@@ -11,11 +13,11 @@ public interface CompanyService {
 
     Optional<Company> get(Long id);
 
-    List<Company> getAll();
+    Page<Company> getAll(Pageable pageable);
 
     Optional<Company> getWithDetails(Long id);
 
-    List<Company> getAllWithDetails();
+    Page<Company> getAllWithDetails(Pageable pageable);
 
     void delete(Long id);
 
