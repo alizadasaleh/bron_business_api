@@ -12,5 +12,4 @@ public class GetProvidedServiceResponse {
     private Long companyId;
     private String coverImageUrl;
 
-
 }
