@@ -85,7 +85,6 @@ public class ProvidedServiceRestController {
 
     }
 
-
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         providedserviceFacade.delete(id);

@@ -2,6 +2,7 @@ package az.bron.business.feature.company.domain.service.impl;
 
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
+import az.bron.business.feature.company.domain.repository.CompanySearchRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -9,12 +10,14 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
+    private final CompanySearchRepository companySearchRepository;
 
     @Override
     public Company create(Company company) {
@@ -65,6 +68,11 @@ public class CompanyServiceImpl implements CompanyService {
     public void updateLogoImageUrl(String fileName, Long id) {
         companyRepository.insertLogoImageUrl(fileName, id);
 
+    }
+
+    @Override
+    public List<Company> search(String query) {
+        return companySearchRepository.searchCompanies(query);
     }
 
     @Override
