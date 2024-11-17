@@ -17,13 +17,18 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
-      search:
-        enabled: true
-        backend:
-          directory:
-            type: local-directory
-            root: /data/lucene
+
       hibernate:
+        search:
+          enabled: true
+          backend:
+            directory:
+              root: ./indexes
+              type: local-filesystem
+          default:
+            type: lucene
+          analysis:
+            configurer: class:az.bron.config.AnalysisConfigurer
         format_sql: true
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     jackson:
