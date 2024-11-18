@@ -19,6 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 @Setter
 @Getter
@@ -27,11 +29,16 @@ import org.hibernate.annotations.BatchSize;
 @Entity
 @BatchSize(size = 25)
 @Table(name = "companies")
+@Indexed
 public class Company extends Auditable<String> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @FullTextField
     private String name;
+
+    @FullTextField
     private String description;
 
     private String logoImageUrl;

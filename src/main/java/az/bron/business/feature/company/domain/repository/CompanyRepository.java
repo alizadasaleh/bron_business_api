@@ -3,6 +3,9 @@ package az.bron.business.feature.company.domain.repository;
 import az.bron.business.feature.company.domain.model.Company;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +17,9 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("SELECT c FROM Company c " +
             "LEFT JOIN FETCH c.staffs m " +
             "LEFT JOIN FETCH c.providedServices ps ")
-    List<Company> getAllWithDetails();
+    Page<Company> getAllWithDetails(Pageable pageable);
+
+    Page<Company> findAll(Specification<Company> spec, Pageable pageable);
 
     @Query("SELECT c FROM Company c " +
             "LEFT JOIN FETCH c.staffs m " +

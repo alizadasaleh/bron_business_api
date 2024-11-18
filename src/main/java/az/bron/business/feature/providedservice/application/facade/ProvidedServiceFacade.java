@@ -1,5 +1,7 @@
 package az.bron.business.feature.providedservice.application.facade;
 
+import az.bron.business.common.application.model.request.SortDirection;
+import az.bron.business.feature.providedservice.application.SortProvidedServiceBy;
 import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
@@ -7,6 +9,7 @@ import az.bron.business.feature.providedservice.application.model.response.GetPr
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
 import java.io.IOException;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ProvidedServiceFacade {
@@ -16,7 +19,7 @@ public interface ProvidedServiceFacade {
 
     GetProvidedServiceResponse get(Long id);
 
-    List<GetProvidedServiceResponse> getAll();
+    Page<GetProvidedServiceResponse> getAll(int page, int size, SortProvidedServiceBy sortBy, SortDirection sortDir);
 
     void delete(Long id);
 
