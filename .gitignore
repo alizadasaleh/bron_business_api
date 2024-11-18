@@ -45,3 +45,4 @@ bin/
 indexes/
 src/main/generated/
 .env
+.env
