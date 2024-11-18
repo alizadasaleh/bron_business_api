@@ -2,17 +2,22 @@ package az.bron.business.feature.company.domain.service.impl;
 
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
+import az.bron.business.feature.company.domain.repository.CompanySearchRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
+    private final CompanySearchRepository companySearchRepository;
 
     @Override
     public Company create(Company company) {
@@ -30,8 +35,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAll() {
-        return companyRepository.findAll();
+    public Page<Company> getAll(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
     @Override
@@ -66,7 +71,12 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAllWithDetails() {
-        return companyRepository.getAllWithDetails();
+    public List<Company> search(String query) {
+        return companySearchRepository.searchCompanies(query);
+    }
+
+    @Override
+    public Page<Company> getAllWithDetails(Pageable pageable) {
+        return companyRepository.getAllWithDetails(pageable);
     }
 }

@@ -1,8 +1,11 @@
 package az.bron.business.feature.company.presentation.controller;
 
+import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
+import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
@@ -10,6 +13,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +38,12 @@ public class CompanyRestController {
     private final CompanyFacade companyFacade;
 
     @GetMapping
-    public ResponseEntity<List<GetCompanyResponse>> getCompany(@RequestParam boolean withDetails) {
-        var response = companyFacade.getAll(withDetails);
+    public ResponseEntity<Page<?>> getCompany(@RequestParam boolean withDetails,
+                                                               @RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "10") int size,
+                                                               @RequestParam(defaultValue = "Id") SortCompanyBy sortBy,
+                                                               @RequestParam(defaultValue = "ASC") SortDirection sortDir) {
+        var response = companyFacade.getAll(withDetails,page,size,sortBy,sortDir);
 
         return ResponseEntity.ok(response);
     }
@@ -101,6 +109,11 @@ public class CompanyRestController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload profile image");
         }
 
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<CompanySearchResponse>> search(@RequestParam String query) {
+        return ResponseEntity.ok(companyFacade.search(query));
     }
 
 

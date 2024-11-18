@@ -1,12 +1,17 @@
 package az.bron.business.feature.company.application.facade;
 
+import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
+import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import java.io.IOException;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CompanyFacade {
@@ -16,7 +21,8 @@ public interface CompanyFacade {
 
     GetCompanyResponse get(Long id, boolean withDetails);
 
-    List<GetCompanyResponse> getAll(boolean withDetails);
+    Page<?> getAll(boolean withDetails, int page, int size, SortCompanyBy sortBy,
+                                    SortDirection sortDir);
 
     void delete(Long id);
 
@@ -25,4 +31,6 @@ public interface CompanyFacade {
     void uploadLogoImage(Long id, MultipartFile file) throws IOException;
 
     void uploadBackgroundImage(Long id, MultipartFile file) throws IOException;
+
+    List<CompanySearchResponse> search(String query);
 }
