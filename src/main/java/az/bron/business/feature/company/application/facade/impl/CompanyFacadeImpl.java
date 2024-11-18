@@ -8,6 +8,7 @@ import az.bron.business.feature.company.application.mapper.CompanyMapper;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
+import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
 import az.bron.business.feature.company.application.model.response.CreateCompanyResponse;
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
@@ -24,6 +25,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -138,5 +140,11 @@ public class CompanyFacadeImpl implements CompanyFacade {
         String directory = "company/image/background/";
         String url = s3Service.uploadFile(fileName, file, directory);
         companyService.updateBackgroundImageUrl(url, directory, id);
+    }
+
+    @Override
+    public List<CompanySearchResponse> search(String query) {
+        return companyMapper.toCompanySearchResponse(companyService.search(query));
+
     }
 }
