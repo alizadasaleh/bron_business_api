@@ -31,11 +31,8 @@ public class AuthenticationService {
         this.roleService = roleService;
     }
 
-    public User signup(User input) {
-        User user = new User();
-                user.setFullName(input.getFullName());
-        user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
+    public User register(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
@@ -59,12 +56,8 @@ public class AuthenticationService {
             return null;
         }
 
-        var userToSave = new User();
-
-        userToSave.setFullName(user.getFullName());
-        userToSave.setEmail(user.getEmail());
-        userToSave.setPassword(passwordEncoder.encode(user.getPassword()));
-        userToSave.setRole(optionalRole.get());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(optionalRole.get());
 
         return userRepository.save(user);
     }
