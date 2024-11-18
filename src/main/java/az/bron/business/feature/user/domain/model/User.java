@@ -31,14 +31,37 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Long id;
 
+    @Column(nullable = true)
+    private String firstName;
+
     @Column(nullable = false)
     private String fullName;
+
+    @Column(nullable = true)
+    private String lastName;
+
 
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean emailVerified;
+
+    @Column(nullable = true)
     private String password;
+
+    @Column(unique = true)
+    private String phoneNumber;
+
+    @Column(name = "verification_code", length = 64)
+    private String verificationCode;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean phoneNumberVerified;
+
+    private String authProvider;
+
+    private boolean isEnabled;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")

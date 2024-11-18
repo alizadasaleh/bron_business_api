@@ -12,6 +12,26 @@ spring:
     problemdetails:
       enabled: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - profile
+              - email
+            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+            authorization-grant-type: authorization_code
+            client-name: Google
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: id
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -24,7 +44,15 @@ spring:
       serialization:
         write-dates-as-timestamps: false
 
-
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GMAIL_SMTP_USERNAME}
+    password: ${GMAIL_SMTP_PASSWORD}
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
 
 server:
   port: 8088
@@ -39,3 +67,5 @@ aws:
   bucket:
     name: ${AWS_S3_BUCKET_NAME}
     url: ${AWS_S3_BUCKET_URL}
+
+APP_URL: ${APP_URL}
