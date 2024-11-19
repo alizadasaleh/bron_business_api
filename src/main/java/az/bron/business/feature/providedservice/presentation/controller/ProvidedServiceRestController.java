@@ -8,6 +8,7 @@ import az.bron.business.feature.providedservice.application.model.request.Update
 import az.bron.business.feature.providedservice.application.model.response.CreateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,8 +44,9 @@ public class ProvidedServiceRestController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "Id") SortProvidedServiceBy sortBy,
-            @RequestParam(defaultValue = "ASC") SortDirection sortDir) {
-        var response = providedserviceFacade.getAll(page,size,sortBy,sortDir);
+            @RequestParam(defaultValue = "ASC") SortDirection sortDir,
+            @ModelAttribute ProvidedServiceFilter filter) {
+        var response = providedserviceFacade.getAll(page,size,sortBy,sortDir,filter);
 
         return ResponseEntity.ok(response);
     }

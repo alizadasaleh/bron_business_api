@@ -3,6 +3,8 @@ package az.bron.business.feature.providedservice.domain.service.impl;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.repository.ProvidedServiceRepository;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceSpecification;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +34,8 @@ public class ProvidedServiceServiceImpl implements ProvidedServiceService {
     }
 
     @Override
-    public Page<ProvidedService> getAll(Pageable pageable) {
-        return providedserviceRepository.findAll(pageable);
+    public Page<ProvidedService> getAll(Pageable pageable, ProvidedServiceFilter filter) {
+        return providedserviceRepository.findAll(ProvidedServiceSpecification.withFilters(filter), pageable);
     }
 
     @Override

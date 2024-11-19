@@ -6,6 +6,8 @@ import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedS
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +43,9 @@ public class ProvidedService extends Auditable<Long> {
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private ServiceCategory category;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     private String coverImageUrl;
 
