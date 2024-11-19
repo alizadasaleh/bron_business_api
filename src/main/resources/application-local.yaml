@@ -85,9 +85,7 @@ aws:
 
 security:
   jwt:
-    secret-key: c2577b2adcc1f980bb7e4edc2ef6e474bd3f152569b27eb3ea74a4af9a79099e
+    secret-key: ${JWT_SECRET_KEY}
     expiration-time: 36000
 
 APP_URL: ${APP_URL}
-
-#smtp mail properties

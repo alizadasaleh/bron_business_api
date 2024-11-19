@@ -8,10 +8,6 @@ spring:
   application:
     name: bron-business
 
-  mvc:
-    problemdetails:
-      enabled: true
-
   security:
     oauth2:
       client:
@@ -30,14 +26,28 @@ spring:
             authorization-uri: https://accounts.google.com/o/oauth2/auth
             token-uri: https://oauth2.googleapis.com/token
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-            user-name-attribute: id
+            user-name-attribute: sub
+  mvc:
+    problemdetails:
+      enabled: true
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
+
       hibernate:
+        search:
+          enabled: true
+          backend:
+            directory:
+              root: ./indexes
+              type: local-filesystem
+          default:
+            type: lucene
+          analysis:
+            configurer: class:az.bron.config.AnalysisConfigurer
         format_sql: true
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     jackson:
@@ -54,9 +64,14 @@ spring:
       starttls.enable: true
       ssl.trust: smtp.gmail.com
 
+logging:
+  file:
+    name: bronapplogfile.log
+  level:
+    az.bron.business: WARN
+
 server:
-  port: 8088
-  forward-headers-strategy: framework
+  port: ${SERVER_PORT}
 debug: on
 
 aws:
@@ -67,5 +82,10 @@ aws:
   bucket:
     name: ${AWS_S3_BUCKET_NAME}
     url: ${AWS_S3_BUCKET_URL}
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: 36000
 
 APP_URL: ${APP_URL}
