@@ -2,11 +2,14 @@ package az.bron.business.feature.company.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.contact.Contact;
+import az.bron.business.feature.providedservice.domain.model.Gender;
 import az.bron.business.feature.staff.domain.model.Staff;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,6 +48,8 @@ public class Company extends Auditable<String> {
     private String profileImageUrl;
     private String backgroundImageUrl;
 
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Embedded
     private Contact contact;

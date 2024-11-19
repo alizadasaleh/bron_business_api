@@ -1,6 +1,7 @@
 package az.bron.business.feature.providedservice.domain.service;
 
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ public interface ProvidedServiceService {
 
     Optional<ProvidedService> get(Long id);
 
-    Page<ProvidedService> getAll(Pageable pageable);
+    Page<ProvidedService> getAll(Pageable pageable, ProvidedServiceFilter filter);
 
     List<ProvidedService> getAllByCompanyId(Long companyId);
 
