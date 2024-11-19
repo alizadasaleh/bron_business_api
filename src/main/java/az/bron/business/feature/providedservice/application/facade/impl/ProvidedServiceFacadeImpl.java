@@ -13,6 +13,7 @@ import az.bron.business.feature.providedservice.application.model.response.GetPr
 import az.bron.business.feature.providedservice.application.model.response.UpdateProvidedServiceResponse;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -74,12 +75,12 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
 
     @Override
     public Page<GetProvidedServiceResponse> getAll(int page, int size, SortProvidedServiceBy sortBy,
-                                                   SortDirection sortDir) {
+                                                   SortDirection sortDir, ProvidedServiceFilter filter) {
         Sort sort = sortDir.toString().equalsIgnoreCase("asc") ? Sort.by(sortBy.toString()).ascending() :
                 Sort.by(sortBy.toString()).descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<ProvidedService> result = providedserviceService.getAll(pageable);
+        Page<ProvidedService> result = providedserviceService.getAll(pageable, filter);
 
         List<GetProvidedServiceResponse> dtoList = result.stream()
                 .map(providedserviceMapper::toGetResponse)
