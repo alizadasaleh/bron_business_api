@@ -13,14 +13,15 @@ version = '1.0-SNAPSHOT'
 //    toolVersion = "10.12.4"
 //}
 
-    repositories {
-        mavenCentral()
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
     }
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -43,8 +44,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.770'
-    implementation files('libs/domain-1.0.0-plain.jar')
-    implementation files('libs/exception-1.0.0-plain.jar')
+    implementation files('src/main/resources/libs/domain-1.0.0-plain.jar')
+    implementation files('src/main/resources/libs/exception-1.0.0-plain.jar')
 
     //security
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
@@ -60,8 +61,8 @@ dependencies {
     implementation 'org.jboss.logging:jboss-logging:3.6.1.Final'
 
         // Fixed oauth2 client version - use the same version as spring-boot
-        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-        implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 
     }
 
