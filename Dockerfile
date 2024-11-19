@@ -5,7 +5,7 @@ FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app
 
 # Copy the built JAR file
-COPY target/your-app.jar app.jar
+COPY jars/business-1.0-SNAPSHOT.jar business-1.0-SNAPSHOT.jar
 
 # Expose the port your application runs on
 EXPOSE 8080
