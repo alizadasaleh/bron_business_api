@@ -1,5 +1,7 @@
 package az.bron.business.feature.providedservice.application.mapper;
 
+import az.bron.business.feature.providedservice.application.model.request.ProvidedServiceFilterRequest;
+import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
 import az.bron.business.feature.staff.application.mapper.StaffMapper;
 import az.bron.business.feature.providedservice.application.model.request.CreateProvidedServiceRequest;
 import az.bron.business.feature.providedservice.application.model.request.UpdateProvidedServiceRequest;
@@ -26,5 +28,7 @@ public interface ProvidedServiceMapper {
     UpdateProvidedServiceResponse toUpdateResponse(ProvidedService providedservice);
 
     GetProvidedServiceResponse toGetResponse(ProvidedService providedservice);
+
+    ProvidedServiceFilter toFilter(ProvidedServiceFilterRequest filter);
 
 }
