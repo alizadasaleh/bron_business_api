@@ -97,11 +97,7 @@ public class AuthenticationFacade {
     }
 
     public GetUserResponse getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User currentUser = (User) authentication.getPrincipal();
-
-        return userMapper.toGetResponse(currentUser);
+        return userMapper.toGetResponse(authenticationService.getCurrentUser());
     }
 
     public String confirmEmail(String confirmationToken){

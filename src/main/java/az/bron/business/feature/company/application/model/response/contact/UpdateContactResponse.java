@@ -11,6 +11,5 @@ public class UpdateContactResponse {
     private String website;
     private String additionalPhoneNumber;
     private String additionalEmail;
-    private Schedule schedule;
     private Long addressId;
 }
