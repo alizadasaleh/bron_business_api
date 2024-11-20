@@ -11,6 +11,5 @@ public class CreateContactRequest {
     private String website;
     private String additionalPhoneNumber;
     private String additionalEmail;
-    private Schedule schedule;
     private CreateAddressRequest address;
 }

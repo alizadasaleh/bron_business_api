@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 public class CreateAppointmentRequest {
-    private Long staffProvidedServiceId;
+    private Long staffId;
+    private Long providedServiceId;
     private LocalDateTime startTime;
 
 }

@@ -7,7 +7,6 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetAddressResponse {
 
-    private Long id;
     private Double latitude;
     private Double longitude;
     private String postalCode;

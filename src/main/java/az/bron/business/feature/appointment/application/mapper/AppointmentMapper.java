@@ -11,7 +11,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface AppointmentMapper {
-    @Mapping(source = "staffProvidedServiceId", target = "staffProvidedService.id")
+    @Mapping(source = "providedServiceId", target = "providedService.id")
+    @Mapping(source = "staffId", target = "staff.id")
     Appointment toModel(CreateAppointmentRequest request);
 
     Appointment toModel(UpdateAppointmentRequest request);
