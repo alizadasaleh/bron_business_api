@@ -3,6 +3,7 @@ package az.bron.business.feature.schedule.staffschedule.domain.service.impl;
 import az.bron.business.feature.schedule.staffschedule.domain.model.StaffSchedule;
 import az.bron.business.feature.schedule.staffschedule.domain.repository.StaffScheduleRepository;
 import az.bron.business.feature.schedule.staffschedule.domain.service.StaffScheduleService;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +39,10 @@ public class StaffScheduleServiceImpl implements StaffScheduleService {
     public void delete(Long id) {
        staffscheduleRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<StaffSchedule> getByStaffId(Long id) {
+       return staffscheduleRepository.getStaffScheduleByStaff_Id(id);
+    }
+
 }
