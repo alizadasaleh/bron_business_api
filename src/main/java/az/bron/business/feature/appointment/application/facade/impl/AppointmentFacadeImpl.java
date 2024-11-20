@@ -10,10 +10,6 @@ import az.bron.business.feature.appointment.application.model.response.GetAppoin
 import az.bron.business.feature.appointment.application.model.response.UpdateAppointmentResponse;
 import az.bron.business.feature.appointment.domain.model.Appointment;
 import az.bron.business.feature.appointment.domain.service.AppointmentService;
-import az.bron.business.feature.schedule.staffschedule.domain.service.StaffScheduleService;
-import az.bron.business.feature.staffprovidedservice.application.exception.StaffProvidedServiceNotFoundException;
-import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
-import az.bron.business.feature.staffprovidedservice.domain.service.StaffProvidedServiceService;
 import az.bron.business.feature.user.application.model.request.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,17 +24,10 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
     private final AppointmentService appointmentService;
     private final AppointmentMapper appointmentMapper;
     private final AuthenticationService authenticationService;
-    private final StaffProvidedServiceService staffProvidedServiceService;
-    private final StaffScheduleService staffScheduleService;
 
     @Override
     public CreateAppointmentResponse create(CreateAppointmentRequest request) {
         Appointment appointmentModel = appointmentMapper.toModel(request);
-        StaffProvidedService staffProvidedService =
-                staffProvidedServiceService.get(request.getStaffProvidedServiceId()).orElseThrow(
-                        StaffProvidedServiceNotFoundException::new);
-
-        appointmentModel.setStaffProvidedService(staffProvidedService);
 
 
         appointmentModel.setUser(authenticationService.getCurrentUser());

@@ -5,23 +5,30 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
+@Schema(description = "Work hours per day",
+        example = "{\"monday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"tuesday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"wednesday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"thursday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"friday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"saturday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
+                + "\"sunday\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
+                + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]}}")
 public class Schedule {
-    @Schema(description = "Work hours per day",
-            example = "{\"MONDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"TUESDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"WEDNESDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"THURSDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"FRIDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"SATURDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]},"
-                    + "\"SUNDAY\":{\"startTime\":\"09:00\",\"endTime\":\"18:00\",\"breaks\":["
-                    + "{\"breakStartTime\":\"13:00\",\"breakEndTime\":\"14:00\"}]}}")
-    private Map<Workday, WorkingHours> schedule;
+
+    private WorkingHours monday;
+    private WorkingHours tuesday;
+    private WorkingHours wednesday;
+    private WorkingHours thursday;
+    private WorkingHours friday;
+    private WorkingHours saturday;
+    private WorkingHours sunday;
 
 }
 

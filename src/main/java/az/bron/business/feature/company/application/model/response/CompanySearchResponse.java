@@ -5,6 +5,5 @@ import lombok.Data;
 @Data
 public class CompanySearchResponse {
     private Long id;
-
     private String name;
 }

@@ -18,10 +18,6 @@ public class Contact {
     private String additionalPhoneNumber;
     private String additionalEmail;
 
-    @Column(columnDefinition = "json")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Schedule schedule;
-
     @Embedded
     private Address address;
 }
