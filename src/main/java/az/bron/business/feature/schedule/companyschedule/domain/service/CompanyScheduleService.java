@@ -15,4 +15,6 @@ public interface CompanyScheduleService {
     List<CompanySchedule> getAll();
 
     void delete(Long id);
+
+    Optional<CompanySchedule> getByCompanyId(Long companyId);
 }

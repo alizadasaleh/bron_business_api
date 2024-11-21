@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "staff_services")
-
 public class StaffProvidedService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

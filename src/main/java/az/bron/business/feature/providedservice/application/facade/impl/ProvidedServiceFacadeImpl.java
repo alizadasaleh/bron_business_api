@@ -2,6 +2,8 @@ package az.bron.business.feature.providedservice.application.facade.impl;
 
 import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.config.S3Service;
+import az.bron.business.feature.company.application.exception.CompanyNotFoundException;
+import az.bron.business.feature.company.domain.service.CompanyService;
 import az.bron.business.feature.providedservice.application.SortProvidedServiceBy;
 import az.bron.business.feature.providedservice.application.exception.ProvidedServiceNotFoundException;
 import az.bron.business.feature.providedservice.application.facade.ProvidedServiceFacade;
@@ -14,6 +16,8 @@ import az.bron.business.feature.providedservice.application.model.response.Updat
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
 import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
+import az.bron.business.feature.servicecategory.application.exception.ServiceCategoryNotFoundException;
+import az.bron.business.feature.servicecategory.domain.service.ServiceCategoryService;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -34,9 +38,16 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     private final ProvidedServiceService providedserviceService;
     private final ProvidedServiceMapper providedserviceMapper;
     private final S3Service s3Service;
+    private final CompanyService companyService;
+    private final ServiceCategoryService categoryService;
 
     @Override
     public CreateProvidedServiceResponse create(CreateProvidedServiceRequest request) {
+
+        
+        companyService.get(request.getCompanyId()).orElseThrow(CompanyNotFoundException::new);
+        categoryService.get(request.getCategoryId()).orElseThrow(ServiceCategoryNotFoundException::new);
+
         var providedServiceModel = providedserviceMapper.toModel(request);
         var providedservice = providedserviceService.create(providedServiceModel);
 

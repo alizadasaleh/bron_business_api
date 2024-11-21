@@ -45,4 +45,9 @@ public class StaffProvidedServiceServiceImpl implements StaffProvidedServiceServ
         staffprovidedserviceRepository.insertCoverImageUrl(fileName, id);
 
     }
+
+    @Override
+    public Optional<StaffProvidedService> getByStaffIdAndProvidedServiceId(Long staffId, Long staffId1) {
+        return staffprovidedserviceRepository.getByStaff_IdAndProvidedService_Id(staffId, staffId1);
+    }
 }
