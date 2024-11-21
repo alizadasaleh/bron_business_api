@@ -15,4 +15,10 @@ public class ProvidedServiceNotFoundException extends NotFoundException {
                 message,
                 ErrorDetails.error(314_00, "ProvidedServiceNotFound")));
     }
+
+    public ProvidedServiceNotFoundException(Long id) {
+        super(ErrorDetails.of("", "ProvidedService not found",
+                "ProvidedService with" + id + " was not found",
+                ErrorDetails.error(314_00, "ProvidedServiceNotFound")));
+    }
 }

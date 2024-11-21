@@ -2,6 +2,7 @@ package az.bron.business.feature.appointment.application.facade.impl;
 
 import az.bron.business.feature.appointment.application.excpetion.AppointmentNotFount;
 import az.bron.business.feature.appointment.application.facade.AppointmentFacade;
+import az.bron.business.feature.appointment.application.facade.validation.AppointmentValidator;
 import az.bron.business.feature.appointment.application.mapper.AppointmentMapper;
 import az.bron.business.feature.appointment.application.model.request.CreateAppointmentRequest;
 import az.bron.business.feature.appointment.application.model.request.UpdateAppointmentRequest;
@@ -24,11 +25,13 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
     private final AppointmentService appointmentService;
     private final AppointmentMapper appointmentMapper;
     private final AuthenticationService authenticationService;
+    private final AppointmentValidator appointmentValidator;
 
     @Override
     public CreateAppointmentResponse create(CreateAppointmentRequest request) {
         Appointment appointmentModel = appointmentMapper.toModel(request);
 
+        appointmentValidator.validate(request);
 
         appointmentModel.setUser(authenticationService.getCurrentUser());
 
@@ -87,7 +90,5 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
 
        appointmentService.delete(id);
     }
-
-
 
 }

@@ -38,4 +38,9 @@ public class CompanyScheduleServiceImpl implements CompanyScheduleService {
     public void delete(Long id) {
        companyScheduleRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<CompanySchedule> getByCompanyId(Long companyId) {
+        return companyScheduleRepository.getByCompany_Id(companyId);
+    }
 }

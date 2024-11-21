@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 @Mapper(componentModel = "spring", uses = StaffMapper.class)
 public interface ProvidedServiceMapper {
     @Mapping(source = "companyId", target = "company.id")
+    @Mapping(source = "categoryId", target = "category.id")
     ProvidedService toModel(CreateProvidedServiceRequest request);
 
     @Mapping(source = "companyId", target = "company.id")

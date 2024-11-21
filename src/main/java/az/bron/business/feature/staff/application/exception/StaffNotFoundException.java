@@ -14,4 +14,10 @@ public class StaffNotFoundException extends NotFoundException {
                 message,
                 ErrorDetails.error(314_00, "StaffNotFound")));
     }
+
+    public StaffNotFoundException(Long staffId) {
+        super(ErrorDetails.of("", "Staff not found",
+                "Staff id: " + staffId,
+                ErrorDetails.error(314_00, "StaffNotFound")));
+    }
 }
