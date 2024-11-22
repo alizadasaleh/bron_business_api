@@ -42,7 +42,8 @@ public class SecurityExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseProblemDetail handleAccessDeniedException(AccessDeniedException ex) {
         log.error("Access denied error: {}", ex.getMessage());
-        return createResponseProblemDetail(HttpStatus.FORBIDDEN, "Not authorized to access this resource", 403_01, "AccessDenied");
+        return createResponseProblemDetail(HttpStatus.FORBIDDEN, "Not authorized to access this resource", 403_01,
+                "AccessDenied");
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -59,7 +60,8 @@ public class SecurityExceptionHandler {
         return createResponseProblemDetail(HttpStatus.UNAUTHORIZED, "JWT has expired", 401_02, "ExpiredJWT");
     }
 
-    private ResponseProblemDetail createResponseProblemDetail(HttpStatus status, String detail, int errorCode, String errorName) {
+    private ResponseProblemDetail createResponseProblemDetail(HttpStatus status, String detail, int errorCode,
+                                                              String errorName) {
         ErrorDetails errorDetails = ErrorDetails.of("", detail, "", ErrorDetails.error(errorCode, errorName));
         return ResponseProblemDetail.of(status, errorDetails);
     }

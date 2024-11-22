@@ -1,7 +1,6 @@
 package az.bron.business.feature.company.application.model.response.contact;
 
 import az.bron.business.feature.company.application.model.response.address.GetAddressResponse;
-import az.bron.business.feature.company.domain.model.contact.Schedule;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 

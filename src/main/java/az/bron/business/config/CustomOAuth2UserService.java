@@ -6,15 +6,11 @@ import az.bron.business.feature.role.domain.model.RoleEnum;
 import az.bron.business.feature.role.domain.repository.RoleRepository;
 import az.bron.business.feature.user.domain.model.User;
 import az.bron.business.feature.user.domain.repository.UserRepository;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.token.TokenService;
+import java.util.Map;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -23,12 +19,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public CustomOAuth2UserService(JwtService jwtService, RoleRepository roleRepository, UserRepository userRepository) {
+    public CustomOAuth2UserService(JwtService jwtService, RoleRepository roleRepository,
+                                   UserRepository userRepository) {
         this.jwtService = jwtService;
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
     }
-
 
 
     @Override

@@ -9,6 +9,7 @@ public class CompanyNotFoundException extends NotFoundException {
                 message,
                 ErrorDetails.error(314_00, "CompanyNotFound")));
     }
+
     public CompanyNotFoundException() {
         super(ErrorDetails.of("", "Company not found",
                 "",

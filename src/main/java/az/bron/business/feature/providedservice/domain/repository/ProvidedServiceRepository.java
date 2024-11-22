@@ -12,12 +12,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProvidedServiceRepository extends JpaRepository<ProvidedService, Long>, JpaSpecificationExecutor<ProvidedService> {
+public interface ProvidedServiceRepository extends JpaRepository<ProvidedService, Long>,
+        JpaSpecificationExecutor<ProvidedService> {
     List<ProvidedService> findAllByCompanyId(Long companyId);
 
     @Modifying
     @Query("UPDATE ProvidedService s SET s.coverImageUrl = :fileName WHERE s.id = :id")
     void insertCoverImageUrl(String fileName, Long id);
-    Page<ProvidedService> findAll( Specification<ProvidedService> specification, Pageable pageable);
+
+    Page<ProvidedService> findAll(Specification<ProvidedService> specification, Pageable pageable);
 
 }

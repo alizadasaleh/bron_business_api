@@ -3,11 +3,10 @@ package az.bron.business.feature.schedule.companyschedule.domain.service.impl;
 import az.bron.business.feature.schedule.companyschedule.domain.model.CompanySchedule;
 import az.bron.business.feature.schedule.companyschedule.domain.repository.CompanyScheduleRepository;
 import az.bron.business.feature.schedule.companyschedule.domain.service.CompanyScheduleService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class CompanyScheduleServiceImpl implements CompanyScheduleService {
 
     @Override
     public void delete(Long id) {
-       companyScheduleRepository.deleteById(id);
+        companyScheduleRepository.deleteById(id);
     }
 
     @Override

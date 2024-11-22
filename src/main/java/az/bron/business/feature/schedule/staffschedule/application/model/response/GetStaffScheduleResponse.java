@@ -7,4 +7,5 @@ import lombok.Data;
 public class GetStaffScheduleResponse {
     private Long id;
     private Schedule schedule;
-    private Long staffId;}
+    private Long staffId;
+}

@@ -25,8 +25,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Log4j2
@@ -60,7 +58,7 @@ public class AuthenticationFacade {
     }
 
     public RegisterUserResponse register(RegisterUserRequest registerUserRequest) {
-        if(userService.findByEmail(registerUserRequest.getEmail()).isPresent()) {
+        if (userService.findByEmail(registerUserRequest.getEmail()).isPresent()) {
             throw new UserAlreadyExists(registerUserRequest.getEmail());
         }
         Role role = roleService.findByName(RoleEnum.USER).orElseThrow(RoleNotFoundException::new);
@@ -100,11 +98,10 @@ public class AuthenticationFacade {
         return userMapper.toGetResponse(authenticationService.getCurrentUser());
     }
 
-    public String confirmEmail(String confirmationToken){
+    public String confirmEmail(String confirmationToken) {
         ConfirmationToken token = confirmationTokenService.findByConfirmationToken(confirmationToken);
 
-        if(token != null)
-        {
+        if (token != null) {
             User user = userService.findByEmailIgnoreCase(token.getUser().getEmail());
             user.setEnabled(true);
             user.setEmailVerified(true);

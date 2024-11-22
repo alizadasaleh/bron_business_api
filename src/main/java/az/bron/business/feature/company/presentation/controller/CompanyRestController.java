@@ -39,11 +39,11 @@ public class CompanyRestController {
 
     @GetMapping
     public ResponseEntity<Page<?>> getCompany(@RequestParam boolean withDetails,
-                                                               @RequestParam(defaultValue = "0") int page,
-                                                               @RequestParam(defaultValue = "10") int size,
-                                                               @RequestParam(defaultValue = "Id") SortCompanyBy sortBy,
-                                                               @RequestParam(defaultValue = "ASC") SortDirection sortDir) {
-        var response = companyFacade.getAll(withDetails,page,size,sortBy,sortDir);
+                                              @RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size,
+                                              @RequestParam(defaultValue = "Id") SortCompanyBy sortBy,
+                                              @RequestParam(defaultValue = "ASC") SortDirection sortDir) {
+        var response = companyFacade.getAll(withDetails, page, size, sortBy, sortDir);
 
         return ResponseEntity.ok(response);
     }

@@ -70,7 +70,7 @@ public class StaffRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateStaffResponse> update(@PathVariable("id") Long id,
-                                                       @RequestBody UpdateStaffRequest request) {
+                                                      @RequestBody UpdateStaffRequest request) {
         UpdateStaffResponse response = staffFacade.update(id, request);
 
         return ResponseEntity.ok(response);

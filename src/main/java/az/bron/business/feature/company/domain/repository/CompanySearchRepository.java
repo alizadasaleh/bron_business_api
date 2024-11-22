@@ -2,11 +2,10 @@ package az.bron.business.feature.company.domain.repository;
 
 import az.bron.business.feature.company.domain.model.Company;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.search.mapper.orm.Search;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class CompanySearchRepository {

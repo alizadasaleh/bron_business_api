@@ -29,7 +29,7 @@
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
     <module name="SuppressionFilter">
         <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
-                  default="checkstyle-suppressions.xml" />
+                  default="checkstyle-suppressions.xml"/>
         <property name="optional" value="true"/>
     </module>
 
@@ -298,13 +298,13 @@
                     METHOD_DEF, QUESTION, RESOURCE_SPECIFICATION, SUPER_CTOR_CALL, LAMBDA,
                     RECORD_DEF"/>
         </module>
-<!--        <module name="OperatorWrap">-->
-<!--            <property name="option" value="IGNORE"/>-->
-<!--            <property name="tokens"-->
-<!--                      value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR,-->
-<!--                    LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF,-->
-<!--                    TYPE_EXTENSION_AND "/>-->
-<!--        </module>-->
+        <!--        <module name="OperatorWrap">-->
+        <!--            <property name="option" value="IGNORE"/>-->
+        <!--            <property name="tokens"-->
+        <!--                      value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR,-->
+        <!--                    LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR, METHOD_REF,-->
+        <!--                    TYPE_EXTENSION_AND "/>-->
+        <!--        </module>-->
         <module name="AnnotationLocation">
             <property name="id" value="AnnotationLocationMostCases"/>
             <property name="tokens"
@@ -352,14 +352,14 @@
         <!-- https://checkstyle.org/config_filters.html#SuppressionXpathFilter -->
         <module name="SuppressionXpathFilter">
             <property name="file" value="${org.checkstyle.google.suppressionxpathfilter.config}"
-                      default="checkstyle-xpath-suppressions.xml" />
+                      default="checkstyle-xpath-suppressions.xml"/>
             <property name="optional" value="true"/>
         </module>
-        <module name="SuppressWarningsHolder" />
+        <module name="SuppressWarningsHolder"/>
         <module name="SuppressionCommentFilter">
-            <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)" />
-            <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)" />
-            <property name="checkFormat" value="$1" />
+            <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)"/>
+            <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)"/>
+            <property name="checkFormat" value="$1"/>
         </module>
         <module name="SuppressWithNearbyCommentFilter">
             <property name="commentFormat" value="CHECKSTYLE.SUPPRESS\: ([\w\|]+)"/>

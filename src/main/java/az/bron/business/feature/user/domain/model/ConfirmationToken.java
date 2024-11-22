@@ -10,9 +10,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -21,10 +19,10 @@ import lombok.Setter;
 public class ConfirmationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="token_id")
+    @Column(name = "token_id")
     private Long tokenId;
 
-    @Column(name="confirmation_token")
+    @Column(name = "confirmation_token")
     private String confirmationToken;
 
     @OneToOne

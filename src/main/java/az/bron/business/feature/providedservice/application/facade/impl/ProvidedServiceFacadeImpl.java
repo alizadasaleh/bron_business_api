@@ -44,7 +44,7 @@ public class ProvidedServiceFacadeImpl implements ProvidedServiceFacade {
     @Override
     public CreateProvidedServiceResponse create(CreateProvidedServiceRequest request) {
 
-        
+
         companyService.get(request.getCompanyId()).orElseThrow(CompanyNotFoundException::new);
         categoryService.get(request.getCategoryId()).orElseThrow(ServiceCategoryNotFoundException::new);
 

@@ -2,10 +2,9 @@ package az.bron.business.feature.providedservice.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
+import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,8 +21,6 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Data
 @NoArgsConstructor
@@ -37,8 +34,7 @@ public class ProvidedService extends Auditable<Long> {
     private String name;
     private String description;
 
-    @Column(columnDefinition = "json")
-    @JdbcTypeCode(SqlTypes.JSON)
+    @Embedded
     private Duration duration;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

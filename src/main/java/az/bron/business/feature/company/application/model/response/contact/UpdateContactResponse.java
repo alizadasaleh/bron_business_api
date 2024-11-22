@@ -1,6 +1,5 @@
 package az.bron.business.feature.company.application.model.response.contact;
 
-import az.bron.business.feature.company.domain.model.contact.Schedule;
 import lombok.Data;
 
 @Data

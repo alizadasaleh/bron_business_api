@@ -58,8 +58,8 @@ public class StaffProvidedServiceRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateStaffProvidedServiceResponse> update(@PathVariable("id") Long id,
-                                                                      @RequestBody UpdateStaffProvidedServiceRequest
-                                                                              request) {
+                                                                     @RequestBody UpdateStaffProvidedServiceRequest
+                                                                             request) {
         var response = staffprovidedserviceFacade.update(id, request);
 
         return ResponseEntity.ok(response);
