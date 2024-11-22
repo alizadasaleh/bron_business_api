@@ -9,11 +9,10 @@ import az.bron.business.feature.role.application.model.response.CreateRoleRespon
 import az.bron.business.feature.role.application.model.response.GetRoleResponse;
 import az.bron.business.feature.role.application.model.response.UpdateRoleResponse;
 import az.bron.business.feature.role.domain.service.RoleService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -40,7 +39,7 @@ public class RoleFacadeImpl implements RoleFacade {
             throw new RoleNotFoundException("Role with id " + id + " does not exist");
         }
 
-       roleModel.setId(id);
+        roleModel.setId(id);
 
         var role = roleService.create(roleModel);
 
@@ -77,6 +76,6 @@ public class RoleFacadeImpl implements RoleFacade {
             throw new RoleNotFoundException("Role with id " + id + " does not exist");
         }
 
-       roleService.delete(id);
+        roleService.delete(id);
     }
 }

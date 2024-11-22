@@ -9,6 +9,7 @@ public class UserNotFoundException extends NotFoundException {
                 "",
                 ErrorDetails.error(314_00, "UserNotFound")));
     }
+
     public UserNotFoundException(String message) {
         super(ErrorDetails.of("", "User not found",
                 message,

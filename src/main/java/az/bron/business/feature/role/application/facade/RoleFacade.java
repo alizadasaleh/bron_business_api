@@ -5,7 +5,6 @@ import az.bron.business.feature.role.application.model.request.UpdateRoleRequest
 import az.bron.business.feature.role.application.model.response.CreateRoleResponse;
 import az.bron.business.feature.role.application.model.response.GetRoleResponse;
 import az.bron.business.feature.role.application.model.response.UpdateRoleResponse;
-
 import java.util.List;
 
 public interface RoleFacade {

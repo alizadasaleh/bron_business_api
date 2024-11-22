@@ -13,12 +13,10 @@ import az.bron.business.feature.schedule.companyschedule.application.model.respo
 import az.bron.business.feature.schedule.companyschedule.domain.model.CompanySchedule;
 import az.bron.business.feature.schedule.companyschedule.domain.service.CompanyScheduleService;
 import com.sun.jdi.InternalException;
-import java.util.Optional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -48,7 +46,7 @@ public class CompanyScheduleFacadeImpl implements CompanyScheduleFacade {
             throw new InternalException("CompanySchedule with id " + id + " does not exist");
         }
 
-       companyScheduleModel.setId(id);
+        companyScheduleModel.setId(id);
 
         var companySchedule = companyScheduleService.create(companyScheduleModel);
 
@@ -85,6 +83,6 @@ public class CompanyScheduleFacadeImpl implements CompanyScheduleFacade {
             throw new InternalException("CompanySchedule with id " + id + " does not exist");
         }
 
-       companyScheduleService.delete(id);
+        companyScheduleService.delete(id);
     }
 }

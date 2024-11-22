@@ -12,11 +12,10 @@ import az.bron.business.feature.appointment.application.model.response.UpdateApp
 import az.bron.business.feature.appointment.domain.model.Appointment;
 import az.bron.business.feature.appointment.domain.service.AppointmentService;
 import az.bron.business.feature.user.application.model.request.AuthenticationService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -33,7 +32,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
 
         appointmentValidator.validate(request);
 
-        appointmentModel.setUser(authenticationService.getCurrentUser());
+//        appointmentModel.setUser(authenticationService.getCurrentUser());
 
         Appointment appointment = appointmentService.create(appointmentModel);
 
@@ -51,7 +50,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
             throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
         }
 
-       appointmentModel.setId(id);
+        appointmentModel.setId(id);
 
         var appointment = appointmentService.create(appointmentModel);
 
@@ -88,7 +87,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
             throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
         }
 
-       appointmentService.delete(id);
+        appointmentService.delete(id);
     }
 
 }

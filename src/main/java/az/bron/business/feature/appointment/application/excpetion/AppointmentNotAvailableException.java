@@ -10,6 +10,7 @@ public class AppointmentNotAvailableException extends AlreadyExistsException {
                 "Appointment for" + dayOfWeek.toString() + " is not available",
                 ErrorDetails.error(314_00, "StaffNotFound")));
     }
+
     public AppointmentNotAvailableException(String message) {
         super(ErrorDetails.of("", "Appointment is not available for this day",
                 message,

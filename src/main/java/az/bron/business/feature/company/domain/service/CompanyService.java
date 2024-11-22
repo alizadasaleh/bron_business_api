@@ -1,12 +1,10 @@
 package az.bron.business.feature.company.domain.service;
 
-import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
 import az.bron.business.feature.company.domain.model.Company;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 public interface CompanyService {
     Company create(Company company);

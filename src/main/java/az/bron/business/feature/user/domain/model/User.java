@@ -76,7 +76,6 @@ public class User implements UserDetails {
     private Role role;
 
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());

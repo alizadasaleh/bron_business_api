@@ -1,7 +1,7 @@
 package az.bron.business.feature.staffprovidedservice.domain.model;
 
-import az.bron.business.feature.staff.domain.model.Staff;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
+import az.bron.business.feature.staff.domain.model.Staff;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

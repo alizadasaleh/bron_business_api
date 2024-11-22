@@ -2,8 +2,6 @@ package az.bron.business.feature.staffprovidedservice.application.facade.impl;
 
 import az.bron.business.config.S3Service;
 import az.bron.business.feature.providedservice.application.exception.ProvidedServiceNotFoundException;
-import az.bron.business.feature.providedservice.application.facade.impl.ProvidedServiceFacadeImpl;
-import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
 import az.bron.business.feature.staff.application.exception.StaffNotFoundException;
 import az.bron.business.feature.staff.domain.service.StaffService;
@@ -19,7 +17,6 @@ import az.bron.business.feature.staffprovidedservice.domain.service.StaffProvide
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import javax.management.ServiceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -40,7 +37,8 @@ public class StaffProvidedServiceFacadeImpl implements StaffProvidedServiceFacad
 
 
         staffService.get(request.getStaffId()).orElseThrow(StaffNotFoundException::new);
-        providedService.get(request.getServiceId()).orElseThrow(() -> new ProvidedServiceNotFoundException(request.getServiceId()));
+        providedService.get(request.getServiceId())
+                .orElseThrow(() -> new ProvidedServiceNotFoundException(request.getServiceId()));
 
         var staffProvidedServiceModel = staffProvidedServiceMapper.toModel(request);
         var staffprovidedservice = staffProvidedServiceService.create(staffProvidedServiceModel);

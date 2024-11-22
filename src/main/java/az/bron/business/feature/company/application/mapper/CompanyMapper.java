@@ -10,7 +10,6 @@ import az.bron.business.feature.company.application.model.response.UpdateCompany
 import az.bron.business.feature.company.domain.model.Company;
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.springframework.http.ResponseEntity;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {

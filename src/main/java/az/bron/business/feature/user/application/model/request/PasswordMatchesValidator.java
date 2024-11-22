@@ -1,7 +1,6 @@
 package az.bron.business.feature.user.application.model.request;
 
 import jakarta.validation.ConstraintValidator;
-
 import jakarta.validation.ConstraintValidatorContext;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, RegisterUserRequest> {

@@ -10,12 +10,11 @@ import az.bron.business.feature.schedule.staffschedule.application.model.respons
 import az.bron.business.feature.schedule.staffschedule.domain.model.StaffSchedule;
 import az.bron.business.feature.schedule.staffschedule.domain.service.StaffScheduleService;
 import az.bron.business.feature.staff.application.exception.StaffNotFoundException;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -41,8 +40,7 @@ public class StaffScheduleFacadeImpl implements StaffScheduleFacade {
         StaffSchedule staffScheduleModel = staffscheduleMapper.toModel(request);
 
 
-
-       staffScheduleModel.setId(id);
+        staffScheduleModel.setId(id);
 
         StaffSchedule staffschedule = staffscheduleService.create(staffScheduleModel);
 
@@ -54,7 +52,8 @@ public class StaffScheduleFacadeImpl implements StaffScheduleFacade {
         Optional<StaffSchedule> existingStaffSchedule = staffscheduleService.get(id);
 
         if (existingStaffSchedule.isEmpty()) {
-            throw new StaffNotFoundException("StaffSchedule with id " + id + " does not exist");  // replace with proper error
+            throw new StaffNotFoundException(
+                    "StaffSchedule with id " + id + " does not exist");  // replace with proper error
         }
 
         StaffSchedule staffschedule = existingStaffSchedule.get();
@@ -80,6 +79,6 @@ public class StaffScheduleFacadeImpl implements StaffScheduleFacade {
             throw new InternalError("StaffSchedule with id " + id + " does not exist");
         }
 
-       staffscheduleService.delete(id);
+        staffscheduleService.delete(id);
     }
 }

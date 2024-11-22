@@ -1,7 +1,7 @@
 package az.bron.business.feature.staffprovidedservice.application.model.response;
 
-import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import az.bron.business.feature.providedservice.domain.model.Duration;
+import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
