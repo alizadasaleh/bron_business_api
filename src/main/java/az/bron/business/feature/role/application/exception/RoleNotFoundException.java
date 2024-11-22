@@ -9,6 +9,7 @@ public class RoleNotFoundException extends NotFoundException {
                 message,
                 ErrorDetails.error(314_00, "RoleNotFound")));
     }
+
     public RoleNotFoundException() {
         super(ErrorDetails.of("", "Role not found",
                 "",

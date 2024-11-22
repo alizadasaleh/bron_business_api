@@ -9,6 +9,7 @@ public class StaffProvidedServiceNotFoundException extends NotFoundException {
                 message,
                 ErrorDetails.error(314_00, "StaffProvidedServiceNotFound")));
     }
+
     public StaffProvidedServiceNotFoundException() {
         super(ErrorDetails.of("", "StaffProvidedService not found",
                 "",

@@ -7,12 +7,14 @@ import az.bron.business.feature.schedule.staffschedule.application.model.request
 import az.bron.business.feature.schedule.staffschedule.application.model.response.CreateStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.GetStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.UpdateStaffScheduleResponse;
+import az.bron.business.feature.schedule.staffschedule.domain.model.StaffSchedule;
 import az.bron.business.feature.schedule.staffschedule.domain.service.StaffScheduleService;
+import az.bron.business.feature.staff.application.exception.StaffNotFoundException;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -20,48 +22,48 @@ import java.util.List;
 public class StaffScheduleFacadeImpl implements StaffScheduleFacade {
     private final StaffScheduleService staffscheduleService;
     private final StaffScheduleMapper staffscheduleMapper;
+    private final StaffScheduleService staffScheduleService;
 
     @Override
     public CreateStaffScheduleResponse create(CreateStaffScheduleRequest request) {
-        var staffscheduleModel = staffscheduleMapper.toModel(request);
-        var staffschedule = staffscheduleService.create(staffscheduleModel);
+        staffScheduleService.get(request.getStaffId()).orElseThrow(StaffNotFoundException::new);
+        StaffSchedule staffScheduleModel = staffscheduleMapper.toModel(request);
+        StaffSchedule staffschedule = staffscheduleService.create(staffScheduleModel);
 
         return staffscheduleMapper.toCreateResponse(staffschedule);
     }
 
     @Override
     public UpdateStaffScheduleResponse update(Long id, UpdateStaffScheduleRequest request) {
-        var staffscheduleModel = staffscheduleMapper.toModel(request);
+        staffScheduleService.get(id).orElseThrow(StaffNotFoundException::new);  // replace with proper error
 
-        var existingStaffSchedule = staffscheduleService.get(id);
+        StaffSchedule staffScheduleModel = staffscheduleMapper.toModel(request);
 
-        if (existingStaffSchedule.isEmpty()) {
-            throw new InternalError("StaffSchedule with id " + id + " does not exist");
-        }
 
-       staffscheduleModel.setId(id);
+        staffScheduleModel.setId(id);
 
-        var staffschedule = staffscheduleService.create(staffscheduleModel);
+        StaffSchedule staffschedule = staffscheduleService.create(staffScheduleModel);
 
         return staffscheduleMapper.toUpdateResponse(staffschedule);
     }
 
     @Override
     public GetStaffScheduleResponse get(Long id) {
-        var existingStaffSchedule = staffscheduleService.get(id);
+        Optional<StaffSchedule> existingStaffSchedule = staffscheduleService.get(id);
 
         if (existingStaffSchedule.isEmpty()) {
-            throw new InternalError("StaffSchedule with id " + id + " does not exist");
+            throw new StaffNotFoundException(
+                    "StaffSchedule with id " + id + " does not exist");  // replace with proper error
         }
 
-        var staffschedule = existingStaffSchedule.get();
+        StaffSchedule staffschedule = existingStaffSchedule.get();
 
         return staffscheduleMapper.toGetResponse(staffschedule);
     }
 
     @Override
     public List<GetStaffScheduleResponse> getAll() {
-        var result = staffscheduleService.getAll();
+        List<StaffSchedule> result = staffscheduleService.getAll();
 
         return result.stream()
                 .map(staffscheduleMapper::toGetResponse)
@@ -70,12 +72,13 @@ public class StaffScheduleFacadeImpl implements StaffScheduleFacade {
 
     @Override
     public void delete(Long id) {
-        var existingStaffSchedule = staffscheduleService.get(id);
+        staffScheduleService.get(id).orElseThrow(StaffNotFoundException::new); // replace with proper error
+        Optional<StaffSchedule> existingStaffSchedule = staffscheduleService.get(id);
 
         if (existingStaffSchedule.isEmpty()) {
             throw new InternalError("StaffSchedule with id " + id + " does not exist");
         }
 
-       staffscheduleService.delete(id);
+        staffscheduleService.delete(id);
     }
 }

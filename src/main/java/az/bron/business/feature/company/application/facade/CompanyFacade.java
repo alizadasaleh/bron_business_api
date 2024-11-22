@@ -11,7 +11,6 @@ import az.bron.business.feature.company.application.model.response.UpdateCompany
 import java.io.IOException;
 import java.util.List;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CompanyFacade {
@@ -22,7 +21,7 @@ public interface CompanyFacade {
     GetCompanyResponse get(Long id, boolean withDetails);
 
     Page<?> getAll(boolean withDetails, int page, int size, SortCompanyBy sortBy,
-                                    SortDirection sortDir);
+                   SortDirection sortDir);
 
     void delete(Long id);
 

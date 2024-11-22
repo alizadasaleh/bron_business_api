@@ -16,4 +16,6 @@ public interface StaffProvidedServiceService {
     void delete(Long id);
 
     void updateCoverImageUrl(String fileName, Long id);
+
+    Optional<StaffProvidedService> getByStaffIdAndProvidedServiceId(Long staffId, Long staffId1);
 }

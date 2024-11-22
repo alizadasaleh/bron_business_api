@@ -22,7 +22,8 @@ public class IndexingService implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(@NonNull ContextRefreshedEvent contextRefreshedEvent) {
         SearchSession searchSession = Search.session(entityManager);
         try {
-            searchSession.massIndexer().idFetchSize(80).batchSizeToLoadObjects(15).threadsToLoadObjects(8).startAndWait();
+            searchSession.massIndexer().idFetchSize(80).batchSizeToLoadObjects(15).threadsToLoadObjects(8)
+                    .startAndWait();
         } catch (InterruptedException interruptedException) {
             log.error("Mass indexing failed!", interruptedException);
             Thread.currentThread().interrupt();

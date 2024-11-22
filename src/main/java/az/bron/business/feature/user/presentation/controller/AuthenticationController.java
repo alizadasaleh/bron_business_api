@@ -1,8 +1,8 @@
 package az.bron.business.feature.user.presentation.controller;
 
+import az.bron.business.feature.user.application.facade.AuthenticationFacade;
 import az.bron.business.feature.user.application.model.request.LoginUserRequest;
 import az.bron.business.feature.user.application.model.request.RegisterUserRequest;
-import az.bron.business.feature.user.application.facade.AuthenticationFacade;
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.LoginResponse;
 import az.bron.business.feature.user.application.model.response.RegisterUserResponse;
@@ -34,8 +34,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(registeredUser);
     }
 
-    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<String> confirmUserAccount(@RequestParam("token")String confirmationToken) {
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity<String> confirmUserAccount(@RequestParam("token") String confirmationToken) {
         return ResponseEntity.ok(authenticationFacade.confirmEmail(confirmationToken));
     }
 

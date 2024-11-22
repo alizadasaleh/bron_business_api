@@ -43,7 +43,8 @@
 //    }
 //
 //    @PutMapping("/{id}")
-//    public ResponseEntity<UpdateRoleResponse> update(@PathVariable("id") Integer id, @RequestBody UpdateRoleRequest request) {
+//    public ResponseEntity<UpdateRoleResponse> update(@PathVariable("id") Integer id, @RequestBody UpdateRoleRequest
+//    request) {
 //        var response = roleFacade.update(id, request);
 //
 //        return ResponseEntity.ok(response);

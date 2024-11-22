@@ -1,6 +1,5 @@
 package az.bron.business.feature.user.application.model.response;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

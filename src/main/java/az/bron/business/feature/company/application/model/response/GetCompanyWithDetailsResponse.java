@@ -1,7 +1,7 @@
 package az.bron.business.feature.company.application.model.response;
 
-import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import az.bron.business.feature.providedservice.application.model.response.GetProvidedServiceResponse;
+import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import java.util.List;
 import lombok.Data;
 

@@ -2,6 +2,7 @@ package az.bron.business.feature.appointment.application.facade.impl;
 
 import az.bron.business.feature.appointment.application.excpetion.AppointmentNotFount;
 import az.bron.business.feature.appointment.application.facade.AppointmentFacade;
+import az.bron.business.feature.appointment.application.facade.validation.AppointmentValidator;
 import az.bron.business.feature.appointment.application.mapper.AppointmentMapper;
 import az.bron.business.feature.appointment.application.model.request.CreateAppointmentRequest;
 import az.bron.business.feature.appointment.application.model.request.UpdateAppointmentRequest;
@@ -11,11 +12,10 @@ import az.bron.business.feature.appointment.application.model.response.UpdateApp
 import az.bron.business.feature.appointment.domain.model.Appointment;
 import az.bron.business.feature.appointment.domain.service.AppointmentService;
 import az.bron.business.feature.user.application.model.request.AuthenticationService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Log4j2
 @Service
@@ -24,13 +24,15 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
     private final AppointmentService appointmentService;
     private final AppointmentMapper appointmentMapper;
     private final AuthenticationService authenticationService;
+    private final AppointmentValidator appointmentValidator;
 
     @Override
     public CreateAppointmentResponse create(CreateAppointmentRequest request) {
         Appointment appointmentModel = appointmentMapper.toModel(request);
 
+        appointmentValidator.validate(request);
 
-        appointmentModel.setUser(authenticationService.getCurrentUser());
+//        appointmentModel.setUser(authenticationService.getCurrentUser());
 
         Appointment appointment = appointmentService.create(appointmentModel);
 
@@ -48,7 +50,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
             throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
         }
 
-       appointmentModel.setId(id);
+        appointmentModel.setId(id);
 
         var appointment = appointmentService.create(appointmentModel);
 
@@ -85,9 +87,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
             throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
         }
 
-       appointmentService.delete(id);
+        appointmentService.delete(id);
     }
-
-
 
 }

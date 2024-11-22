@@ -10,5 +10,6 @@ public class CreateProvidedServiceRequest {
     private String description;
     private Duration duration;
     private Long companyId;
+    private Integer categoryId;
 
 }

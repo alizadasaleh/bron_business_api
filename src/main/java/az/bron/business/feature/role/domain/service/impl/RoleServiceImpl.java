@@ -4,11 +4,10 @@ import az.bron.business.feature.role.domain.model.Role;
 import az.bron.business.feature.role.domain.model.RoleEnum;
 import az.bron.business.feature.role.domain.repository.RoleRepository;
 import az.bron.business.feature.role.domain.service.RoleService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void delete(Integer id) {
-       roleRepository.deleteById(id);
+        roleRepository.deleteById(id);
     }
 
     @Override

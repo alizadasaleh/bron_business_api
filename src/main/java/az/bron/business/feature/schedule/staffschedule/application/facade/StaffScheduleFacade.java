@@ -5,9 +5,7 @@ import az.bron.business.feature.schedule.staffschedule.application.model.request
 import az.bron.business.feature.schedule.staffschedule.application.model.response.CreateStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.GetStaffScheduleResponse;
 import az.bron.business.feature.schedule.staffschedule.application.model.response.UpdateStaffScheduleResponse;
-
 import java.util.List;
-import org.mapstruct.Mapping;
 
 public interface StaffScheduleFacade {
     CreateStaffScheduleResponse create(CreateStaffScheduleRequest request);
