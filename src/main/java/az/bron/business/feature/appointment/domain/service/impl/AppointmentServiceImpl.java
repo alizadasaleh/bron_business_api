@@ -3,11 +3,11 @@ package az.bron.business.feature.appointment.domain.service.impl;
 import az.bron.business.feature.appointment.domain.model.Appointment;
 import az.bron.business.feature.appointment.domain.repository.AppointmentRepository;
 import az.bron.business.feature.appointment.domain.service.AppointmentService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +36,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public void delete(Long id) {
-       appointmentRepository.deleteById(id);
+        appointmentRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean checkIfOverlaps(LocalDateTime startTime, LocalDateTime endTime, Long staffId) {
+        return appointmentRepository.checkIfOverlaps(startTime, endTime, staffId);
     }
 
 }

@@ -35,7 +35,7 @@ public class JwtService {
     }
 
     public String generateToken(String email) {
-        return  generateToken(new HashMap<>(), email);
+        return generateToken(new HashMap<>(), email);
     }
 
     private String generateToken(HashMap<String, Object> extraClaims, String email) {
@@ -103,4 +103,4 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-    }
+}

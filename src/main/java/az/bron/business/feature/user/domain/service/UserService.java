@@ -1,7 +1,6 @@
 package az.bron.business.feature.user.domain.service;
 
 import az.bron.business.feature.user.domain.model.User;
-
 import java.util.List;
 import java.util.Optional;
 

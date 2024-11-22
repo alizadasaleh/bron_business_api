@@ -5,7 +5,6 @@ import az.bron.business.feature.user.application.model.request.UpdateUserRequest
 import az.bron.business.feature.user.application.model.response.CreateUserResponse;
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.UpdateUserResponse;
-
 import java.util.List;
 
 public interface UserFacade {

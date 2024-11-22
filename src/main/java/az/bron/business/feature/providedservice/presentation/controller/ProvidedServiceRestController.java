@@ -11,7 +11,6 @@ import az.bron.business.feature.providedservice.application.model.response.Updat
 import az.bron.business.feature.providedservice.domain.specification.ProvidedServiceFilter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,7 @@ public class ProvidedServiceRestController {
             @RequestParam(defaultValue = "Id") SortProvidedServiceBy sortBy,
             @RequestParam(defaultValue = "ASC") SortDirection sortDir,
             @ModelAttribute ProvidedServiceFilter filter) {
-        var response = providedserviceFacade.getAll(page,size,sortBy,sortDir,filter);
+        var response = providedserviceFacade.getAll(page, size, sortBy, sortDir, filter);
 
         return ResponseEntity.ok(response);
     }

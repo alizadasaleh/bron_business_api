@@ -2,9 +2,10 @@ package az.bron.business.feature.providedservice.domain.model;
 
 import az.bron.business.common.Auditable;
 import az.bron.business.feature.company.domain.model.Company;
-import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import az.bron.business.feature.servicecategory.domain.model.ServiceCategory;
+import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,6 +33,8 @@ public class ProvidedService extends Auditable<Long> {
     private Long id;
     private String name;
     private String description;
+
+    @Embedded
     private Duration duration;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

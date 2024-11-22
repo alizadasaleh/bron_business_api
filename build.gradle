@@ -60,11 +60,11 @@ dependencies {
     implementation 'org.hibernate.search:hibernate-search-backend-lucene:7.2.1.Final'
     implementation 'org.jboss.logging:jboss-logging:3.6.1.Final'
 
-        // Fixed oauth2 client version - use the same version as spring-boot
+    // Fixed oauth2 client version - use the same version as spring-boot
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 
-    }
+}
 
 test {
     useJUnitPlatform()

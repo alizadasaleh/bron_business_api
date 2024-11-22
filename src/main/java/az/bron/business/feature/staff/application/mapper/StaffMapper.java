@@ -1,5 +1,6 @@
 package az.bron.business.feature.staff.application.mapper;
 
+import az.bron.business.feature.providedservice.application.mapper.ProvidedServiceMapper;
 import az.bron.business.feature.staff.application.model.request.CreateStaffRequest;
 import az.bron.business.feature.staff.application.model.request.UpdateStaffRequest;
 import az.bron.business.feature.staff.application.model.response.CreateStaffResponse;
@@ -7,7 +8,6 @@ import az.bron.business.feature.staff.application.model.response.GetStaffRespons
 import az.bron.business.feature.staff.application.model.response.UpdateStaffResponse;
 import az.bron.business.feature.staff.domain.model.Staff;
 import az.bron.business.feature.staffprovidedservice.application.mapper.StaffProvidedServiceMapper;
-import az.bron.business.feature.providedservice.application.mapper.ProvidedServiceMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

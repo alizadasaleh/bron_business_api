@@ -21,8 +21,7 @@ public class S3Service {
     private String bucketUrl;
 
 
-
-    public S3Service(@Autowired(required = false)AmazonS3 s3client) {
+    public S3Service(@Autowired(required = false) AmazonS3 s3client) {
         this.s3client = s3client;
     }
 

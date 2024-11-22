@@ -7,13 +7,20 @@ import az.bron.business.feature.user.application.model.response.CreateUserRespon
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.UpdateUserResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -50,7 +57,8 @@ public class UserRestController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
-    public ResponseEntity<UpdateUserResponse> update(@PathVariable("id") Long id, @RequestBody UpdateUserRequest request) {
+    public ResponseEntity<UpdateUserResponse> update(@PathVariable("id") Long id,
+                                                     @RequestBody UpdateUserRequest request) {
         var response = userFacade.update(id, request);
 
         return ResponseEntity.ok(response);
@@ -59,6 +67,6 @@ public class UserRestController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     public void delete(@PathVariable("id") Long id) {
-       userFacade.delete(id);
+        userFacade.delete(id);
     }
 }

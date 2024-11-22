@@ -2,7 +2,6 @@ package az.bron.business.auth;
 
 import az.bron.business.config.JwtService;
 import az.bron.business.feature.user.domain.model.User;
-import az.bron.business.feature.user.domain.repository.UserRepository;
 import az.bron.business.feature.user.domain.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,7 +25,8 @@ public class OAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException {
         // Retrieve the user's email from authentication
         OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
         OAuth2User oauthUser = oauthToken.getPrincipal();

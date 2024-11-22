@@ -3,11 +3,10 @@ package az.bron.business.feature.user.domain.service.impl;
 import az.bron.business.feature.user.domain.model.User;
 import az.bron.business.feature.user.domain.repository.UserRepository;
 import az.bron.business.feature.user.domain.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
-       userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
