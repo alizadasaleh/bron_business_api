@@ -18,6 +18,7 @@ import az.bron.business.feature.staff.application.exception.StaffNotFoundExcepti
 import az.bron.business.feature.staff.domain.model.Staff;
 import az.bron.business.feature.staff.domain.service.StaffService;
 import az.bron.business.feature.staffprovidedservice.application.exception.StaffProvidedServiceNotFoundException;
+import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import az.bron.business.feature.staffprovidedservice.domain.service.StaffProvidedServiceService;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -47,38 +48,36 @@ public class AppointmentValidator {
     }
 
     public void validate(CreateAppointmentRequest request) {
-        ProvidedService service = validateProvidedService(request.getProvidedServiceId());
-        Staff staff = validateStaff(request.getStaffId());
-        validateStaffProvidedService(request.getStaffId(), request.getProvidedServiceId());
-        Schedule schedule = determineSchedule(staff);
+
+        Long staffId = request.getStaffId();
+        Long serviceId = request.getProvidedServiceId();
+
+        ProvidedService service = providedServiceService.get(serviceId)
+                .orElseThrow(() -> new ProvidedServiceNotFoundException(serviceId));
+
+        Staff staff = staffService.get(staffId)
+                .orElseThrow(() -> new StaffNotFoundException(staffId));
+
+        StaffProvidedService staffProvidedService =
+                staffProvidedServiceService.getByStaffIdAndProvidedServiceId(staffId, serviceId)
+                .orElseThrow(StaffProvidedServiceNotFoundException::new);
+
+        Schedule schedule = staffScheduleService.getByStaffId(staff.getId())
+                .map(StaffSchedule::getSchedule)
+                .orElse(null);
+
+        if (schedule == null) {
+            schedule = companyScheduleService.getByCompanyId(staff.getCompany().getId())
+                    .map(CompanySchedule::getSchedule)
+                    .orElseThrow(CompanyScheduleNotFoundException::new);
+        }
+
 
         validateWorkingHours(request, schedule, service);
         validateBreakHours(request, schedule, service);
         validateOverlappingAppointments(request, service);
     }
 
-    private ProvidedService validateProvidedService(Long serviceId) {
-        return providedServiceService.get(serviceId)
-                .orElseThrow(() -> new ProvidedServiceNotFoundException(serviceId));
-    }
-
-    private Staff validateStaff(Long staffId) {
-        return staffService.get(staffId)
-                .orElseThrow(() -> new StaffNotFoundException(staffId));
-    }
-
-    private void validateStaffProvidedService(Long staffId, Long serviceId) {
-        staffProvidedServiceService.getByStaffIdAndProvidedServiceId(staffId, serviceId)
-                .orElseThrow(StaffProvidedServiceNotFoundException::new);
-    }
-
-    private Schedule determineSchedule(Staff staff) {
-        return staffScheduleService.getByStaffId(staff.getId())
-                .map(StaffSchedule::getSchedule)
-                .orElseGet(() -> companyScheduleService.getByCompanyId(staff.getCompany().getId())
-                        .map(CompanySchedule::getSchedule)
-                        .orElseThrow(CompanyScheduleNotFoundException::new));
-    }
 
     private void validateWorkingHours(CreateAppointmentRequest request, Schedule schedule, ProvidedService service) {
         DayOfWeek dayOfWeek = request.getStartTime().getDayOfWeek();
