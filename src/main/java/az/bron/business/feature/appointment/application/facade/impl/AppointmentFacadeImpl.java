@@ -84,7 +84,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
 
         appointmentModel.setEndTime(startTime.plusHours(service.getDuration().getHours()).plusMinutes(service.getDuration().getMinutes()));
 
-//        appointmentModel.setUser(authenticationService.getCurrentUser());
+        appointmentModel.setUser(authenticationService.getCurrentUser());
 
 
         Appointment appointment = appointmentService.create(appointmentModel);
