@@ -65,7 +65,10 @@ dependencies {
     implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 
 }
-
+bootJar{
+    version = '1.0.0'
+    destinationDirectory = file("jars")
+}
 test {
     useJUnitPlatform()
 }
