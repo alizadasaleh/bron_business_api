@@ -9,4 +9,10 @@ public class CompanyScheduleNotFoundException extends NotFoundException {
                 "",
                 ErrorDetails.error(314_00, "CompanyScheduleNotFound")));
     }
+
+    public CompanyScheduleNotFoundException(String s) {
+        super(ErrorDetails.of("", "CompanySchedule not found",
+                s,
+                ErrorDetails.error(314_00, "CompanyScheduleNotFound")));
+    }
 }
