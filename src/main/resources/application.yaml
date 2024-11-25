@@ -5,6 +5,9 @@ spring:
     password: ${POSTGRES_PASSWORDS}
     driver-class-name: org.postgresql.Driver
 
+  profiles:
+    active: prod
+
   application:
     name: bron-business
 
@@ -86,6 +89,6 @@ aws:
 security:
   jwt:
     secret-key: ${JWT_SECRET_KEY}
-    expiration-time: 36000
+    expiration-time: 86400
 
 APP_URL: ${APP_URL}
