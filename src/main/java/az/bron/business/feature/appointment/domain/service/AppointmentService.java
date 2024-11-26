@@ -17,4 +17,6 @@ public interface AppointmentService {
     void delete(Long id);
 
     boolean checkIfOverlaps(LocalDateTime startTime, LocalDateTime endTime, Long staffId);
+
+    List<Appointment> findAllByUser(Long userId);
 }

@@ -33,6 +33,8 @@ public class Appointment {
     @JoinColumn(name = "staff_id")
     private Staff staff;
 
+    private Double price;
+
     @ManyToOne
     @JoinColumn(name = "provided_service_id")
     private ProvidedService providedService;
