@@ -1,11 +1,8 @@
 package az.bron.business.feature.slots.application.facade.impl;
 
 import az.bron.business.feature.appointment.application.excpetion.AppointmentNotAvailableException;
-import az.bron.business.feature.appointment.domain.service.AppointmentService;
-import az.bron.business.feature.providedservice.domain.model.Duration;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
 import az.bron.business.feature.providedservice.domain.service.ProvidedServiceService;
-import az.bron.business.feature.schedule.common.models.BreakHours;
 import az.bron.business.feature.schedule.common.models.Schedule;
 import az.bron.business.feature.schedule.common.models.WorkingHours;
 import az.bron.business.feature.schedule.companyschedule.application.exception.CompanyScheduleNotFoundException;
@@ -22,13 +19,10 @@ import az.bron.business.feature.staff.domain.service.StaffService;
 import az.bron.business.feature.staffprovidedservice.application.exception.StaffProvidedServiceNotFoundException;
 import az.bron.business.feature.staffprovidedservice.domain.model.StaffProvidedService;
 import az.bron.business.feature.staffprovidedservice.domain.service.StaffProvidedServiceService;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service

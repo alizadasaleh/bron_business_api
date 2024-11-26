@@ -86,6 +86,6 @@ aws:
 security:
   jwt:
     secret-key: ${JWT_SECRET_KEY}
-    expiration-time: 36000
+    expiration-time: 36000000
 
 APP_URL: ${APP_URL}

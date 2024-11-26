@@ -4,7 +4,6 @@ import az.bron.business.feature.slots.application.facade.SlotsFacade;
 import az.bron.business.feature.slots.application.model.Slot;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Min;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

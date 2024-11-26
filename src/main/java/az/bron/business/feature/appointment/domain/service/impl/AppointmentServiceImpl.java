@@ -44,4 +44,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.checkIfOverlaps(startTime, endTime, staffId);
     }
 
+    @Override
+    public List<Appointment> findAllByUser(Long userId) {
+        return appointmentRepository.findAllByUserId(userId);
+    }
+
 }
