@@ -21,5 +21,9 @@ public interface AppointmentMapper {
 
     UpdateAppointmentResponse toUpdateResponse(Appointment appointment);
 
+    @Mapping(target = "companyId",source = "providedService.company.id")
+    @Mapping(target = "companyName", source = "providedService.company.name")
+    @Mapping(target = "companyAddressName", source = "providedService.company.contact.address.street")
+    @Mapping(target = "serviceName", source = "providedService.name")
     GetAppointmentResponse toGetResponse(Appointment appointment);
 }
