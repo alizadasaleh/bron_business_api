@@ -126,7 +126,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
 
     @Override
     public List<GetAppointmentResponse> getAll() {
-        var result = appointmentService.getAll();
+        var result = appointmentService.findAllByUser(authenticationService.getCurrentUser().getId());
 
         return result.stream()
                 .map(appointmentMapper::toGetResponse)

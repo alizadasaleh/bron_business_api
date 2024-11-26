@@ -6,6 +6,7 @@ import az.bron.business.feature.user.application.model.request.RegisterUserReque
 import az.bron.business.feature.user.application.model.response.GetUserResponse;
 import az.bron.business.feature.user.application.model.response.LoginResponse;
 import az.bron.business.feature.user.application.model.response.RegisterUserResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/me")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<GetUserResponse> authenticatedUser() {
         return ResponseEntity.ok(authenticationFacade.getCurrentUser());
     }

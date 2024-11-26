@@ -6,6 +6,7 @@ import az.bron.business.feature.appointment.application.model.request.UpdateAppo
 import az.bron.business.feature.appointment.application.model.response.CreateAppointmentResponse;
 import az.bron.business.feature.appointment.application.model.response.GetAppointmentResponse;
 import az.bron.business.feature.appointment.application.model.response.UpdateAppointmentResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/appointments")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@SecurityRequirement(name = "bearerAuth")
 public class AppointmentRestController {
     private final AppointmentFacade appointmentFacade;
 
