@@ -1,7 +1,7 @@
 package az.bron.business.feature.appointment.application.facade.impl;
 
 import az.bron.business.feature.appointment.application.excpetion.AppointmentNotAvailableException;
-import az.bron.business.feature.appointment.application.excpetion.AppointmentNotFount;
+import az.bron.business.feature.appointment.application.excpetion.AppointmentNotFound;
 import az.bron.business.feature.appointment.application.facade.AppointmentFacade;
 import az.bron.business.feature.appointment.application.mapper.AppointmentMapper;
 import az.bron.business.feature.appointment.application.model.request.CreateAppointmentRequest;
@@ -101,7 +101,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         var existingAppointment = appointmentService.get(id);
 
         if (existingAppointment.isEmpty()) {
-            throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
+            throw new AppointmentNotFound("Appointment with id " + id + " does not exist");
         }
 
         appointmentModel.setId(id);
@@ -116,7 +116,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         var existingAppointment = appointmentService.get(id);
 
         if (existingAppointment.isEmpty()) {
-            throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
+            throw new AppointmentNotFound("Appointment with id " + id + " does not exist");
         }
 
         var appointment = existingAppointment.get();
@@ -138,7 +138,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         var existingAppointment = appointmentService.get(id);
 
         if (existingAppointment.isEmpty()) {
-            throw new AppointmentNotFount("Appointment with id " + id + " does not exist");
+            throw new AppointmentNotFound("Appointment with id " + id + " does not exist");
         }
 
         appointmentService.delete(id);

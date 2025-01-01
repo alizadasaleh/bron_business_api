@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORDS}
+    url: jdbc:postgresql://localhost:5432/bron_business_local
+    username: bron_user
+    password: bron_password
     driver-class-name: org.postgresql.Driver
 
   application:
@@ -13,8 +13,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: mock-google-client-id
+            client-secret: mock-google-client-secret
             scope:
               - profile
               - email
@@ -27,6 +27,7 @@ spring:
             token-uri: https://oauth2.googleapis.com/token
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
             user-name-attribute: sub
+
   mvc:
     problemdetails:
       enabled: true
@@ -36,7 +37,6 @@ spring:
       ddl-auto: update
     show-sql: true
     properties:
-
       hibernate:
         search:
           enabled: true
@@ -50,19 +50,20 @@ spring:
             configurer: class:az.bron.config.AnalysisConfigurer
         format_sql: true
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
     jackson:
       serialization:
         write-dates-as-timestamps: false
 
   mail:
-    host: smtp.gmail.com
+    host: smtp.example.com
     port: 587
-    username: ${GMAIL_SMTP_USERNAME}
-    password: ${GMAIL_SMTP_PASSWORD}
+    username: mock-email@example.com
+    password: mockpassword
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-      ssl.trust: smtp.gmail.com
+      ssl.trust: smtp.example.com
 
 logging:
   file:
@@ -71,21 +72,22 @@ logging:
     az.bron.business: WARN
 
 server:
-  port: ${SERVER_PORT}
+  port: 8080
+
 debug: on
 
 aws:
   access:
-    key: ${AWS_ACCESS_KEY}
+    key: mock-access-key
   secret:
-    key: ${AWS_SECRET_KEY}
+    key: mock-secret-key
   bucket:
-    name: ${AWS_S3_BUCKET_NAME}
-    url: ${AWS_S3_BUCKET_URL}
+    name: mock-bucket
+  url: http://localhost:4566/mock-s3
 
 security:
   jwt:
-    secret-key: ${JWT_SECRET_KEY}
+    secret-key: f0e89e404f04f47754fbcf31267506750ce1815e45bc37bbe6dbb907e2a0c68a
     expiration-time: 36000000
 
-APP_URL: ${APP_URL}
+APP_URL: http://localhost:8080
