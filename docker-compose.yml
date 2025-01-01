@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: springboot-app
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - db
     environment:
@@ -18,7 +18,7 @@ services:
       POSTGRES_URL: jdbc:postgresql://db:5432/bron_business_local
       POSTGRES_USERNAME: bron_user
       POSTGRES_PASSWORD: bron_password
-      SERVER_PORT: 8080
+      SERVER_PORT: 8081
       GMAIL_SMTP_USERNAME: dummy@gmail.com
       GMAIL_SMTP_PASSWORD: dummy_password
       AWS_ACCESS_KEY: dummy_access_key
@@ -30,6 +30,9 @@ services:
 
 
   db:
+    build:
+      context: .
+      dockerfile: db.Dockerfile
     image: postgres:16
     container_name: postgres-db
     ports:
