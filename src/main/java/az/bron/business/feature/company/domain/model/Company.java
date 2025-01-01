@@ -51,9 +51,6 @@ public class Company extends Auditable<String> {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private Double averageRating ;
-    private Integer totalReviews;
-
     @Embedded
     private Contact contact;
 
