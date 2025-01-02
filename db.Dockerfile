@@ -1,0 +1,4 @@
+FROM library/postgres
+ENV POSTGRES_USER bron_user
+ENV POSTGRES_PASSWORD bron_password
+ENV POSTGRES_DB bron_business_local
