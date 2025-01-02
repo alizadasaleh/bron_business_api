@@ -7,28 +7,43 @@ services:
       dockerfile: Dockerfile
     container_name: springboot-app
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - db
-    env_file:
-      - .env
     environment:
       SPRING_PROFILES_ACTIVE: local
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
-      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORDS}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/bron_business_local
+      SPRING_DATASOURCE_USERNAME: bron_user
+      SPRING_DATASOURCE_PASSWORD: bron_password
+      POSTGRES_URL: jdbc:postgresql://db:5432/bron_business_local
+      POSTGRES_USERNAME: bron_user
+      POSTGRES_PASSWORD: bron_password
+      SERVER_PORT: 8081
+      GMAIL_SMTP_USERNAME: dummy@gmail.com
+      GMAIL_SMTP_PASSWORD: dummy_password
+      AWS_ACCESS_KEY: dummy_access_key
+      AWS_SECRET_KEY: dummy_secret_key
+      AWS_S3_BUCKET_NAME: dummy_bucket
+      AWS_S3_BUCKET_URL: https://dummy_bucket.s3.amazonaws.com
+      JWT_SECRET_KEY: dummy_secret
+      APP_URL: http://localhost:8080
+
 
   db:
+    build:
+      context: .
+      dockerfile: db.Dockerfile
     image: postgres:16
     container_name: postgres-db
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USERNAME}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORDS}
+      POSTGRES_DB: bron_business_local
+      POSTGRES_USER: bron_user
+      POSTGRES_PASSWORD: bron_password
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:
