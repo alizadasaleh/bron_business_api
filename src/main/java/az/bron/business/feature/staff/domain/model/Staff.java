@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +36,10 @@ public class Staff extends Auditable<Long> {
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
+
+    @Transient
+    private Long companyId;
+
 
     @OneToMany(mappedBy = "staff", fetch = FetchType.LAZY)
     private List<StaffProvidedService> staffServices;

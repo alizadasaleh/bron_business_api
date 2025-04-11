@@ -50,7 +50,6 @@ public class AppointmentRestController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<UpdateAppointmentResponse> update(@PathVariable("id") Long id,
                                                             @RequestBody UpdateAppointmentRequest request) {

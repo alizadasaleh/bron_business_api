@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,8 +35,8 @@ public class StaffRestController {
     private final StaffFacade staffFacade;
 
     @GetMapping
-    public ResponseEntity<List<GetStaffResponse>> getStaff() {
-        List<GetStaffResponse> response = staffFacade.getAll();
+    public ResponseEntity<List<GetStaffResponse>> getStaff(@ModelAttribute StaffFilter filter) {
+        List<GetStaffResponse> response = staffFacade.getAll(filter);
 
         return ResponseEntity.ok(response);
     }
