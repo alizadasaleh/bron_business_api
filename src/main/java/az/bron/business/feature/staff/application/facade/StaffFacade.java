@@ -5,6 +5,7 @@ import az.bron.business.feature.staff.application.model.request.UpdateStaffReque
 import az.bron.business.feature.staff.application.model.response.CreateStaffResponse;
 import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import az.bron.business.feature.staff.application.model.response.UpdateStaffResponse;
+import az.bron.business.feature.staff.presentation.controller.StaffFilter;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +17,7 @@ public interface StaffFacade {
 
     GetStaffResponse get(Long id);
 
-    List<GetStaffResponse> getAll();
+    List<GetStaffResponse> getAll(StaffFilter filter);
 
     void delete(Long id);
 

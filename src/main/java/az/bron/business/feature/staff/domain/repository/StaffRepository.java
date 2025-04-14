@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StaffRepository extends JpaRepository<Staff, Long> {
-    List<Staff> findAllByCompanyId(Long companyId);
+//    List<Staff> findAllByCompanyId(Long companyId);
 
     @Modifying
     @Query("UPDATE Staff m SET m.profileImageUrl = :fileName WHERE m.id = :id")
