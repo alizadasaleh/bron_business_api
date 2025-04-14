@@ -72,7 +72,7 @@ logging:
     az.bron.business: WARN
 
 server:
-  port: 8080
+  port: 8088
 
 debug: on
 
@@ -83,7 +83,7 @@ aws:
     key: mock-secret-key
   bucket:
     name: mock-bucket
-  url: http://localhost:4566/mock-s3
+    url: http://localhost:4566/mock-s3
 
 security:
   jwt:
