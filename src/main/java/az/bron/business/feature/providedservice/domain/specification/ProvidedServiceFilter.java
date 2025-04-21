@@ -6,4 +6,6 @@ import lombok.Data;
 @Data
 public class ProvidedServiceFilter {
     private Gender gender;
+    private Double minPrice;
+    private Double maxPrice;
 }
