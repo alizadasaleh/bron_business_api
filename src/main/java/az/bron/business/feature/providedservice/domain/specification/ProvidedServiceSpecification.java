@@ -20,6 +20,18 @@ public interface ProvidedServiceSpecification {
                         filter.getGender()
                 ));
             }
+            if (filter.getMinPrice() != null) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(
+                        root.get("price"),
+                        filter.getMinPrice()
+                ));
+            }
+            if (filter.getMaxPrice() != null) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(
+                        root.get("price"),
+                        filter.getMaxPrice()
+                ));
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
