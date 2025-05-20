@@ -44,6 +44,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
         return companyMapper.toCreateResponse(company);
     }
 
+
     @Override
     public UpdateCompanyResponse update(Long id, UpdateCompanyRequest request) {
         var companyModel = companyMapper.toModel(request);
