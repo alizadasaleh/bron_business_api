@@ -1,6 +1,8 @@
 package az.bron.business.feature.company.domain.model;
 
 import az.bron.business.common.Auditable;
+import az.bron.business.common.model.Location;
+import az.bron.business.feature.company.domain.model.address.Address;
 import az.bron.business.feature.company.domain.model.contact.Contact;
 import az.bron.business.feature.providedservice.domain.model.Gender;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
@@ -47,6 +49,9 @@ public class Company extends Auditable<String> {
     private String logoImageUrl;
     private String profileImageUrl;
     private String backgroundImageUrl;
+
+    @Embedded
+    private Address address;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;

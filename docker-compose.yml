@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: springboot-app
     ports:
-      - "8081:8081"
+      - "8082:8081"
     depends_on:
       - db
     environment:
@@ -26,14 +26,14 @@ services:
       AWS_S3_BUCKET_NAME: dummy_bucket
       AWS_S3_BUCKET_URL: https://dummy_bucket.s3.amazonaws.com
       JWT_SECRET_KEY: dummy_secret
-      APP_URL: http://localhost:8080
+      APP_URL: http://localhost:8081
 
 
   db:
     build:
       context: .
       dockerfile: db.Dockerfile
-    image: postgres:16
+    image: postgres:17
     container_name: postgres-db
     ports:
       - "5433:5432"

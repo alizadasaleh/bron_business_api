@@ -10,5 +10,4 @@ public class CreateContactResponse {
     private String website;
     private String additionalPhoneNumber;
     private String additionalEmail;
-    private CreateAddressResponse address;
 }
