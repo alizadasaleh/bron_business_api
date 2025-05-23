@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -70,8 +71,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> search(String query) {
-        return companySearchRepository.searchCompanies(query);
+    public SearchResult<Company> search(String query, int page, int size) {
+        return companySearchRepository.searchCompanies(query, page, size);
     }
 
     @Override
