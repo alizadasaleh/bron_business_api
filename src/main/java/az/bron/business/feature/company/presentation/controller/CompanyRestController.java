@@ -10,8 +10,6 @@ import az.bron.business.feature.company.application.model.response.CreateCompany
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -114,7 +114,7 @@ public class CompanyRestController {
     @GetMapping("/search")
     public ResponseEntity<Page<CompanySearchResponse>> search(@RequestParam String query,
                                                               @RequestParam(defaultValue = "0") int page,
-                                                              @RequestParam(defaultValue = "10") int size ){
+                                                              @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(companyFacade.search(query, page, size));
     }
 
