@@ -3,6 +3,8 @@ package az.bron.business.feature.company.domain.service;
 import az.bron.business.feature.company.domain.model.Company;
 import java.util.List;
 import java.util.Optional;
+
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,5 +29,5 @@ public interface CompanyService {
 
     void updateLogoImageUrl(String fileName, Long id);
 
-    List<Company> search(String query);
+    SearchResult<Company> search(String query, int page, int size);
 }

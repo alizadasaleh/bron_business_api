@@ -4,8 +4,10 @@ import az.bron.business.feature.company.domain.model.Company;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.mapper.orm.Search;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class CompanySearchRepository {
@@ -16,7 +18,7 @@ public class CompanySearchRepository {
         this.entityManager = entityManager;
     }
 
-    public List<Company> searchCompanies(String keyword) {
+    public SearchResult<Company> searchCompanies(String keyword, int page, int size) {
         Session session = entityManager.unwrap(Session.class);
 
         return Search.session(session)
@@ -24,6 +26,6 @@ public class CompanySearchRepository {
                 .where(f -> f.match()
                         .fields("name", "description")
                         .matching(keyword))
-                .fetchHits(20);
+                .fetch(page, size);
     }
 }

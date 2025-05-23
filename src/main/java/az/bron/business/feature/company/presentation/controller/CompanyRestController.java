@@ -112,8 +112,10 @@ public class CompanyRestController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<CompanySearchResponse>> search(@RequestParam String query) {
-        return ResponseEntity.ok(companyFacade.search(query));
+    public ResponseEntity<Page<CompanySearchResponse>> search(@RequestParam String query,
+                                                              @RequestParam(defaultValue = "0") int page,
+                                                              @RequestParam(defaultValue = "10") int size ){
+        return ResponseEntity.ok(companyFacade.search(query, page, size));
     }
 
 

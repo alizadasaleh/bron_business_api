@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -143,8 +144,23 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public List<CompanySearchResponse> search(String query) {
-        return companyMapper.toCompanySearchResponse(companyService.search(query));
+    public Page<CompanySearchResponse> search(String query, int page, int size) {
+        log.info("Searching companies with query='{}', page={}, size={}", query, page, size);
 
+        SearchResult<Company> searchResult = companyService.search(query, page, size);
+        long totalHits = searchResult.total().hitCount();
+
+        log.debug("Found {} total hits for query '{}'", totalHits, query);
+
+        List<CompanySearchResponse> responses = companyMapper.toCompanySearchResponse(searchResult.hits());
+
+        log.info("Search finished: query='{}', totalHits={}, took={} ms",
+                query, totalHits,searchResult.took());
+
+        return new PageImpl<>(
+                responses,
+                PageRequest.of(page, size),
+                totalHits
+        );
     }
 }

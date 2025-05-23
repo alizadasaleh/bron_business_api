@@ -9,7 +9,7 @@ import az.bron.business.feature.company.application.model.response.CreateCompany
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import java.io.IOException;
-import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,5 +31,5 @@ public interface CompanyFacade {
 
     void uploadBackgroundImage(Long id, MultipartFile file) throws IOException;
 
-    List<CompanySearchResponse> search(String query);
+    Page<CompanySearchResponse> search(String query, int page, int size);
 }
