@@ -1,6 +1,7 @@
 package az.bron.business.feature.company.application.facade;
 
 import az.bron.business.common.application.model.request.SortDirection;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
@@ -31,5 +32,5 @@ public interface CompanyFacade {
 
     void uploadBackgroundImage(Long id, MultipartFile file) throws IOException;
 
-    Page<CompanySearchResponse> search(String query, int page, int size);
+    Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size);
 }

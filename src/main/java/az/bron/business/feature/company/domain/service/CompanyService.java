@@ -1,7 +1,8 @@
 package az.bron.business.feature.company.domain.service;
 
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.domain.model.Company;
-import java.util.List;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import java.util.Optional;
 
 import org.hibernate.search.engine.search.query.SearchResult;
@@ -29,5 +30,5 @@ public interface CompanyService {
 
     void updateLogoImageUrl(String fileName, Long id);
 
-    SearchResult<Company> search(String query, int page, int size);
+    SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size);
 }

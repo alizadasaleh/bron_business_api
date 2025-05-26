@@ -1,7 +1,9 @@
 package az.bron.business.feature.company.domain.service.impl;
 
 import az.bron.business.common.model.Location;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.domain.model.Company;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
 import az.bron.business.feature.company.domain.repository.CompanySearchRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
@@ -72,8 +74,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public SearchResult<Company> search(String query, Location location, int page, int size) {
-        return companySearchRepository.searchCompanies(query, location, page, size);
+    public SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size) {
+        return companySearchRepository.searchCompanies(companySearchFilter, page, size);
     }
 
     @Override
