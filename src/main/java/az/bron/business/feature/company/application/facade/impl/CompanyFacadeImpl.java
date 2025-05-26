@@ -5,6 +5,7 @@ import az.bron.business.config.S3Service;
 import az.bron.business.feature.company.application.exception.CompanyNotFoundException;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.mapper.CompanyMapper;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
@@ -13,6 +14,7 @@ import az.bron.business.feature.company.application.model.response.CreateCompany
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import az.bron.business.feature.company.domain.service.CompanyService;
 import java.io.IOException;
 import java.util.List;
@@ -144,18 +146,18 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public Page<CompanySearchResponse> search(String query, int page, int size) {
-        log.info("Searching companies with query='{}', page={}, size={}", query, page, size);
+    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size) {
+        log.info("Searching companies with query='{}', page={}, size={}", companySearchFilter, page, size);
 
-        SearchResult<Company> searchResult = companyService.search(query, page, size);
+        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size);
         long totalHits = searchResult.total().hitCount();
 
-        log.debug("Found {} total hits for query '{}'", totalHits, query);
+        log.debug("Found {} total hits for query '{}'", totalHits, companySearchFilter);
 
         List<CompanySearchResponse> responses = companyMapper.toCompanySearchResponse(searchResult.hits());
 
         log.info("Search finished: query='{}', totalHits={}, took={} ms",
-                query, totalHits,searchResult.took());
+                companySearchFilter, totalHits,searchResult.took());
 
         return new PageImpl<>(
                 responses,

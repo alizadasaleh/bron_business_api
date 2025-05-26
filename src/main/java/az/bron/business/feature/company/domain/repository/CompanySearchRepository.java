@@ -1,12 +1,12 @@
 package az.bron.business.feature.company.domain.repository;
 
 import az.bron.business.common.model.Location;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.search.engine.search.query.SearchResult;
-import org.hibernate.search.engine.spatial.DistanceUnit;
 import org.hibernate.search.engine.spatial.GeoPoint;
 import org.hibernate.search.mapper.orm.Search;
 import org.springframework.stereotype.Repository;
@@ -21,8 +21,10 @@ public class CompanySearchRepository {
         this.entityManager = entityManager;
     }
 
-    public SearchResult<CompanyWithDistance> searchCompanies(String keyword, Location location, int page, int size) {
+    public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter, int page, int size) {
         Session session = entityManager.unwrap(Session.class);
+        Location location = searchFilter.getLocation();
+        String query = searchFilter.getQuery();
 
         return Search.session(session)
                 .search(Company.class)
@@ -30,12 +32,19 @@ public class CompanySearchRepository {
                         .from(f.entity(),
                                 f.distance("location", GeoPoint.of(location.getLatitude(),location.getLatitude())))
                         .as(CompanyWithDistance::new))
-                .where(f -> f.bool()
-                        .must(f.match()
+                .where(f -> {
+                    var bool = f.bool();
+
+                    if (query != null && !query.isBlank()) {
+                        bool.must(f.match()
                                 .fields("name", "description")
-                                .matching(keyword)
-                            )
-                        )
+                                .matching(query));
+                    }
+
+                    // Add other filters if needed
+
+                    return bool;
+                })
                 .sort(f -> f.distance("location", location.getLatitude(), location.getLongitude()))
                 .fetch(page, size);
     }
