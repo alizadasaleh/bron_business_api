@@ -32,5 +32,5 @@ public interface CompanyFacade {
 
     void uploadBackgroundImage(Long id, MultipartFile file) throws IOException;
 
-    Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size);
+    Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size, SortCompanyBy sortCompanyBy, SortDirection sortDir);
 }
