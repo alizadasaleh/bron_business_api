@@ -26,15 +26,24 @@ public class CompanySearchRepository {
 
     public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter, int page, int size, SortDirection sortDir, SortCompanyBy sortCompanyBy) {
         Session session = entityManager.unwrap(Session.class);
-        Location location = searchFilter.getLocation();
+        Location location = new Location();
+        location.setLatitude(searchFilter.getLatitude());
+        location.setLongitude(searchFilter.getLongitude());
         String query = searchFilter.getQuery();
 
         return Search.session(session)
                 .search(Company.class)
-                .select(f -> f.composite()
-                        .from(f.entity(),
-                                f.distance("location", GeoPoint.of(location.getLatitude(), location.getLatitude())))
-                        .as(CompanyWithDistance::new))
+                .select(f -> {
+                    if (location != null) {
+                        return f.composite()
+                                .from(f.entity(),
+                                        f.distance("location", GeoPoint.of(location.getLatitude(), location.getLongitude())))
+                                .as(CompanyWithDistance::new);
+                    } else {
+                        return f.composite()
+                                .from(f.entity())
+                                .as(entity -> new CompanyWithDistance(entity, null));
+                    }})
                 .where(f -> {
                     var bool = f.bool();
 
@@ -48,7 +57,7 @@ public class CompanySearchRepository {
                         bool.must(f.match().fields("gender").matching(searchFilter.getGender()));
                     }
 
-                    if (searchFilter.getRadius() != null) {
+                    if (searchFilter.getRadius() != null && searchFilter.getLongitude() != null && searchFilter.getLatitude() != null) {
                         bool.must(f.spatial()
                                 .within()
                                 .field("location")

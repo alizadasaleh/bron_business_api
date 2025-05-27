@@ -8,7 +8,8 @@ import lombok.Data;
 public class CompanySearchFilter {
     private String query;
     private Double radius;
-    private Location location;
+    private Double latitude;
+    private Double longitude;
     private Gender gender;
 
 }
