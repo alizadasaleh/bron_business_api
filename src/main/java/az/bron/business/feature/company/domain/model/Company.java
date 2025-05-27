@@ -51,9 +51,7 @@ public class Company extends Auditable<String> {
     private String profileImageUrl;
     private String backgroundImageUrl;
 
-    @IndexedEmbedded(includePaths = {
-            "location.latitude", "location.longitude",
-    })
+    @IndexedEmbedded
     @Embedded
     private Address address;
 
