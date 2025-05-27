@@ -146,10 +146,10 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size) {
+    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size, SortCompanyBy sortCompanyBy, SortDirection sortDir) {
         log.info("Searching companies with query='{}', page={}, size={}", companySearchFilter, page, size);
 
-        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size);
+        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size, sortCompanyBy, sortDir);
         long totalHits = searchResult.total().hitCount();
 
         log.debug("Found {} total hits for query '{}'", totalHits, companySearchFilter);

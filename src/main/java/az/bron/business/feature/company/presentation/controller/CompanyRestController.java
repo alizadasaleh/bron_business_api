@@ -119,7 +119,7 @@ public class CompanyRestController {
                                                               @RequestParam(defaultValue = "10") int size,
                                                               @RequestParam SortCompanyBy sortCompanyBy,
                                                               @RequestParam SortDirection sortDir) {
-        return ResponseEntity.ok(companyFacade.search(companySearchFilter, page, size));
+        return ResponseEntity.ok(companyFacade.search(companySearchFilter, page, size, sortCompanyBy, sortDir));
     }
 
 
