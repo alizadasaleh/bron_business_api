@@ -1,0 +1,253 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="liquibase (generated)" id="1748523668151-1">
+        <createTable tableName="appointments">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="appointments_pkey"/>
+            </column>
+            <column name="end_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="price" type="FLOAT8"/>
+            <column name="start_time" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="provided_service_id" type="BIGINT"/>
+            <column name="staff_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-2">
+        <createTable tableName="categories">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="categories_pkey"/>
+            </column>
+            <column name="cover_image_url" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-3">
+        <createTable tableName="companies">
+            <column autoIncrement="true" name="id" startWith="2" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="companies_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="latitude" type="FLOAT8"/>
+            <column name="longitude" type="FLOAT8"/>
+            <column name="postal_code" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="background_image_url" type="VARCHAR(255)"/>
+            <column name="additional_email" type="VARCHAR(255)"/>
+            <column name="additional_phone_number" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="website" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="logo_image_url" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="profile_image_url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-4">
+        <createTable tableName="company_schedules">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="company_schedules_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="schedule" type="JSON"/>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-5">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" startWith="4" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="roles_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-6">
+        <createTable tableName="services">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="services_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_by" type="BIGINT"/>
+            <column name="cover_image_url" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="hours" type="INTEGER"/>
+            <column name="minutes" type="INTEGER"/>
+            <column name="gender" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="category_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-7">
+        <createTable tableName="staff_services">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="staff_services_pkey"/>
+            </column>
+            <column name="cover_image_url" type="VARCHAR(255)"/>
+            <column name="price" type="FLOAT8"/>
+            <column name="service_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="staff_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-8">
+        <createTable tableName="staffs">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="staffs_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="updated_by" type="BIGINT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="profile_image_url" type="VARCHAR(255)"/>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-9">
+        <createTable tableName="staff_schedules">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="staff_schedules_pkey"/>
+            </column>
+            <column name="schedule" type="JSON"/>
+            <column name="staff_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-10">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="auth_provider" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueBoolean="false" name="email_verified" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="full_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column defaultValueBoolean="false" name="phone_number_verified" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="verification_code" type="VARCHAR(64)"/>
+            <column name="role_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-11">
+        <createTable tableName="confirmation_token">
+            <column name="token_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="confirmation_token_pkey"/>
+            </column>
+            <column name="confirmation_token" type="VARCHAR(255)"/>
+            <column name="created_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-12">
+        <addUniqueConstraint columnNames="company_id" constraintName="uk_ssc2yrbtt9ol8pt53lxfry3vj" tableName="company_schedules"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-13">
+        <addUniqueConstraint columnNames="name" constraintName="uk_ofx66keruapi6vyqpv6f2or37" tableName="roles"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-14">
+        <addUniqueConstraint columnNames="staff_id" constraintName="uk_cin42q4gsqnj3i2a8apwij7a0" tableName="staff_schedules"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-15">
+        <addUniqueConstraint columnNames="email" constraintName="uk_6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-16">
+        <addUniqueConstraint columnNames="phone_number" constraintName="uk_9q63snka3mdh91as4io72espi" tableName="users"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-17">
+        <addUniqueConstraint columnNames="user_id" constraintName="uk_3rtt9efhavjo2dfx9f763sypm" tableName="confirmation_token"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-18">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1" sequenceName="confirmation_token_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-19">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1" sequenceName="users_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-20">
+        <addForeignKeyConstraint baseColumnNames="provided_service_id" baseTableName="appointments" constraintName="fk3xlgr286kbjult5k64jh9i0v1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="services" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-21">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="services" constraintName="fk5iw3ff9rsayxpvu9an7wdedc6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-22">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="staffs" constraintName="fk66twklpk662k9jni0iq5iqw3y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-23">
+        <addForeignKeyConstraint baseColumnNames="staff_id" baseTableName="staff_services" constraintName="fk6bmv2ekg5qj1xn5y865s76ecr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="staffs" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-24">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="appointments" constraintName="fk886ced1atxgvnf1o3oxtj5m4s" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-25">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="confirmation_token" constraintName="fkah4p1rycwibwm6s9bsyeckq51" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-26">
+        <addForeignKeyConstraint baseColumnNames="staff_id" baseTableName="staff_schedules" constraintName="fkfpilov6l4kpscnvhr1r16jwul" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="staffs" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-27">
+        <addForeignKeyConstraint baseColumnNames="staff_id" baseTableName="appointments" constraintName="fkhbb1pu0kgq1nw9oxuk8q8mv3a" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="staffs" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-28">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="services" constraintName="fkhv7d5p40ipfq91065vlmqk8xv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-29">
+        <addForeignKeyConstraint baseColumnNames="service_id" baseTableName="staff_services" constraintName="fkjdproc9qwf981diinc4255rk9" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="services" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-30">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="company_schedules" constraintName="fkm3ajhync1pils3uxj02cqtdt6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="companies" validate="true"/>
+    </changeSet>
+    <changeSet author="liquibase (generated)" id="1748523668151-31">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="users" constraintName="fkp56c1712k691lhsyewcssf40f" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
