@@ -64,6 +64,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 
+    implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.11'
+
 }
 bootJar{
     version = '1.0.0'

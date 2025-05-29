@@ -15,7 +15,5 @@ public class Contact {
     private String additionalPhoneNumber;
     private String additionalEmail;
 
-    @Embedded
-    private Address address;
 }
 

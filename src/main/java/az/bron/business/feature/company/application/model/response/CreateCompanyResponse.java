@@ -1,5 +1,6 @@
 package az.bron.business.feature.company.application.model.response;
 
+import az.bron.business.feature.company.application.model.response.address.CreateAddressResponse;
 import az.bron.business.feature.company.application.model.response.contact.CreateContactResponse;
 import lombok.Data;
 
@@ -9,4 +10,5 @@ public class CreateCompanyResponse {
     private String name;
     private String description;
     private CreateContactResponse contact;
+    private CreateAddressResponse address;
 }
