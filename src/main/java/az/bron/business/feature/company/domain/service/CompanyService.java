@@ -2,7 +2,7 @@ package az.bron.business.feature.company.domain.service;
 
 import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
-import az.bron.business.feature.company.application.model.request.SortCompanyBy;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import java.util.Optional;
@@ -32,5 +32,5 @@ public interface CompanyService {
 
     void updateLogoImageUrl(String fileName, Long id);
 
-    SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size, SortCompanyBy sortCompanyBy, SortDirection sortDir);
+    SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size, SearchSortCompanyBy searchSortCompanyBy, SortDirection sortDir);
 }

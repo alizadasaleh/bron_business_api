@@ -7,6 +7,7 @@ import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.mapper.CompanyMapper;
 import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
 import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
@@ -146,10 +147,10 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size, SortCompanyBy sortCompanyBy, SortDirection sortDir) {
+    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size, SearchSortCompanyBy searchSortCompanyBy, SortDirection sortDir) {
         log.info("Searching companies with query='{}', page={}, size={}", companySearchFilter, page, size);
 
-        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size, sortCompanyBy, sortDir);
+        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size, searchSortCompanyBy, sortDir);
         long totalHits = searchResult.total().hitCount();
 
         log.debug("Found {} total hits for query '{}'", totalHits, companySearchFilter);
