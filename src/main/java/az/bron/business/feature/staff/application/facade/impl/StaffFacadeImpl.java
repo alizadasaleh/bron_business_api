@@ -10,6 +10,7 @@ import az.bron.business.feature.staff.application.model.response.CreateStaffResp
 import az.bron.business.feature.staff.application.model.response.GetStaffResponse;
 import az.bron.business.feature.staff.application.model.response.UpdateStaffResponse;
 import az.bron.business.feature.staff.domain.service.StaffService;
+import az.bron.business.feature.staff.presentation.controller.StaffFilter;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -69,8 +70,8 @@ public class StaffFacadeImpl implements StaffFacade {
     }
 
     @Override
-    public List<GetStaffResponse> getAll() {
-        var result = staffService.getAll();
+    public List<GetStaffResponse> getAll(StaffFilter filter) {
+        var result = staffService.getAll(filter);
 
         return result.stream()
                 .map(staffMapper::toGetResponse)

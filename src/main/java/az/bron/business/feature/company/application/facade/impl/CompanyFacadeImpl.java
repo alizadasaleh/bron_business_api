@@ -5,7 +5,9 @@ import az.bron.business.config.S3Service;
 import az.bron.business.feature.company.application.exception.CompanyNotFoundException;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.mapper.CompanyMapper;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
 import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
@@ -13,6 +15,7 @@ import az.bron.business.feature.company.application.model.response.CreateCompany
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import az.bron.business.feature.company.domain.service.CompanyService;
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +47,7 @@ public class CompanyFacadeImpl implements CompanyFacade {
 
         return companyMapper.toCreateResponse(company);
     }
+
 
     @Override
     public UpdateCompanyResponse update(Long id, UpdateCompanyRequest request) {
@@ -142,8 +147,23 @@ public class CompanyFacadeImpl implements CompanyFacade {
     }
 
     @Override
-    public List<CompanySearchResponse> search(String query) {
-        return companyMapper.toCompanySearchResponse(companyService.search(query));
+    public Page<CompanySearchResponse> search(CompanySearchFilter companySearchFilter, int page, int size, SearchSortCompanyBy searchSortCompanyBy, SortDirection sortDir) {
+        log.info("Searching companies with query='{}', page={}, size={}", companySearchFilter, page, size);
 
+        SearchResult<CompanyWithDistance> searchResult = companyService.search(companySearchFilter, page, size, searchSortCompanyBy, sortDir);
+        long totalHits = searchResult.total().hitCount();
+
+        log.debug("Found {} total hits for query '{}'", totalHits, companySearchFilter);
+
+        List<CompanySearchResponse> responses = companyMapper.toCompanySearchResponse(searchResult.hits());
+
+        log.info("Search finished: query='{}', totalHits={}, took={} ms",
+                companySearchFilter, totalHits,searchResult.took());
+
+        return new PageImpl<>(
+                responses,
+                PageRequest.of(page, size),
+                totalHits
+        );
     }
 }

@@ -8,8 +8,10 @@ import az.bron.business.feature.company.application.model.response.GetCompanyRes
 import az.bron.business.feature.company.application.model.response.GetCompanyWithDetailsResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import az.bron.business.feature.company.domain.model.Company;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface CompanyMapper {
@@ -27,5 +29,11 @@ public interface CompanyMapper {
 
     List<GetCompanyWithDetailsResponse> toGetWithDetailsResponse(List<Company> company);
 
-    List<CompanySearchResponse> toCompanySearchResponse(List<Company> search);
+    @Mapping(source = "company.id", target = "id")
+    @Mapping(source = "company.name", target = "name")
+    @Mapping(source = "distance", target = "distance")
+    @Mapping(source = "company.address.location", target = "location")
+    CompanySearchResponse toSearchResponse(CompanyWithDistance companyWithDistance);
+
+    List<CompanySearchResponse> toCompanySearchResponse(List<CompanyWithDistance> search);
 }

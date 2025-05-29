@@ -12,5 +12,4 @@ public class GetContactResponse {
     private String website;
     private String additionalPhoneNumber;
     private String additionalEmail;
-    private GetAddressResponse address;
 }
