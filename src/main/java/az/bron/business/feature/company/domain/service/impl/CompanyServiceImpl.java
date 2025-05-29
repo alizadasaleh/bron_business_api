@@ -1,13 +1,18 @@
 package az.bron.business.feature.company.domain.service.impl;
 
+import az.bron.business.common.application.model.request.SortDirection;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.domain.model.Company;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import az.bron.business.feature.company.domain.repository.CompanyRepository;
 import az.bron.business.feature.company.domain.repository.CompanySearchRepository;
 import az.bron.business.feature.company.domain.service.CompanyService;
 import jakarta.transaction.Transactional;
-import java.util.List;
+
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -70,8 +75,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> search(String query) {
-        return companySearchRepository.searchCompanies(query);
+    public SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size, SearchSortCompanyBy searchSortCompanyBy, SortDirection sortDir) {
+        return companySearchRepository.searchCompanies(companySearchFilter, page, size, sortDir, searchSortCompanyBy);
     }
 
     @Override

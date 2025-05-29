@@ -1,8 +1,13 @@
 package az.bron.business.feature.company.domain.service;
 
+import az.bron.business.common.application.model.request.SortDirection;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.domain.model.Company;
-import java.util.List;
+import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import java.util.Optional;
+
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,5 +32,5 @@ public interface CompanyService {
 
     void updateLogoImageUrl(String fileName, Long id);
 
-    List<Company> search(String query);
+    SearchResult<CompanyWithDistance> search(CompanySearchFilter companySearchFilter, int page, int size, SearchSortCompanyBy searchSortCompanyBy, SortDirection sortDir);
 }

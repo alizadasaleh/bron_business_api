@@ -9,5 +9,4 @@ public class UpdateContactRequest {
     private String website;
     private String additionalPhoneNumber;
     private String additionalEmail;
-    private Long addressId;
 }

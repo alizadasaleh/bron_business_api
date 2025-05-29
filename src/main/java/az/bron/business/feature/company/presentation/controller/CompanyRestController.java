@@ -2,7 +2,9 @@ package az.bron.business.feature.company.presentation.controller;
 
 import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
+import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
 import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
@@ -10,8 +12,6 @@ import az.bron.business.feature.company.application.model.response.CreateCompany
 import az.bron.business.feature.company.application.model.response.GetCompanyResponse;
 import az.bron.business.feature.company.application.model.response.UpdateCompanyResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -112,8 +115,12 @@ public class CompanyRestController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<CompanySearchResponse>> search(@RequestParam String query) {
-        return ResponseEntity.ok(companyFacade.search(query));
+    public ResponseEntity<Page<CompanySearchResponse>> search(@ModelAttribute CompanySearchFilter companySearchFilter,
+                                                              @RequestParam(defaultValue = "0") int page,
+                                                              @RequestParam(defaultValue = "10") int size,
+                                                              @RequestParam SearchSortCompanyBy searchSortCompanyBy,
+                                                              @RequestParam SortDirection sortDir) {
+        return ResponseEntity.ok(companyFacade.search(companySearchFilter, page, size, searchSortCompanyBy, sortDir));
     }
 
 

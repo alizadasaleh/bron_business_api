@@ -1,6 +1,7 @@
 package az.bron.business.feature.company.domain.model;
 
 import az.bron.business.common.Auditable;
+import az.bron.business.feature.company.domain.model.address.Address;
 import az.bron.business.feature.company.domain.model.contact.Contact;
 import az.bron.business.feature.providedservice.domain.model.Gender;
 import az.bron.business.feature.providedservice.domain.model.ProvidedService;
@@ -16,14 +17,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+
+import java.util.Set;
 
 @Setter
 @Getter
@@ -48,7 +52,12 @@ public class Company extends Auditable<String> {
     private String profileImageUrl;
     private String backgroundImageUrl;
 
+    @IndexedEmbedded
+    @Embedded
+    private Address address;
+
     @Enumerated(EnumType.STRING)
+    @GenericField
     private Gender gender;
 
     @Embedded
