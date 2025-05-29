@@ -3,7 +3,7 @@ package az.bron.business.feature.company.domain.repository;
 import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.common.model.Location;
 import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
-import az.bron.business.feature.company.application.model.request.SortCompanyBy;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.domain.model.Company;
 import az.bron.business.feature.company.domain.model.CompanyWithDistance;
 import jakarta.persistence.EntityManager;
@@ -24,7 +24,7 @@ public class CompanySearchRepository {
         this.entityManager = entityManager;
     }
 
-    public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter, int page, int size, SortDirection sortDir, SortCompanyBy sortCompanyBy) {
+    public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter, int page, int size, SortDirection sortDir, SearchSortCompanyBy searchSortCompanyBy) {
         Session session = entityManager.unwrap(Session.class);
         Location location = new Location();
         location.setLatitude(searchFilter.getLatitude());
@@ -69,8 +69,8 @@ public class CompanySearchRepository {
                 .sort(f -> {
                     var sort = f.composite();
 
-                    if (sortCompanyBy != null) {
-                        switch (sortCompanyBy) {
+                    if (searchSortCompanyBy != null) {
+                        switch (searchSortCompanyBy) {
                             case DISTANCE -> {
                                 if (sortDir == SortDirection.DESC) {
                                     sort.add(f.distance("location", location.getLatitude(), location.getLongitude()).desc());

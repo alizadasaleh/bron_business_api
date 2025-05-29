@@ -4,6 +4,7 @@ import az.bron.business.common.application.model.request.SortDirection;
 import az.bron.business.feature.company.application.facade.CompanyFacade;
 import az.bron.business.feature.company.application.model.request.CompanySearchFilter;
 import az.bron.business.feature.company.application.model.request.CreateCompanyRequest;
+import az.bron.business.feature.company.application.model.request.SearchSortCompanyBy;
 import az.bron.business.feature.company.application.model.request.SortCompanyBy;
 import az.bron.business.feature.company.application.model.request.UpdateCompanyRequest;
 import az.bron.business.feature.company.application.model.response.CompanySearchResponse;
@@ -117,9 +118,9 @@ public class CompanyRestController {
     public ResponseEntity<Page<CompanySearchResponse>> search(@ModelAttribute CompanySearchFilter companySearchFilter,
                                                               @RequestParam(defaultValue = "0") int page,
                                                               @RequestParam(defaultValue = "10") int size,
-                                                              @RequestParam SortCompanyBy sortCompanyBy,
+                                                              @RequestParam SearchSortCompanyBy searchSortCompanyBy,
                                                               @RequestParam SortDirection sortDir) {
-        return ResponseEntity.ok(companyFacade.search(companySearchFilter, page, size, sortCompanyBy, sortDir));
+        return ResponseEntity.ok(companyFacade.search(companySearchFilter, page, size, searchSortCompanyBy, sortDir));
     }
 
 
