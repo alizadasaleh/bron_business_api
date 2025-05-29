@@ -24,44 +24,56 @@ public class CompanySearchRepository {
         this.entityManager = entityManager;
     }
 
-    public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter, int page, int size, SortDirection sortDir, SearchSortCompanyBy searchSortCompanyBy) {
+    public SearchResult<CompanyWithDistance> searchCompanies(CompanySearchFilter searchFilter,
+                                                             int page,
+                                                             int size,
+                                                             SortDirection sortDir,
+                                                             SearchSortCompanyBy searchSortCompanyBy) {
         Session session = entityManager.unwrap(Session.class);
-        Location location = new Location();
-        location.setLatitude(searchFilter.getLatitude());
-        location.setLongitude(searchFilter.getLongitude());
-        String query = searchFilter.getQuery();
+
+        boolean hasLocation = searchFilter.getLatitude() != null && searchFilter.getLongitude() != null;
 
         return Search.session(session)
                 .search(Company.class)
                 .select(f -> {
-                    if (location != null) {
+                    if (hasLocation) {
+                        GeoPoint geoPoint = GeoPoint.of(searchFilter.getLatitude(), searchFilter.getLongitude());
                         return f.composite()
-                                .from(f.entity(),
-                                        f.distance("location", GeoPoint.of(location.getLatitude(), location.getLongitude())))
+                                .from(f.entity(), f.distance("location", geoPoint))
                                 .as(CompanyWithDistance::new);
                     } else {
                         return f.composite()
                                 .from(f.entity())
                                 .as(entity -> new CompanyWithDistance(entity, null));
-                    }})
+                    }
+                })
                 .where(f -> {
                     var bool = f.bool();
 
+                    // Text search filter
+                    String query = searchFilter.getQuery();
                     if (query != null && !query.isBlank()) {
                         bool.must(f.match()
                                 .fields("name", "description")
                                 .matching(query));
                     }
 
+                    // Gender filter
                     if (searchFilter.getGender() != null) {
-                        bool.must(f.match().fields("gender").matching(searchFilter.getGender()));
+                        bool.must(f.match()
+                                .field("gender")
+                                .matching(searchFilter.getGender()));
                     }
 
-                    if (searchFilter.getRadius() != null && searchFilter.getLongitude() != null && searchFilter.getLatitude() != null) {
+                    // Location radius filter
+                    if (hasLocation && searchFilter.getRadius() != null) {
                         bool.must(f.spatial()
                                 .within()
                                 .field("location")
-                                .circle(location.getLatitude(), location.getLongitude(), searchFilter.getRadius(), DistanceUnit.KILOMETERS));
+                                .circle(searchFilter.getLatitude(),
+                                        searchFilter.getLongitude(),
+                                        searchFilter.getRadius(),
+                                        DistanceUnit.KILOMETERS));
                     }
 
                     return bool;
@@ -69,29 +81,12 @@ public class CompanySearchRepository {
                 .sort(f -> {
                     var sort = f.composite();
 
-                    if (searchSortCompanyBy != null) {
-                        switch (searchSortCompanyBy) {
-                            case DISTANCE -> {
-                                if (sortDir == SortDirection.DESC) {
-                                    sort.add(f.distance("location", location.getLatitude(), location.getLongitude()).desc());
-                                } else {
-                                    sort.add(f.distance("location", location.getLatitude(), location.getLongitude()).asc());
-                                }
-                            }
-                            default -> {
-                                if (sortDir == SortDirection.DESC) {
-                                    sort.add(f.field("id").desc());
-                                } else {
-                                    sort.add(f.field("id").asc());
-                                }
-                            }
-                        }
-                    } else {
-                        sort.add(f.distance("location", location.getLatitude(), location.getLongitude()).asc());
+                    if (searchSortCompanyBy == SearchSortCompanyBy.DISTANCE && hasLocation) {
+                        // Sort by distance
+                        var distanceSort = f.distance("location", searchFilter.getLatitude(), searchFilter.getLongitude());
+                        sort.add(sortDir == SortDirection.DESC ? distanceSort.desc() : distanceSort.asc());
                     }
-
                     return sort;
                 })
                 .fetch(page, size);
-    }
-}
+    }}
