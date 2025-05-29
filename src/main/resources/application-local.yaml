@@ -39,6 +39,7 @@ spring:
     properties:
       hibernate:
         search:
+          strategy: drop-and-create-and-drop
           enabled: true
           backend:
             directory:
