@@ -153,18 +153,9 @@ Run unit tests with Gradle:
 ./gradlew test
 ```
 
-Next steps / suggestions
-
-- Add a `CONTRIBUTING.md` to formalize contribution workflow.
-- Add CI (GitHub Actions) to run `./gradlew test` and `./gradlew check` on PRs.
-- Add a `LICENSE` file if you intend to open-source the project.
 
 Acknowledgements
 
 This project uses Spring Boot, Hibernate Search (Lucene), MapStruct, MyBatis, and other OSS libraries — see `build.gradle` for the full dependency list.
 
 ----
-
-- create a `CONTRIBUTING.md` skeleton under `docs/` or root
-- add a sample `.env.example` file
-- add a small `Makefile` or `scripts/` entry for common tasks
