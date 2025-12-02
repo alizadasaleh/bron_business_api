@@ -164,10 +164,7 @@ Acknowledgements
 This project uses Spring Boot, Hibernate Search (Lucene), MapStruct, MyBatis, and other OSS libraries — see `build.gradle` for the full dependency list.
 
 ----
-If you'd like, I can also:
 
 - create a `CONTRIBUTING.md` skeleton under `docs/` or root
 - add a sample `.env.example` file
 - add a small `Makefile` or `scripts/` entry for common tasks
-
-Happy to continue — tell me which follow-up you'd like.
