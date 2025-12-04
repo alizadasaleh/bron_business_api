@@ -1,5 +1,5 @@
 # Stage 1: Build the application using Gradle
-FROM gradle:8.4-jdk21 AS build
+FROM gradle:9.2-jdk21 AS build
 WORKDIR /app
 
 # Copy only necessary files
