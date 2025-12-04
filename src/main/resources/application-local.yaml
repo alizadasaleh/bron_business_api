@@ -88,7 +88,7 @@ aws:
 
 security:
   jwt:
-    secret-key: f0e89e404f04f47754fbcf31267506750ce1815e45bc37bbe6dbb907e2a0c68a
+    secret-key: secret-key
     expiration-time: 36000000
 
 APP_URL: http://localhost:8080
