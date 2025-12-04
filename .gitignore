@@ -45,4 +45,10 @@ bin/
 indexes/
 src/main/generated/
 .env
-.env
+
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+
+/infra/.terraform
+/infra/.terraform.lock.hcl
