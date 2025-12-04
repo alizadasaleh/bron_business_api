@@ -4,6 +4,9 @@ WORKDIR /app
 
 # Copy only necessary files
 COPY build.gradle settings.gradle /app/
+
+RUN gradle dependencies --no-daemon
+
 COPY src /app/src
 
 # Build only the bootJar
