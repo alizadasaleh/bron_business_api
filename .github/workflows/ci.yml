@@ -27,5 +27,15 @@ jobs:
       - name: Build Docker Image
         run: docker build -t springboot-app:${{ github.sha }} .
 
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: springboot-app:${{ github.sha }}
+          format: 'sarif'
+          exit-code: '0'
+          vuln-type: 'os,library'
+
+
+
       - name: Run Gitleaks
         uses: zricethezav/gitleaks-action@v2
