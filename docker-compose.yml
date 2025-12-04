@@ -30,9 +30,6 @@ services:
 
 
   db:
-    build:
-      context: .
-      dockerfile: db.Dockerfile
     image: postgres:17
     container_name: postgres-db
     ports:
@@ -42,7 +39,7 @@ services:
       POSTGRES_USER: bron_user
       POSTGRES_PASSWORD: bron_password
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
