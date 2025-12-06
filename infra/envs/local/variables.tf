@@ -3,7 +3,5 @@ variable "aws_region" {
 }
 
 variable "bucket_name" {
-  default = "bron_s3"
-  description = "BRON_S3"
-  type        = string
+  default = "brons3-local"
 }

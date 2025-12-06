@@ -46,9 +46,20 @@ indexes/
 src/main/generated/
 .env
 
-terraform.tfstate
-terraform.tfstate.backup
-.terraform/
+# Local Terraform directories (anywhere)
+**/.terraform/*
 
-/infra/.terraform
-/infra/.terraform.lock.hcl
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform lock file (optional – see note below)
+.terraform.lock.hcl
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
