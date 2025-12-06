@@ -45,4 +45,21 @@ bin/
 indexes/
 src/main/generated/
 .env
-.env
+
+# Local Terraform directories (anywhere)
+**/.terraform/*
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform lock file (optional – see note below)
+.terraform.lock.hcl
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
