@@ -13,7 +13,7 @@ COPY src /app/src
 RUN gradle bootJar --no-daemon
 
 # Stage 2: Run the application
-FROM eclipse-temurin:21-jdk-jammy
+FROM eclipse-temurin:25-jdk-jammy
 WORKDIR /app
 
 # Copy the JAR file
