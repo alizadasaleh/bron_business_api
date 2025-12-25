@@ -62,7 +62,7 @@ dependencies {
 
     // Fixed oauth2 client version - use the same version as spring-boot
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
+    implementation 'com.nimbusds:nimbus-jose-jwt:10.6'
 
     implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.11'
 
